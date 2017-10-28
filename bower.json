@@ -1,0 +1,15 @@
+{
+  "name": "ibiza_comunidad",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Martin Kjellberg"
+  ],
+  "license": "Not open source",
+  "homepage": "ibizacomunidad.es",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "foundation-sites": "~6.4.1",
+    "js-cookie": "^2.1.4"
+  }
+}
