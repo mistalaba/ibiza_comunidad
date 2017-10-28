@@ -31,7 +31,7 @@ var pathsConfig = function (appName) {
     app: this.app,
     templates: this.app + '/templates',
     css: this.app + '/static/css',
-    sass: this.app + '/static/sass',
+    sass: this.app + '/static/sass/**',
     fonts: this.app + '/static/fonts',
     images: this.app + '/static/images',
     js: this.app + '/static/js',
@@ -52,6 +52,7 @@ var sassOptions = {
 // Styles autoprefixing and minification
 gulp.task('styles', function() {
   return gulp.src(paths.sass + '/*.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass(sassOptions).on('error', sass.logError))
     .pipe(plumber()) // Checks for errors
     .pipe(autoprefixer({browsers: ['last 2 versions']})) // Adds vendor prefixes
