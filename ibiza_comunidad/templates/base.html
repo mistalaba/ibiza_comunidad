@@ -1,4 +1,4 @@
-{% load static i18n %}<!DOCTYPE html>
+{% load static i18n core_tags %}<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -21,6 +21,7 @@
         {% endblock %}
     </head>
     <body>
+        {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
         <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
             <button class="menu-icon" type="button" data-toggle="example-menu"></button>
