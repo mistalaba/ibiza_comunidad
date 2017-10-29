@@ -7499,27 +7499,31 @@ a.thumbnail image {
   color: inherit;
 }
 
-.main-nav, .menu, .nav-logo {
+.ic__main-nav, .menu {
   height: 80px;
 }
 
-.main-nav {
+.ic__main-nav {
   padding: 0;
 }
 
-.main-nav .nav-logo {
-  display: inline-block;
+.ic__main-nav .ic__logo-container {
+  width: 80px;
   background: #ff0000;
 }
 
-.main-nav .menu li {
+.ic__main-nav .ic__logo-container a {
+  padding: 0;
+}
+
+.ic__main-nav .menu li {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column;
 }
 
-.main-nav .menu li:not(.top-bar-logo) a {
+.ic__main-nav .menu li a {
   display: -ms-flexbox;
   display: flex;
   -ms-flex: 1 1 auto;
@@ -7527,6 +7531,15 @@ a.thumbnail image {
   -ms-flex-align: center;
       align-items: center;
   background-color: antiquewhite;
+}
+
+.icon {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
 }
 
 /*# sourceMappingURL=app.css.map */

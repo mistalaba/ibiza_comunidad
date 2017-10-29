@@ -28,10 +28,14 @@
             <div class="title-bar-title">Menu</div>
         </div>
         <!-- Responsive nav END -->
-        <div class="top-bar main-nav" id="example-menu">
+        <div class="top-bar ic__main-nav" id="example-menu">
             <div class="top-bar-left">
                 <ul class="vertical medium-horizontal menu" data-dropdown-menu>
-                    <li class="top-bar-logo"><div class="nav-logo"><a href="{% url 'home' %}">Ibiza Comunidad</a></div></li>
+                    <li class="ic__logo-container">
+                        <a href="{% url 'home' %}">
+                            <svg class="icon icon-logo"><use xlink:href="#icon-logo"></use></svg>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="top-bar-right">
@@ -57,6 +61,14 @@
             {% block content %}
                 <div class="grid-x grid-margin-x">
                     <div class="small-12 cell"><p>Use this document as a way to quick start any new project.</p></div>
+                </div>
+
+                <div class="">
+                    <div style="margin-right: 1.5em; float: left; width: 150px;">
+                        <div style="width: 150px; height: 150px; background: #aaffaa;">
+                            <svg class="icon icon-logo"><use xlink:href="#icon-logo"></use></svg>
+                        </div>
+                    </div>
                 </div>
             {% endblock content %}
         </div>
