@@ -62,6 +62,7 @@ LOCAL_APPS = [
     # custom users app
     'ibiza_comunidad.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'core',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
