@@ -7499,4 +7499,34 @@ a.thumbnail image {
   color: inherit;
 }
 
+.main-nav, .menu, .nav-logo {
+  height: 80px;
+}
+
+.main-nav {
+  padding: 0;
+}
+
+.main-nav .nav-logo {
+  display: inline-block;
+  background: #ff0000;
+}
+
+.main-nav .menu li {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.main-nav .menu li:not(.top-bar-logo) a {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+  -ms-flex-align: center;
+      align-items: center;
+  background-color: antiquewhite;
+}
+
 /*# sourceMappingURL=app.css.map */

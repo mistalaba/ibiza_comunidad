@@ -47,3 +47,30 @@
     padding: 0 !important;
     color: inherit;
 }
+
+// Set height ov navbar
+.main-nav, .menu, .nav-logo  {
+    height: 80px;
+}
+.main-nav{
+    padding: 0;
+    .nav-logo {
+        display: inline-block;
+        background: #ff0000;
+    }
+    .menu {
+        li {
+            display: flex;
+            flex-direction: column;
+        }
+        li:not(.top-bar-logo) {
+            a {
+                display: flex;
+                flex: 1 1 auto;
+                align-items: center;
+                background-color: antiquewhite;
+            }
+        }
+    }
+}
+
