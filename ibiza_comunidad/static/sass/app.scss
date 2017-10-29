@@ -62,6 +62,7 @@
             padding: 0;
         }
     }
+    // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
     .menu {
         li {
             display: flex;
@@ -78,6 +79,17 @@
     }
 }
 
+.ic__title-bar {
+    justify-content: space-between;
+    .ic__mobile-logo-container {
+        a {
+            display: block;
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
+
 // * icons * //
 // Taken from icomoon
 .icon {
@@ -87,4 +99,12 @@
     stroke-width: 0;
     stroke: currentColor;
     fill: currentColor;
+}
+
+// LOGO
+.icon-logo {
+    fill: $black;
+}
+.icon-logo-inverse {
+    fill: $white;
 }

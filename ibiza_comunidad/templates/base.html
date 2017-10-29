@@ -23,13 +23,19 @@
     <body>
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
-        <div class="title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+        <div class="title-bar ic__title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+            <!-- Should be to the left -->
+            <div class="ic__mobile-logo-container">
+                <a href="{% url 'home' %}">
+                    <svg class="icon icon-logo-inverse"><use xlink:href="#icon-logo"></use></svg>
+                </a>
+            </div>
+            <!-- Should be to the right -->
             <button class="menu-icon" type="button" data-toggle="example-menu"></button>
-            <div class="title-bar-title">Menu</div>
         </div>
         <!-- Responsive nav END -->
         <div class="top-bar ic__main-nav" id="example-menu">
-            <div class="top-bar-left">
+            <div class="top-bar-left hide-for-small-only">
                 <ul class="vertical medium-horizontal menu" data-dropdown-menu>
                     <li class="ic__logo-container">
                         <a href="{% url 'home' %}">
