@@ -7516,6 +7516,14 @@ a.thumbnail image {
   padding: 0;
 }
 
+.ic__main-nav .ic__logo-container .ic__logo-link {
+  padding: 10px;
+}
+
+.ic__main-nav .ic__logo-container .ic__logo-link-small {
+  padding: 5px;
+}
+
 .ic__main-nav .menu li {
   display: -ms-flexbox;
   display: flex;
