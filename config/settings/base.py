@@ -7,8 +7,8 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
-import environ
 import json
+import environ
 
 # Load non-versioned, sensitive settings file
 with open('secrets.json') as f:
@@ -61,8 +61,8 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'ibiza_comunidad.users.apps.UsersConfig',
-    # Your stuff: custom apps go here
     'core',
+    'events',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
