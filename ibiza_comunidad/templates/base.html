@@ -51,9 +51,9 @@
                     <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
                     <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
                 {% else %}
-                    <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
                     <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
-                {% endif %}
+                    <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+                    {% endif %}
           </ul>
             </div>
           </div>
