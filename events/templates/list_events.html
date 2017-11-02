@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles i18n %}
+
+{% block content %}
+{% for event in events %}
+<div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            {{ event }}
+        </div>
+</div>
+{% endfor %}
+{% endblock content %}

@@ -4,7 +4,12 @@
 from django.db import models
 from django.conf import settings
 
+from core.models import TimeStampedModel
 
-class Event(models.Model):
+
+class Event(TimeStampedModel):
     title = models.CharField(max_length=400)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load staticfiles i18n %}
+
+{% block content %}
+<div class="grid-x grid-padding-x align-center">
+        <div class="small-6 cell">
+                <form action="" method="post">{% csrf_token %}
+                        <div class="grid-x grid-padding-x align-center">
+                            <div class="small-10 cell">
+                                <label>{{ form.title.label }}
+                                {{form.title}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="grid-x grid-margin-x align-center">
+                            <div class="small-10 cell">
+                                <button type="submit" class="button">{% trans 'Create event' %}</button>
+                            </div>
+                        </div>
+                </form>
+        </div>
+</div>
+
+{% endblock content %}
