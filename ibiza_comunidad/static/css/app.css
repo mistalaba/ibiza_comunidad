@@ -7499,8 +7499,13 @@ a.thumbnail image {
   color: inherit;
 }
 
+.top-bar, .top-bar ul {
+  background-color: #fefefe;
+}
+
 .ic__main-nav {
-  padding: 0;
+  background: #fefefe;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
 }
 
 .ic__main-nav .menu {
@@ -7541,7 +7546,7 @@ a.thumbnail image {
 }
 
 .menu a.ic__logo-link {
-  padding: 10px;
+  padding: 0;
 }
 
 .ic__logo-link-small {

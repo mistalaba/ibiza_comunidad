@@ -53,9 +53,11 @@
 // .ic__main-nav, .menu  {
 //     height: 80px;
 // }
+.top-bar, .top-bar ul {
+    background-color: $white;
+}
 .ic__main-nav{
-    padding: 0;
-
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
     // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
     .menu {
         // Add this to Foundation .menu since links next to logo are misaligned.
@@ -99,7 +101,7 @@
 }
 
 .menu a.ic__logo-link {
-    padding: 10px;
+    padding: 0;
 }
 
 .ic__logo-link-small {
