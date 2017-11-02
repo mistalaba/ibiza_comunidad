@@ -7,12 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="theme-color" content="#ffffff">
+    {% include "_favicons.html" %}
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -31,37 +26,37 @@
         <!-- Responsive nav -->
         <div class="title-bar ic__title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
             <!-- Should be to the left -->
-            <div class="ic__mobile-logo-container">
-                <a class="ic__logo-link-small" href="{% url 'home' %}">
-                    <svg class="icon icon-logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
-                </a>
-            </div>
+            <a class="ic__logo-link-small" href="{% url 'home' %}">
+                <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
+            </a>
             <!-- Should be to the right -->
             <button class="menu-icon" type="button" data-toggle="example-menu"></button>
         </div>
         <!-- Responsive nav END -->
+
         <div class="top-bar ic__main-nav" id="example-menu">
             <div class="top-bar-left hide-for-small-only">
-                <ul class="vertical medium-horizontal menu" data-dropdown-menu>
-                    <li class="ic__logo-container">
+                <ul class="vertical medium-horizontal menu ic__left-list" data-dropdown-menu>
+                    <li>
                         <a class="ic__logo-link" href="{% url 'home' %}">
-                            <svg class="icon icon-logo"><use xlink:href="#icon-logo1"></use></svg>
+                            <svg class="ic__icon ic__logo-large ic__logo"><use xlink:href="#icon-logo1"></use></svg>
                         </a>
                     </li>
+                    <li><a href="#">Three</a></li>
                 </ul>
             </div>
             <div class="top-bar-right">
                     <ul class="vertical medium-horizontal menu" data-dropdown-menu>
-                        {% if request.user.is_authenticated %}
-                            <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
-                            <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
-                        {% else %}
-                            <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
-                            <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
+                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                {% else %}
+                    <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+                    <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
+                {% endif %}
+          </ul>
             </div>
+          </div>
 
         <div class="grid-container">
             {% if messages %}
@@ -78,7 +73,7 @@
                 <div class="">
                     <div style="margin-right: 1.5em; float: left; width: 150px;">
                         <div style="width: 150px; height: 150px; background: #aaffaa;">
-                            <svg class="icon icon-logo"><use xlink:href="#icon-logo1"></use></svg>
+                            <svg class="ic__icon icon-logo"><use xlink:href="#icon-logo1"></use></svg>
                         </div>
                     </div>
                 </div>

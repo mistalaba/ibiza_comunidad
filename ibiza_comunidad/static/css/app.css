@@ -7499,46 +7499,13 @@ a.thumbnail image {
   color: inherit;
 }
 
-.ic__main-nav, .menu {
-  height: 80px;
-}
-
 .ic__main-nav {
   padding: 0;
 }
 
-.ic__main-nav .ic__logo-container {
-  width: 80px;
-  background: #ff0000;
-}
-
-.ic__main-nav .ic__logo-container a {
-  padding: 0;
-}
-
-.ic__main-nav .ic__logo-container .ic__logo-link {
-  padding: 10px;
-}
-
-.ic__main-nav .ic__logo-container .ic__logo-link-small {
-  padding: 5px;
-}
-
-.ic__main-nav .menu li {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-direction: column;
-      flex-direction: column;
-}
-
-.ic__main-nav .menu li a {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
+.ic__main-nav .menu {
   -ms-flex-align: center;
       align-items: center;
-  background-color: antiquewhite;
 }
 
 .ic__title-bar {
@@ -7546,27 +7513,39 @@ a.thumbnail image {
       justify-content: space-between;
 }
 
-.ic__title-bar .ic__mobile-logo-container a {
+.ic__icon {
   display: block;
-  width: 40px;
-  height: 40px;
-}
-
-.icon {
-  display: inline-block;
-  width: 100%;
-  height: 100%;
+  width: 32px;
+  height: 32px;
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
 }
 
-.icon-logo {
+.ic__logo-large {
+  width: 64px;
+  height: 64px;
+}
+
+.ic__logo-small {
+  width: 32px;
+  height: 32px;
+}
+
+.ic__logo {
   fill: #0a0a0a;
 }
 
-.icon-logo-inverse {
+.ic__logo-inverse {
   fill: #fefefe;
+}
+
+.menu a.ic__logo-link {
+  padding: 10px;
+}
+
+.ic__logo-link-small {
+  padding: 5px;
 }
 
 /*# sourceMappingURL=app.css.map */

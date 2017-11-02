@@ -50,67 +50,58 @@
 
 // * Navbar * //
 // Set height of navbar
-.ic__main-nav, .menu  {
-    height: 80px;
-}
+// .ic__main-nav, .menu  {
+//     height: 80px;
+// }
 .ic__main-nav{
     padding: 0;
-    .ic__logo-container {
-        width: 80px;
-        background: #ff0000;
-        a {
-            padding: 0;
-        }
-        .ic__logo-link {
-            padding: 10px;
-        }
-        .ic__logo-link-small {
-            padding: 5px;
-        }
-    }
+
     // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
     .menu {
-        li {
-            display: flex;
-            flex-direction: column;
-        }
-        li {
-            a {
-                display: flex;
-                flex: 1 1 auto;
-                align-items: center;
-                background-color: antiquewhite;
-            }
-        }
+        // Add this to Foundation .menu since links next to logo are misaligned.
+        align-items: center;
     }
 }
 
 .ic__title-bar {
     justify-content: space-between;
-    .ic__mobile-logo-container {
-        a {
-            display: block;
-            width: 40px;
-            height: 40px;
-        }
-    }
 }
 
 // * icons * //
 // Taken from icomoon
-.icon {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
+.ic__icon {
+    // Defaults for all icons
+    display: block;
+    width: 32px;
+    height: 32px;
     stroke-width: 0;
     stroke: currentColor;
     fill: currentColor;
 }
 
 // LOGO
-.icon-logo {
+.ic__logo-large {
+    width: 64px;
+    height: 64px;
+}
+
+.ic__logo-small {
+    width: 32px;
+    height: 32px;
+}
+
+.ic__logo {
     fill: $black;
 }
-.icon-logo-inverse {
+
+.ic__logo-inverse {
     fill: $white;
+}
+
+.menu a.ic__logo-link {
+    padding: 10px;
+}
+
+.ic__logo-link-small {
+    padding: 5px;
 }
