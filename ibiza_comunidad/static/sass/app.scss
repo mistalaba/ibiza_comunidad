@@ -1,5 +1,7 @@
 @import 'foundation/settings';
 @import '../bower_components/foundation-sites/scss/foundation';
+@import '_components/forms';
+@import '_components/fonts';
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;

@@ -13,6 +13,116 @@
   }
 }
 
+.ic__form-container {
+  margin: 60px auto 0;
+  margin: 3.75rem auto 0;
+}
+
+.ic__form-container .ic__form {
+  padding: 16px;
+  padding: 1rem;
+}
+
+.ic__form-wrapper {
+  background-color: #fefefe;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ic__form-header {
+  background-color: #1779ba;
+  padding: 16px;
+  padding: 1rem;
+}
+
+.ic__form-header h1 {
+  color: #fefefe;
+  margin: -1px;
+}
+
+@font-face {
+  font-family: 'robotoblack';
+  src: url("../fonts/roboto/roboto-black-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-black-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotoblack_italic';
+  src: url("../fonts/roboto/roboto-blackitalic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-blackitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotobold';
+  src: url("../fonts/roboto/roboto-bold-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotobold_italic';
+  src: url("../fonts/roboto/roboto-bolditalic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-bolditalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotoitalic';
+  src: url("../fonts/roboto/roboto-italic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-italic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotolight';
+  src: url("../fonts/roboto/roboto-light-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotolight_italic';
+  src: url("../fonts/roboto/roboto-lightitalic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-lightitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotomedium';
+  src: url("../fonts/roboto/roboto-medium-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotomedium_italic';
+  src: url("../fonts/roboto/roboto-mediumitalic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-mediumitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotoregular';
+  src: url("../fonts/roboto/roboto-regular-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotothin';
+  src: url("../fonts/roboto/roboto-thin-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-thin-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotothin_italic';
+  src: url("../fonts/roboto/roboto-thinitalic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-thinitalic-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 /* Document
        ========================================================================== */
@@ -499,8 +609,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: #fefefe;
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  background: #fafafa;
+  font-family: "robotobold_italic", Arial, sans-serif;
   font-weight: normal;
   line-height: 1.5;
   color: #0a0a0a;
@@ -3119,7 +3229,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: "robotobold_italic", Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   color: inherit;
@@ -5269,7 +5379,7 @@ a.button:hover, a.button:focus {
   display: none;
   border: 1px solid #cacaca;
   border-radius: 0;
-  background-color: #fefefe;
+  background-color: #fafafa;
   font-size: 16px;
   font-size: 1rem;
 }
@@ -7504,7 +7614,6 @@ a.thumbnail image {
 }
 
 .ic__main-nav {
-  background: #fefefe;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
 }
 
