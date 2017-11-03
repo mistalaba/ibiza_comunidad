@@ -1,18 +1,14 @@
-{% extends "base.html" %}
+{% extends "forms/base.html" %}
+{% load static i18n %}
 
-{% block content %}
-<div class="ic__form-container grid-x align-center">
-    <div class="small-12 medium-6 cell ic__form-wrapper">
-        <div class="ic__form-header">
-            <h1>Enter your email</h1>
-        </div>
-        <form action="" method="post" class="ic__form">
-            <label>
-                Email *
-                <input type="text">
-            </label>
-        </form>
-        <p>I am here.</p>
-    </div>
-</div>
-{% endblock content %}
+{% block head_title %}{% trans 'Form header translated' %}{% endblock head_title %}
+{% block form_title %}{% trans 'Form header translated' %}{% endblock form_title %}
+
+{% block inner %}
+    <form action="" method="post" class="ic__form">
+        <label>
+            <em>Email</em> *
+            <input type="text">
+        </label>
+    </form>
+{% endblock inner %}
