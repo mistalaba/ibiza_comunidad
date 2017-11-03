@@ -39,6 +39,26 @@
   margin: -1px;
 }
 
+div.ic__buttons {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -ms-flex-align: baseline;
+      align-items: baseline;
+}
+
+div.ic__buttons * {
+  margin-bottom: 0;
+}
+
+div.ic__buttons *:not(:last-child) {
+  margin-right: 16px;
+  margin-right: 1rem;
+}
+
 @font-face {
   font-family: 'Roboto';
   src: url("../fonts/roboto/roboto-regular-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-regular-webfont.woff") format("woff");

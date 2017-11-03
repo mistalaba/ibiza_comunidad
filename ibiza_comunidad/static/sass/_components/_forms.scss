@@ -21,3 +21,17 @@
         // margin-bottom: 0;
     }
 }
+
+div.ic__buttons {
+    // Contains the submit buttons etc. Foundation 6 adds margin-bottom on buttons, remove it.
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    * {
+        margin-bottom: 0;
+        &:not(:last-child) {
+            margin-right: $global-margin;
+        }
+    }
+}
