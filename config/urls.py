@@ -38,11 +38,6 @@ if settings.DEBUG:
         url(r'^favicon-16x16\.png$', serve, {'document_root': favicon_url, 'path': 'favicon-16x16.png'}),
         url(r'^manifest\.json$', serve, {'document_root': favicon_url, 'path': 'manifest.json'}),
         url(r'^safari-pinned-tab\.svg$', serve, {'document_root': favicon_url, 'path': 'safari-pinned-tab.svg'}),
-        # url(r'^favicon-32x32.png$', serve, {'document_root': os.path.join(str(settings.ROOT_DIR), 'static/favicon/')}),
-        # url(r'^favicon-16x16.png$', serve, {'document_root': os.path.join(str(settings.ROOT_DIR), 'static/favicon/')}),
-        # url(r'^manifest.json$', serve, {'document_root': os.path.join(str(settings.ROOT_DIR), 'static/favicon/')}),
-        # url(r'^safari-pinned-tab.svg$', serve, {'document_root': os.path.join(str(settings.ROOT_DIR), 'static/favicon/')}),
-
 
         url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
         url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
