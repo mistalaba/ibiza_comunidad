@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{% block head_title %}{% endblock head_title %}{% endblock title %}
+
+{% block content %}
+<div class="ic__form-container grid-x align-center">
+    <div class="small-12 medium-6 cell ic__form-wrapper">
+        <div class="ic__form-header">
+            <h1>{% block form_title %}{% endblock form_title %}</h1>
+        </div>
+        {% block inner %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+

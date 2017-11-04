@@ -1,1 +1,15 @@
-{% extends "base.html" %}
+{% extends "forms/base.html" %}
+{% load static i18n %}
+
+{% block head_title %}{% trans 'Form header translated' %}{% endblock head_title %}
+
+{% block form_title %}{% trans 'Form header translated' %}{% endblock form_title %}
+
+{% block inner %}
+    <form action="" method="post" class="ic__form">
+        <label>
+            <em>Email</em> *
+            <input type="text">
+        </label>
+    </form>
+{% endblock inner %}

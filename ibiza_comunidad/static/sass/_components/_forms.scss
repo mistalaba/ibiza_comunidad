@@ -1,0 +1,37 @@
+.ic__form-container {
+    margin: rem-calc(60) auto 0;
+    // background-color: $light-gray;
+
+    .ic__form {
+        padding: $global-padding;
+    }
+}
+
+.ic__form-wrapper {
+    background-color: $white;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .2);
+}
+
+.ic__form-header {
+    background-color: $primary-color;
+    padding: $global-margin;
+    h1 {
+        color: color-pick-contrast($primary-color, ($button-color, $button-color-alt));
+        margin: -1px;
+        // margin-bottom: 0;
+    }
+}
+
+div.ic__buttons {
+    // Contains the submit buttons etc. Foundation 6 adds margin-bottom on buttons, remove it.
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    * {
+        margin-bottom: 0;
+        &:not(:last-child) {
+            margin-right: $global-margin;
+        }
+    }
+}
