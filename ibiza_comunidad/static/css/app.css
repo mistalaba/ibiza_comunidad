@@ -143,6 +143,60 @@ div.ic__buttons *:not(:last-child) {
   font-style: normal;
 }
 
+.ic__card-container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  padding: 16px;
+  padding: 1rem;
+  background-color: #fefefe;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.ic__card-container .ic__card-photo {
+  position: relative;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: calc(100% + 2em);
+  height: 10em;
+  margin: -1em 0 1em -1em;
+  border-radius: 3px 3px 0 0;
+}
+
+.ic__card-container .ic__card-photo:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+  opacity: 1;
+}
+
+.ic__card-container .ic__card-title {
+  position: absolute;
+  bottom: 0;
+  padding: 0.5em 1em;
+  z-index: 1;
+}
+
+.ic__card-container .ic__card-title h2 {
+  font-size: 1.75em;
+  color: #fefefe;
+  margin: 0;
+}
+
+.ic__card-container .ic__card-details-item {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 /* Document
        ========================================================================== */
@@ -7634,6 +7688,7 @@ a.thumbnail image {
 }
 
 .ic__main-nav {
+  margin-bottom: 3em;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -7654,6 +7709,17 @@ a.thumbnail image {
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+}
+
+.ic__icon.small {
+  width: 24px;
+  height: 24px;
+}
+
+i {
+  display: inline-block;
+  font-style: normal;
+  margin-right: 0.5em;
 }
 
 .ic__logo-large {
