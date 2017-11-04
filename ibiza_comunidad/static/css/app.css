@@ -195,6 +195,7 @@ div.ic__buttons *:not(:last-child) {
   display: flex;
   -ms-flex-align: center;
       align-items: center;
+  margin-bottom: 0.5em;
 }
 
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
