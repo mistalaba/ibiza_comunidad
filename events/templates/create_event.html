@@ -1,24 +1,17 @@
-{% extends "base.html" %}
+{% extends "forms/base.html" %}
 {% load staticfiles i18n %}
 
-{% block content %}
-<div class="grid-x grid-padding-x align-center">
-        <div class="small-6 cell">
-                <form action="" method="post">{% csrf_token %}
-                        <div class="grid-x grid-padding-x align-center">
-                            <div class="small-10 cell">
-                                <label>{{ form.title.label }}
-                                {{form.title}}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="grid-x grid-margin-x align-center">
-                            <div class="small-10 cell">
-                                <button type="submit" class="button">{% trans 'Create event' %}</button>
-                            </div>
-                        </div>
-                </form>
-        </div>
-</div>
+{% block head_title %}{% trans "Create a new event" %}{% endblock %}
 
-{% endblock content %}
+{% block form_title %}{% trans "Create a new event" %}{% endblock form_title %}
+
+{% block inner %}
+<form class="login ic__form" method="POST" action="" novalidate>{% csrf_token %}
+    {{ form }}
+    <div class="ic__buttons">
+        <button class="button primary" type="submit">{% trans 'Create event' %}</button>
+        <a class="" href="{% url 'events:list-events' %}">{% trans "Cancel" %}</a>
+    </div>
+</form>
+
+{% endblock inner %}
