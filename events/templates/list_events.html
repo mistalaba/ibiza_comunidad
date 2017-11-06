@@ -6,9 +6,8 @@
     {% for event in events %}
         <div class="small-12 medium-4 cell">
             <div class="ic__card-container">
-                <div class="ic__card-photo" style="background-image:url(
-                    https://picsum.photos/1200/800?random={{event.pk}}
-                )">
+                <div class="ic__card-photo" style="background-image:url({% if event.photo %}{{ event.photo.url }}{% else %}
+                    https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
                     <div class="ic__card-title">
                         <h2>{{ event }}</h2>
                     </div>

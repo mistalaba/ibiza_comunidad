@@ -6,12 +6,11 @@
 {% block form_title %}{% trans "Create a new event" %}{% endblock form_title %}
 
 {% block inner %}
-<form class="login ic__form" method="POST" action="" novalidate>{% csrf_token %}
+<form class="login ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
     {{ form }}
     <div class="ic__buttons">
         <button class="button primary" type="submit">{% trans 'Create event' %}</button>
         <a class="" href="{% url 'events:list-events' %}">{% trans "Cancel" %}</a>
     </div>
 </form>
-
 {% endblock inner %}

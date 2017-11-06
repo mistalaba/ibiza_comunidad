@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from .forms import EventForm
@@ -14,12 +15,13 @@ def list_events(request):
     })
 
 
+@login_required
 def create_event(request):
-    form = EventForm(request.POST or None, user=request.user)
+    form = EventForm(request.POST, request.FILES or None, user=request.user)
 
     if form.is_valid():
         data = form.cleaned_data
-        event = Event.objects.create(title=data['title'], created_by=request.user)
+        event = Event.objects.create(title=data['event_name'], photo=data['photo'], created_by=request.user)
 
         return redirect('events:list-events')
 

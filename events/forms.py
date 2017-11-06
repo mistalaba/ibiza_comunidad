@@ -9,4 +9,5 @@ class EventForm(forms.Form):
         self.user = kwargs.pop('user')
         super(EventForm, self).__init__(*args, **kwargs)
 
-    title = forms.CharField(max_length=400, required=True)
+    event_name = forms.CharField(max_length=400, required=True)
+    photo = forms.ImageField(max_length=100, required=True)
