@@ -153,6 +153,7 @@ div.ic__buttons *:not(:last-child) {
   background-color: #fefefe;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
   border-radius: 3px;
+  margin-bottom: 2em;
 }
 
 .ic__card-container .ic__card-photo {

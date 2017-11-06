@@ -14,11 +14,35 @@
                 </div>
                 <p class="ic__card-details-item">
                     <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
-                    <span>2017-10-01 12:00 - 15:00</span>
+                    {% with sd=event.start_datetime ed=event.end_datetime %}
+                    <span>
+                        {% if sd|date:'Y-m-d' == ed|date:'Y-m-d' %}
+                            {% if sd.year == now.year %}
+                                {% if sd.month == now.month %}
+                                    {{ sd|date:'D, j H:i' }} - {{ ed|date:'H:i' }}
+                                {% else %}
+                                    {{ sd|date:'D, M j H:i' }} - {{ ed|date:'H:i' }}
+                                {% endif %}
+                            {% else %}
+                                {{ sd }} - {{ ed }}
+                            {% endif %}
+                        {% else %}
+                            {% if sd.year == now.year %}
+                                {% if sd.month == now.month %}
+                                    {{ sd|date:'D, j H:i' }} - {{ ed|date:'D, j H:i' }}
+                                {% else %}
+                                    {{ sd|date:'D, M j H:i' }} - {{ ed|date:'D, M j H:i' }}
+                                {% endif %}
+                            {% else %}
+                                {{ sd }} - {{ ed }}
+                            {% endif %}
+                        {% endif %}
+                </span>
+                    {% endwith %}
                 </p>
                 <p class="ic__card-details-item">
                     <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
-                    <span>5.00</span>
+                    <span>{% if event.price > 0 %}{{ event.price }}{% else %}{% trans 'Free' %}{% endif %}</span>
                 </p>
                 <p class="ic__card-details-item">
                     <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
