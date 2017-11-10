@@ -125,11 +125,21 @@ CACHES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            # '()': 'core.utils.UtcFormatter',
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%d/%b/%Y %H:%M:%S %Z"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
     'handlers': {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': '/home/mistalaba/logs/ibiza_comunidad_django.log',
+            'formatter': 'verbose'
         },
     },
     'loggers': {
