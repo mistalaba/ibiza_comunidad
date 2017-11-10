@@ -4,5 +4,5 @@
 # virtualenv postactivate and postdeactivate files for django. Place these files at $VIRTUAL_ENV/bin. That is inside the bin folder inside the virtualenv directory
 # Symlink the postactivate and postdeactivate
 
-export DJANGO_SETTINGS_MODULE=config.settings.prod
+export DJANGO_SETTINGS_MODULE=config.settings.production
 echo "postactivate: Set DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE"
