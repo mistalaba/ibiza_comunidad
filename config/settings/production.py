@@ -133,6 +133,7 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
+    },
     'handlers': {
         'file': {
             'level': 'INFO',
