@@ -20,7 +20,10 @@
         <link href="{% static 'css/app.css' %}" rel="stylesheet">
 
         {% endblock %}
-    </head>
+    {% block ga %}
+    {% include "_google_analytics_beta.html" %}
+    {% endblock ga %}
+</head>
     <body>
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
