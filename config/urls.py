@@ -18,6 +18,7 @@ urlpatterns = [
     # User management
     url(r'^users/', include('ibiza_comunidad.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^comingsoon/', include('comingsoon.urls', namespace='comingsoon')),
 
     # Your stuff: custom urls includes go here
 
