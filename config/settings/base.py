@@ -63,6 +63,7 @@ LOCAL_APPS = [
     'ibiza_comunidad.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'core',
+    'comingsoon',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
