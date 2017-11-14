@@ -27,7 +27,7 @@
     <body>
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
-        <div class="title-bar ic__title-bar" data-responsive-toggle="example-menu" data-hide-for="medium">
+        <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
             <!-- Should be to the left -->
             <a class="ic__logo-link-small" href="{% url 'home' %}">
                 <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
@@ -36,7 +36,7 @@
             <button class="menu-icon" type="button" data-toggle="example-menu"></button>
         </div>
         <!-- Responsive nav END -->
-        <div class="top-bar ic__main-nav" id="example-menu">
+        <div class="top-bar ic__main-nav" id="top-menu">
             <div class="top-bar-left hide-for-small-only">
                 <ul class="vertical medium-horizontal menu ic__left-list" data-dropdown-menu>
                     <li>
@@ -50,8 +50,8 @@
                 <ul class="vertical medium-horizontal menu" data-dropdown-menu>
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
-                        <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                    <li><a href="{% url 'users:private-profile' %}">{% trans "My Profile" %}</a></li>
+                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
                         <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>

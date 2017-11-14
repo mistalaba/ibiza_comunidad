@@ -1,9 +1,49 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from allauth.account.models import EmailAddress
 
 from .models import User
+from .forms import ProfileForm
+
+import logging
+logger = logging.getLogger(__name__)
+
+
+@login_required
+def private_user_profile(request):
+    User = get_user_model()
+    user = request.user
+    email = user.emailaddress_set.get_primary(user).email
+    email_verified = user.emailaddress_set.get_primary(user).verified
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, user=user)
+        if form.is_valid():
+            if form.cleaned_data['email'] != email:
+                # User changed email address
+                new_email = form.cleaned_data['email']
+                email = EmailAddress.objects.get_primary(user)
+                email.change(request, new_email=new_email)
+            user.save()
+    else:
+        data = {
+            'username': user.username,
+            'email': email,
+        }
+        form = ProfileForm(data, user=user)
+    return render(request, 'profile/private_profile.html', {
+        'user': request.user,
+        'form': form,
+        'email': email,
+        'email_verified': email_verified,
+    })
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
