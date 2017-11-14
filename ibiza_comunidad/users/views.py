@@ -1,9 +1,15 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-
 from .models import User
+from .forms import ProfileForm
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
@@ -43,3 +49,17 @@ class UserListView(LoginRequiredMixin, ListView):
     # These next two lines tell the view to index lookups by username
     slug_field = 'username'
     slug_url_kwarg = 'username'
+
+
+@login_required
+def private_user_profile(request):
+    # User = get_user_model()
+    user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, user=user)
+    else:
+        form = ProfileForm(user=user)
+    return render(request, 'profile/private_profile.html', {
+        'user': request.user,
+        'form': form,
+    })
