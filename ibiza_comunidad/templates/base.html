@@ -36,7 +36,6 @@
             <button class="menu-icon" type="button" data-toggle="example-menu"></button>
         </div>
         <!-- Responsive nav END -->
-
         <div class="top-bar ic__main-nav" id="example-menu">
             <div class="top-bar-left hide-for-small-only">
                 <ul class="vertical medium-horizontal menu ic__left-list" data-dropdown-menu>
@@ -48,17 +47,18 @@
                 </ul>
             </div>
             <div class="top-bar-right">
-                    <ul class="vertical medium-horizontal menu" data-dropdown-menu>
+                <ul class="vertical medium-horizontal menu" data-dropdown-menu>
+                    <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
-                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
-                {% else %}
-                    <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
-                    <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+                        <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
+                        <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
+                        <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
                     {% endif %}
-          </ul>
+                </ul>
             </div>
-          </div>
+        </div>
 
         <div class="grid-container">
             {% if messages %}

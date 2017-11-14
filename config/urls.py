@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^comingsoon/', include('comingsoon.urls', namespace='comingsoon')),
 
     # Your stuff: custom urls includes go here
-
+    url(r'^events/', include('events.urls', namespace='events')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
