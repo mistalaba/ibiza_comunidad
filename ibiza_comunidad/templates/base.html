@@ -51,8 +51,7 @@
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'users:private-profile' %}">{% trans "My Profile" %}</a></li>
-                    <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile OLD" %}</a></li>
-                        <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
                         <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
