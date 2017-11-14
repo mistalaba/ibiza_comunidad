@@ -27,12 +27,12 @@ class User(AbstractUser):
 
 @receiver(email_confirmed)
 def user_email_confirmed(request, email_address, **kwargs):
+    # import ipdb; ipdb.set_trace()
     logger.info("Email is confirmed")
+    # Change user's login email
+    email_address.user.email = email_address.email
+    email_address.user.save()
 
 @receiver(email_changed)
-def user_email_changed(request, email_address, **kwargs):
+def user_email_changed(request, user, from_email_address, to_email_address, **kwargs):
     logger.info("Email is changed")
-
-@receiver(request_finished)
-def my_callback(sender, **kwargs):
-    logger.info("Request finished!")

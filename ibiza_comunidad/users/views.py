@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 @login_required
 def private_user_profile(request):
-    # User = get_user_model()
+    User = get_user_model()
     user = request.user
     email = user.emailaddress_set.get_primary(user).email
     email_verified = user.emailaddress_set.get_primary(user).verified
