@@ -1,5 +1,31 @@
-{% extends "base.html" %}
-{% block title %}{% block head_title %}Profile{% endblock head_title %}{% endblock title %}
+{% extends "forms/base.html" %}
+{% load staticfiles i18n %}
 
-{% block content %}
-{% endblock content %}
+{% block title %}{% block head_title %}{% trans 'Profile' %}{% endblock head_title %}{% endblock title %}
+
+{% block form_title %}{% trans 'Profile' %}{% endblock form_title %}
+
+{% block inner %}
+<form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
+    <!-- Form field template -->
+    <div class="grid-x">
+        <div class="small-12 cell">
+            <label>{{ form.username.label }}{% if form.username.field.required %} (required){% endif %}
+                {{ form.username }}
+            </label>
+        </div>
+    </div>
+    <!-- Form field template END -->
+    <div class="grid-x">
+        <div class="small-12 cell">
+            <label>{{ form.email.label }}{% if form.email.field.required %} (required){% endif %}
+                {{ form.email }}{% if not email_verified %}({% trans 'Not verified' %}){% endif %}
+            </label> <a href="{% url 'account_email' %}">Change email</a>
+        </div>
+    </div>
+    <div class="ic__buttons">
+        <button class="button primary" type="submit">{% trans 'Save profile' %}</button>
+        <a class="" href="{% url 'events:list-events' %}">{% trans "Cancel" %}</a>
+    </div>
+</form>
+{% endblock inner %}
