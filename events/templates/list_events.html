@@ -1,13 +1,25 @@
 {% extends "base.html" %}
 {% load staticfiles i18n %}
 
+{% block title %}{% trans 'Events' %}{% endblock title %}
+{% block page_title %}{% trans 'Events' %}{% endblock page_title %}
+
 {% block content %}
+<div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <a href="{% url 'events:create-event' %}" class="button primary">Add event</a>
+        </div>
+</div>
+
 <div class="grid-x grid-padding-x">
     {% for event in events %}
         <div class="small-12 medium-4 cell">
             <div class="ic__card-container">
                 <div class="ic__card-photo" style="background-image:url({% if event.photo %}{{ event.photo.url }}{% else %}
                     https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
+                    <div class="ic__user-avatar top right" title="{{ event.created_by.username }}">
+                       <span class="ic__user-without-avatar">{{ event.created_by.username|make_list|slice:":2"|join:"" }}</span>
+                    </div>
                     <div class="ic__card-title">
                         <h2>{{ event }}</h2>
                     </div>
