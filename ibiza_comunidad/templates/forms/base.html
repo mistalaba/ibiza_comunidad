@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{% block head_title %}{% endblock head_title %}{% endblock title %}
 
+{# Forms should never have the title h1 #}
+{% block page_title_container %}{% endblock page_title_container %}
+
 {% block content %}
 <div class="ic__form-container grid-x align-center">
     <div class="small-12 medium-6 cell ic__form-wrapper">
