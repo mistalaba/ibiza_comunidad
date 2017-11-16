@@ -1,12 +1,8 @@
 """
 Production settings for ibiza_comunidad project.
 
-- Use Amazon's S3 for storing static files and uploaded media
 - Use mailgun to send emails
 - Use Redis for cache
-
-- Use sentry for error logging
-
 
 """
 
@@ -85,9 +81,15 @@ INSTALLED_APPS += ['gunicorn', ]
 
 # EMAIL
 # ------------------------------------------------------------------------------
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND')
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
-EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[ibiza_comunidad]')
 SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[ibiza_comunidad]')
+EMAIL_HOST = env('DJANGO_EMAIL_HOST')
+EMAIL_PORT = env('DJANGO_EMAIL_PORT')
+EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS')
 
 # Anymail with Mailgun. Not used yet, commented out
 # INSTALLED_APPS += ['anymail', ]

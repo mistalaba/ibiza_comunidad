@@ -40,10 +40,15 @@ DATABASES = {
 
 # Mail settings
 # ------------------------------------------------------------------------------
-
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND')
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[ibiza_comunidad]')
+EMAIL_HOST = env('DJANGO_EMAIL_HOST')
 EMAIL_PORT = 1025
-
-EMAIL_HOST = 'localhost'
+EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS', default=False)
 
 
 # CACHING
