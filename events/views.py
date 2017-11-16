@@ -26,6 +26,7 @@ def create_event(request):
             event = Event.objects.create(
                 title=data['event_name'],
                 photo=data['photo'],
+                description=data['description'],
                 start_datetime=data['start'],
                 end_datetime=data['end'],
                 price=data['price'],

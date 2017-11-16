@@ -10,6 +10,7 @@ from core.models import TimeStampedModel
 class Event(TimeStampedModel):
     title = models.CharField(max_length=400)
     photo = models.ImageField(upload_to='event_photos/', max_length=100, null=True)
+    description = models.CharField(max_length=600, blank=True)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()

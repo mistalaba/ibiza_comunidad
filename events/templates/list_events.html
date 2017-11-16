@@ -25,6 +25,9 @@
                         <h2>{{ event }}</h2>
                     </div>
                 </div>
+                {% if event.description %}
+                <p class="ic__card-description">{{ event.description }}</p>
+                {% endif %}
                 <p class="ic__card-details-item">
                     <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
                     {% with sd=event.start_datetime ed=event.end_datetime %}
