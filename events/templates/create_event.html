@@ -3,11 +3,13 @@
 
 {% block head_title %}{% trans "Create a new event" %}{% endblock %}
 
+{% block page_title_container %}{% endblock page_title_container %}
+
 {% block form_title %}{% trans "Create a new event" %}{% endblock form_title %}
 
 {% block inner %}
 <form class="login ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}{% include 'forms/_form_field.html' %}{% endfor %}
     <div class="ic__buttons">
         <button class="button primary" type="submit">{% trans 'Create event' %}</button>
         <a class="" href="{% url 'events:list-events' %}">{% trans "Cancel" %}</a>

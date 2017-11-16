@@ -1,0 +1,35 @@
+.ic__user-avatar {
+    position: absolute;
+    height: 3em;
+    width: 3em;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    cursor: default;
+
+    // Experimental
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    &.top {
+        top: -1rem;
+        @include breakpoint(small only) {
+            top: 0.5rem;
+        }
+    }
+    &.right{
+        right: -1rem;
+        @include breakpoint(small only) {
+            right: 0.5rem;
+        }
+    }
+}
+
+.ic__user-without-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.5rem;
+}

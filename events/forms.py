@@ -11,6 +11,7 @@ class EventForm(forms.Form):
 
     event_name = forms.CharField(max_length=400, required=True)
     photo = forms.ImageField(max_length=100, required=True)
+    description = forms.CharField(max_length=600, required=False, widget=forms.Textarea)
     start = forms.DateTimeField(required=True)
     end = forms.DateTimeField(required=True)
     price = forms.DecimalField(max_digits=10, decimal_places=2, required=True)
