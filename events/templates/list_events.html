@@ -5,15 +5,16 @@
 {% block page_title %}{% trans 'Events' %}{% endblock page_title %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
 <div class="grid-x grid-padding-x">
         <div class="small-12 cell">
             <a href="{% url 'events:create-event' %}" class="button primary">Add event</a>
         </div>
 </div>
-
+{% endif %}
 <div class="grid-x grid-padding-x">
     {% for event in events %}
-        <div class="small-12 medium-4 cell">
+        <div class="small-12 medium-6 large-4 cell">
             <div class="ic__card-container">
                 <div class="ic__card-photo" style="background-image:url({% if event.photo %}{{ event.photo.url }}{% else %}
                     https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">

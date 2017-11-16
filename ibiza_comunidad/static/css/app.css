@@ -221,9 +221,21 @@ div.ic__buttons *:not(:last-child) {
   top: -1rem;
 }
 
+@media screen and (max-width: 39.9375em) {
+  .ic__user-avatar.top {
+    top: 0.5rem;
+  }
+}
+
 .ic__user-avatar.right {
   right: -16px;
   right: -1rem;
+}
+
+@media screen and (max-width: 39.9375em) {
+  .ic__user-avatar.right {
+    right: 0.5rem;
+  }
 }
 
 .ic__user-without-avatar {
