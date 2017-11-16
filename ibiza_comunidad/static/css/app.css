@@ -152,9 +152,14 @@ div.ic__buttons *:not(:last-child) {
   padding: 16px;
   padding: 1rem;
   background-color: #fefefe;
+  color: #8a8a8a;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   margin-bottom: 2em;
+}
+
+.ic__card-container:hover {
+  color: #8a8a8a;
 }
 
 .ic__card-container .ic__card-photo {

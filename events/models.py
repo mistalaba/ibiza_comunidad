@@ -5,6 +5,7 @@ from django.db import models
 from django.conf import settings
 
 from core.models import TimeStampedModel
+from core.utils import slugify_unique
 
 
 class Event(TimeStampedModel):
@@ -15,6 +16,12 @@ class Event(TimeStampedModel):
     start_datetime = models.DateTimeField()
     end_datetime = models.DateTimeField()
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    slug = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify_unique(self)
+        super().save()

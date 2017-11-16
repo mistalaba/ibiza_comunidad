@@ -41,3 +41,10 @@ def create_event(request):
         'form': form,
     })
 
+
+def event_detail(request, event_slug):
+    event = Event.objects.get(slug=event_slug)
+
+    return render(request, 'view_event.html', {
+        'event': event,
+    })
