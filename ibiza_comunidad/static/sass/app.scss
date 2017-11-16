@@ -52,6 +52,17 @@
     color: inherit;
 }
 
+// Center a grid-x cell with less than 12 size
+body.ic__center {
+    .ic__title-container, .ic__content {
+        justify-content: center;
+    }
+}
+
+.grid-x.ic__center {
+    justify-content: center;
+}
+
 // * Navbar * //
 // Set height of navbar
 // .ic__main-nav, .menu  {
@@ -123,3 +134,4 @@ i {
 .ic__logo-link-small {
     padding: 5px;
 }
+

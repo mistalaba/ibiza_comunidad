@@ -7741,6 +7741,16 @@ a.thumbnail image {
   color: inherit;
 }
 
+body.ic__center .ic__title-container, body.ic__center .ic__content {
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.grid-x.ic__center {
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
 .top-bar, .top-bar ul {
   background-color: #fefefe;
 }

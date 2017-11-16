@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from .forms import EventForm
 from .models import Event
@@ -42,9 +44,21 @@ def create_event(request):
     })
 
 
+@login_required
 def event_detail(request, event_slug):
     event = Event.objects.get(slug=event_slug)
 
     return render(request, 'view_event.html', {
         'event': event,
     })
+
+@login_required
+def event_delete(request, event_slug):
+    event = Event.objects.get(slug=event_slug)
+    if event.created_by == request.user:
+        event.delete()
+        messages.success(request, _("Event successfully deleted."))
+    else:
+        messages.error(request, _("You cannot delete another user's event ."))
+
+    return redirect('events:list-events')
