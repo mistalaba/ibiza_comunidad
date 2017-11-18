@@ -140,12 +140,6 @@ LOGGING['handlers']['sentry'] = {
     'level': 'WARNING', # To capture more than ERROR, change to WARNING, INFO, etc.
     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
 }
-LOGGING['handlers']['mail_admins'] = {
-    'level': 'ERROR',
-    'class': 'django.utils.log.AdminEmailHandler',
-    'filters': ['require_debug_false'],
-}
-LOGGING['loggers']['django']['handlers'].append('mail_admins')
 
 
 

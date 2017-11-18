@@ -301,6 +301,11 @@ LOGGING = {
             'formatter': 'verbose',
             'filters': ['require_debug_true'],
         },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+        },
         'null': {
             "class": 'logging.NullHandler',
         },
@@ -309,6 +314,10 @@ LOGGING = {
         '': {
             'handlers': ['console'],
             'propagate': False,
+            'level': 'DEBUG',
+        },
+        'django': {
+            'handlers': ['console', 'mail_admins'],
             'level': 'DEBUG',
         },
     }
