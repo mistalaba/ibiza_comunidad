@@ -12,7 +12,7 @@ import os
 import raven
 
 RAVEN_CONFIG = {
-    'dsn': 'http://0909a081e34c45838fdd6b1719622dd1:1f3fe831cbdf4f948f048ba19268565d@sentry.martinkjellberg.com/4',
+    'dsn': env('DJANGO_SENTRY_DSN'),
     # If you are using git, you can also automatically configure the
     # release based on the git info.
     'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
