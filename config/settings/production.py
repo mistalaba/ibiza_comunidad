@@ -130,42 +130,65 @@ CACHES = {
 }
 
 # LOGGING
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'root': {
-        'level': 'WARNING',
-        'handlers': ['sentry'],
-    },
-    'formatters': {
-        'verbose': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt': "%d/%b/%Y %H:%M:%S %Z"
-        },
-        'simple': {
-            'format': '%(levelname)s %(message)s'
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': '/home/mistalaba/logs/ibiza_comunidad_django.log',
-            'formatter': 'verbose'
-        },
-        'sentry': {
-            'level': 'WARNING', # To capture more than ERROR, change to WARNING, INFO, etc.
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
+
+# Add logger settings to base.py
+LOGGING['root'] = {
+    'level': 'WARNING',
+    'handlers': ['sentry'],
 }
+LOGGING['handlers']['sentry'] = {
+    'level': 'WARNING', # To capture more than ERROR, change to WARNING, INFO, etc.
+    'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+}
+LOGGING['handlers']['mail_admins'] = {
+    'level': 'ERROR',
+    'class': 'django.utils.log.AdminEmailHandler',
+    'filters': ['require_debug_false'],
+}
+
+
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     # 'root': {
+#     #     'level': 'WARNING',
+#     #     'handlers': ['sentry'],
+#     # },
+#     'formatters': {
+#         'verbose': {
+#             'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+#             'datefmt': "%d/%b/%Y %H:%M:%S %Z"
+#         },
+#         'simple': {
+#             'format': '%(levelname)s %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'INFO',
+#             'class': 'logging.FileHandler',
+#             'filename': '/home/mistalaba/logs/ibiza_comunidad_django.log',
+#             'formatter': 'verbose'
+#         },
+#         # 'sentry': {
+#         #     'level': 'WARNING', # To capture more than ERROR, change to WARNING, INFO, etc.
+#         #     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+#         # },
+#         # 'mail_admins': {
+#         #     'level': 'ERROR',
+#         #     'class': 'django.utils.log.AdminEmailHandler',
+#         #     'filters': ['require_debug_false'],
+#         # }
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
 
 # Sentry Configuration
 # SENTRY_DSN = env('DJANGO_SENTRY_DSN')
