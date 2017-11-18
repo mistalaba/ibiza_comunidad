@@ -140,6 +140,9 @@ LOGGING['handlers']['sentry'] = {
     'level': 'WARNING', # To capture more than ERROR, change to WARNING, INFO, etc.
     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
 }
+# Write to log file
+LOGGING['loggers']['django']['handlers'].append('file')
+
 
 
 

@@ -309,6 +309,12 @@ LOGGING = {
         'null': {
             "class": 'logging.NullHandler',
         },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/home/mistalaba/logs/ibiza_comunidad_django.log',
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
         '': {
