@@ -141,6 +141,14 @@ LOGGING['handlers']['sentry'] = {
     'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
 }
 # Write to log file
+LOGGING['handlers']['file'] = {
+    'level': 'INFO',
+    'class': 'logging.FileHandler',
+    'filename': '/home/mistalaba/logs/ibiza_comunidad_django.log',
+    'formatter': 'verbose',
+    'filters': ['require_debug_false'],
+}
+
 LOGGING['loggers']['django']['handlers'].append('file')
 
 # Custom Admin URL, use {% url 'admin:index' %}
