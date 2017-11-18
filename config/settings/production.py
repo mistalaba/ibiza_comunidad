@@ -5,12 +5,18 @@ Production settings for ibiza_comunidad project.
 - Use Redis for cache
 
 """
-
+from .base import *  # noqa
 
 import logging
+import os
+import raven
 
-
-from .base import *  # noqa
+RAVEN_CONFIG = {
+    'dsn': 'http://0909a081e34c45838fdd6b1719622dd1:1f3fe831cbdf4f948f048ba19268565d@sentry.martinkjellberg.com/4',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+}
 
 # DEBUG
 # ------------------------------------------------------------------------------
@@ -42,6 +48,7 @@ DATABASES = {
 # This ensures that Django will be able to detect a secure connection
 # properly on Heroku.
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # raven sentry client
 # See https://docs.sentry.io/clients/python/integrations/django/
 INSTALLED_APPS += ['raven.contrib.django.raven_compat', ]
