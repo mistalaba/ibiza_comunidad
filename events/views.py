@@ -3,12 +3,16 @@
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseServerError
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from .forms import EventForm
 from .models import Event
+
+def test500(request):
+    return HttpResponseServerError()
 
 def list_events(request):
     events = Event.objects.all().order_by('-start_datetime')
