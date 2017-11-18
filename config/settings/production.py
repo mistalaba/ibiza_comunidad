@@ -145,6 +145,7 @@ LOGGING['handlers']['mail_admins'] = {
     'class': 'django.utils.log.AdminEmailHandler',
     'filters': ['require_debug_false'],
 }
+LOGGING['loggers']['django']['handlers'].append('mail_admins')
 
 
 
