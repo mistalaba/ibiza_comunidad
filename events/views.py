@@ -12,6 +12,7 @@ from .forms import EventForm
 from .models import Event
 
 def test500(request):
+    raise Exception
     return HttpResponseServerError()
 
 def list_events(request):
