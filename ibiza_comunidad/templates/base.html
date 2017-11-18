@@ -28,7 +28,7 @@
     <body class="{% block bodyclass %}{% endblock bodyclass %}">
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
-        <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
+        <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium" style="display:none;">
             <!-- Should be to the left -->
             <a class="ic__logo-link-small" href="{% url 'home' %}">
                 <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
