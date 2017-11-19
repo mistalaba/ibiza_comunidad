@@ -16,3 +16,17 @@
     </div>
 </form>
 {% endblock inner %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+    $(document).ready(function() {
+        $("._datetimepicker").flatpickr({
+            enableTime: true,
+            minDate: "today",
+            time_24hr: true,
+            closeOnSelect: true
+        });
+    });
+</script>
+{% endblock javascript %}
