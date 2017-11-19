@@ -10,6 +10,9 @@ from django.utils.translation import ugettext_lazy as _
 from .forms import EventForm
 from .models import Event
 
+import logging
+logger = logging.getLogger(__name__)
+
 
 def list_events(request):
     events = Event.objects.all().order_by('-start_datetime')
@@ -52,6 +55,7 @@ def event_detail(request, event_slug):
     return render(request, 'view_event.html', {
         'event': event,
     })
+
 
 @login_required
 def event_delete(request, event_slug):
