@@ -24,6 +24,5 @@ def add_number_two(x, y):
 
 @app.task()
 def async_send_messages(email_messages):
-    # conn = get_connection(backend=settings.EMAIL_BACKEND)
     conn = get_connection(backend='anymail.backends.mailgun.EmailBackend')
     conn.send_messages(email_messages)
