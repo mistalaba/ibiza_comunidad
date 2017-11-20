@@ -251,7 +251,7 @@ ACCOUNT_USERNAME_REQUIRED = False
 
 ACCOUNT_ADAPTER = 'ibiza_comunidad.users.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'ibiza_comunidad.users.adapters.SocialAccountAdapter'
-
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
