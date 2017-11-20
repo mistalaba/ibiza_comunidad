@@ -52,7 +52,7 @@ def collect_static():
 def supervisord_changes():
     update_supervisord = prompt("Did you make any changes to the Supervisor config? (y/n)", default='n')
     if update_supervisord == 'y':
-        run("supervisorctl reread; supervisorctl update")
+        run("supervisorctl reread; supervisorctl reload")
 
 
 @task
