@@ -82,5 +82,5 @@ def deploy(mode=None):
     collect_static()
     supervisord_changes()
     restart_gunicorn()
-    # restart_celery()
+    restart_celery()
     restart_nginx()
