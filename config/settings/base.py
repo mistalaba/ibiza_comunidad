@@ -268,10 +268,6 @@ INSTALLED_APPS += ['ibiza_comunidad.taskapp.celery.CeleryConfig']
 CELERY_BROKER_URL = 'redis://'
 ########## END CELERY
 
-
-# Location of root django.contrib.admin URL, use {% url 'admin:index' %}
-ADMIN_URL = r'^admin/'
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
