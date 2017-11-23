@@ -141,3 +141,5 @@ LOGGING['handlers']['file'] = {
 }
 
 LOGGING['loggers']['django']['handlers'].append('file')
+
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
