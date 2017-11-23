@@ -48,11 +48,16 @@
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="vertical medium-horizontal menu" data-dropdown-menu>
+                <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'users:private-profile' %}">{% trans "My Profile" %}</a></li>
-                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                    <li><a href="#">{% trans "Settings" %}</a>
+                        <ul class="menu">
+                            <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
+                            <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
+                            <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                        </ul>
+                    </li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
                         <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
