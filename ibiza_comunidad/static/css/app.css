@@ -19,8 +19,8 @@
 }
 
 .ic__form-container .ic__form {
-  padding: 16px;
-  padding: 1rem;
+  padding: 16px 0;
+  padding: 1rem 0;
 }
 
 .ic__form-wrapper {
@@ -253,6 +253,37 @@ div.ic__buttons *:not(:last-child) {
   width: 100%;
   font-size: 24px;
   font-size: 1.5rem;
+}
+
+.social {
+  margin-right: 4px;
+  margin-right: .25rem;
+}
+
+.social.facebook {
+  background-color: #3b5998;
+  color: #fefefe;
+}
+
+.social.facebook:hover, .social.facebook:focus {
+  background-color: #2f477a;
+  color: #fefefe;
+}
+
+.social.twitter {
+  background-color: #55acee;
+  color: #fefefe;
+}
+
+.social.twitter:hover, .social.twitter:focus {
+  background-color: #1a8fe8;
+  color: #fefefe;
+}
+
+.ic__socialaccount_providers {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
@@ -7784,15 +7815,26 @@ body.ic__center .ic__title-container, body.ic__center .ic__content {
   height: 24px;
 }
 
+.ic__icon.medium {
+  width: 32px;
+  height: 32px;
+}
+
 i {
   display: inline-block;
   font-style: normal;
   margin-right: 0.5em;
+  vertical-align: inherit;
 }
 
 .ic__logo-large {
   width: 64px;
   height: 64px;
+}
+
+.ic__logo-medium {
+  width: 32px;
+  height: 32px;
 }
 
 .ic__logo-small {

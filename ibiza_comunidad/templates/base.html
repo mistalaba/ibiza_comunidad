@@ -82,7 +82,7 @@
 
             {% block content %}
                 <div class="grid-x grid-margin-x">
-                    <div class="small-12 cell"><p>Use this document as a way to quick start any new project.</p></div>
+                    <div class="small-12 cell">{% block inner %}<p>Use this document as a way to quick start any new project.</p>{% endblock inner %}</div>
                 </div>
             {% endblock content %}
         </div>

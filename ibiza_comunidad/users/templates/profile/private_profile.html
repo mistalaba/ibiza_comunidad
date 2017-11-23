@@ -6,10 +6,12 @@
 {% block form_title %}{% trans 'Profile' %}{% endblock form_title %}
 
 {% block inner %}
-<form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
-    {% for field in form %}{% include 'forms/_form_field.html' %}{% endfor %}
-    <div class="ic__buttons">
-        <button class="button primary" type="submit">{% trans 'Save profile' %}</button>
-    </div>
-</form>
+<div class="grid-container">
+    <form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
+        {% for field in form %}{% include 'forms/_form_field.html' %}{% endfor %}
+        <div class="ic__buttons">
+            <button class="button primary" type="submit">{% trans 'Save profile' %}</button>
+        </div>
+    </form>
+</div>
 {% endblock inner %}
