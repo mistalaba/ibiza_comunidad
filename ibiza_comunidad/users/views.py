@@ -33,6 +33,8 @@ def private_user_profile(request):
         data = {
             'username': user.username,
             'email': email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
         }
         form = ProfileForm(data, user=user)
     return render(request, 'profile/private_profile.html', {
