@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+from django.core import validators
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
 from allauth.account.models import EmailAddress
 
+from core.validators import validate_unicode_username
 import logging
 logger = logging.getLogger(__name__)
 
@@ -17,8 +19,11 @@ class ProfileForm(forms.Form):
         self.user = kwargs.pop('user')
         super(ProfileForm, self).__init__(*args, **kwargs)
 
-    username = forms.CharField()
-    email = forms.EmailField()
+    # max_length taken from model
+    username = forms.CharField(max_length=150, validators=[validate_unicode_username])
+    email = forms.EmailField(max_length=254)
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
 
     def clean_email(self):
         User = get_user_model()
@@ -36,3 +41,19 @@ class ProfileForm(forms.Form):
         if User.objects.filter(username__iexact=data).exclude(pk=self.user.pk).exists():
             self.add_error('username', ValidationError(_("The username {} already exists.").format(data)))
         return data
+
+    def save(self, request):
+        data = self.cleaned_data
+        user = self.user
+        email = user.emailaddress_set.get_primary(user).email
+        if data['email'] != email:
+            # User changed email address
+            new_email = data['email']
+            email = EmailAddress.objects.get_primary(user)
+            email.change(request, new_email=new_email)
+        user.username = data['username']
+        user.first_name = data['first_name']
+        user.last_name = data['last_name']
+        user.save()
+
+
