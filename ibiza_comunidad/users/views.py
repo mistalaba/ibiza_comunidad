@@ -1,12 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from django.utils.translation import ugettext_lazy as _
 
 from allauth.account.models import EmailAddress
 
@@ -26,12 +27,8 @@ def private_user_profile(request):
     if request.method == 'POST':
         form = ProfileForm(request.POST, user=user)
         if form.is_valid():
-            if form.cleaned_data['email'] != email:
-                # User changed email address
-                new_email = form.cleaned_data['email']
-                email = EmailAddress.objects.get_primary(user)
-                email.change(request, new_email=new_email)
-            user.save()
+            form.save(request)
+            messages.success(request, _("Your user profile is updated"))
     else:
         data = {
             'username': user.username,
