@@ -6,7 +6,6 @@
 {% block form_title %}{% trans "Sign In" %}{% endblock form_title %}
 
 {% block inner %}
-<div class="grid-container">
     {% get_providers as socialaccount_providers %}
     <form class="login ic__form" method="POST" action="{% url 'account_login' %}" novalidate>{% csrf_token %}
         {% if socialaccount_providers %}
@@ -36,4 +35,3 @@
         </div>
     </form>
 {% endblock inner %}
-</div>

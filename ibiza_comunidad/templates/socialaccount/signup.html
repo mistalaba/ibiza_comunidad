@@ -6,7 +6,6 @@
 {% block form_title %}{% trans "Signup" %}{% endblock form_title %}
 
 {% block inner %}
-<div class="grid-container">
     <p>{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
     {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
 
@@ -19,5 +18,4 @@
             <button class="button primary" type="submit">{% trans "Sign up" %}</button>
         </div>
     </form>
-</div>
 {% endblock inner %}

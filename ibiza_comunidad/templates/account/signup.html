@@ -5,7 +5,6 @@
 {% block form_title %}{% trans "Signup" %}{% endblock form_title %}
 
 {% block inner %}
-<div class="grid-container">
     {% get_providers as socialaccount_providers %}
     {% if socialaccount_providers %}
     <div class="grid-x grid-margin-x">
@@ -31,6 +30,5 @@
                 <button class="button" type="submit">{% trans "Sign Up" %}</button>
             </div>
         </form>
-</div>
 {% endblock %}
 
