@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Ibiza Comunidad{% endblock title %}{% block subtitle %}{% if request.path_info != '/' %} | Ibiza Comunidad{% endif %}{% endblock subtitle %}</title>
+    <title>{% block head_title %}Ibiza Comunidad{% endblock %}{% block subtitle %}{% if request.path_info != '/' %} | Ibiza Comunidad{% endif %}{% endblock subtitle %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -28,7 +28,7 @@
     <body class="{% block bodyclass %}{% endblock bodyclass %}">
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
-        <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium">
+        <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium" style="display:none;">
             <!-- Should be to the left -->
             <a class="ic__logo-link-small" href="{% url 'home' %}">
                 <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
@@ -48,11 +48,17 @@
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="vertical medium-horizontal menu" data-dropdown-menu>
+                <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a href="{% url 'users:private-profile' %}">{% trans "My Profile" %}</a></li>
-                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                    <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
+                    <li><a href="#">{% trans "Settings" %}</a>
+                        <ul class="menu">
+                            <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
+                            <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
+                            <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                        </ul>
+                    </li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
                         <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
@@ -64,24 +70,28 @@
         <div class="grid-container">
             {% if messages %}
                 {% for message in messages %}
-                    <div class="callout alert {% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</div>
+                    <div class="callout {% if message.tags %}{{ message.tags }}{% endif %}" data-closable>
+                        {{ message }}
+                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 {% endfor %}
             {% endif %}
 
             {% block page_title_container %}
             <div class="grid-x grid-margin-x ic__title-container">
-                <div class="small-12 medium-6 cell"><h1>{% block page_title %}Default title{% endblock page_title %}</h1></div>
+                <div class="small-12 cell"><h1>{% block page_title %}Default title{% endblock page_title %}</h1></div>
             </div>
             {% endblock page_title_container %}
 
-
             {% block content %}
                 <div class="grid-x grid-margin-x">
-                    <div class="small-12 cell"><p>Use this document as a way to quick start any new project.</p></div>
+                    <div class="small-12 cell">{% block inner %}<p>Use this document as a way to quick start any new project.</p>{% endblock inner %}</div>
                 </div>
             {% endblock content %}
         </div>
-
+        <span>is_user_profile_incomplete: {{ is_user_profile_incomplete }}</span>
         {% block modal %}{% endblock modal %}
 
         {% block javascript %}

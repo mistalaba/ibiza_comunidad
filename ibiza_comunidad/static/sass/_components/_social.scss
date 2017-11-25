@@ -1,0 +1,19 @@
+// https://foundation.zurb.com/building-blocks/blocks/social-buttons.html
+$social-brand-facebook: #3b5998;
+$social-brand-twitter: #55acee;
+
+.social {
+    margin-right: .25rem;
+    &.facebook {
+        @include button-style($social-brand-facebook, auto, $white);
+    }
+    &.twitter {
+        @include button-style($social-brand-twitter, auto, $white);
+    }
+}
+
+.ic__socialaccount_providers {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}

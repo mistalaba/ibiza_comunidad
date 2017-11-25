@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n core_tags %}
 
-{% block title %}{% trans 'Events' %}{% endblock title %}
+{% block head_title %}{% trans 'Events' %}{% endblock %}
 {% block page_title %}{% trans 'Events' %}{% endblock page_title %}
 
 {% block content %}
@@ -19,7 +19,7 @@
                 <div class="ic__card-photo" style="background-image:url({% if event.photo %}{{ event.photo.url }}{% else %}
                     https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
                     <div class="ic__user-avatar top right" title="{{ event.created_by.username }}">
-                        <span class="ic__user-without-avatar">{{ event.created_by.username|make_list|slice:":2"|join:"" }}</span>
+                        {% avatar event.created_by %}
                     </div>
                     <div class="ic__card-title">
                         <h2>{{ event }}</h2>

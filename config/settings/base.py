@@ -54,6 +54,9 @@ THIRD_PARTY_APPS = [
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.facebook',
+    'anymail',
 ]
 
 # Apps specific for this project go here.
@@ -78,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.UpgradeUserProfileMiddleware'
 ]
 
 # MIGRATIONS CONFIGURATION
@@ -97,10 +101,6 @@ DEBUG = env.bool('DJANGO_DEBUG', False)
 FIXTURE_DIRS = (
     str(APPS_DIR.path('fixtures')),
 )
-
-# EMAIL CONFIGURATION
-# ------------------------------------------------------------------------------
-EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND')
 
 # MANAGER CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -148,13 +148,14 @@ TEMPLATES = [
         'DIRS': [
             str(APPS_DIR.path('templates')),
         ],
+        'APP_DIRS': True,
         'OPTIONS': {
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
-            'loaders': [
-                'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader',
-            ],
+            # 'loaders': [
+            #     'django.template.loaders.filesystem.Loader',
+            #     'django.template.loaders.app_directories.Loader',
+            # ],
             # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -166,6 +167,8 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 # Your stuff: custom template context processors go here
+                # 'core.context_processors.user_profile_complete',
+                # 'core.context_processors.has_profile',
             ],
         },
     },
@@ -221,18 +224,10 @@ PASSWORD_HASHERS = [
 # ------------------------------------------------------------------------------
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
 ]
 
 # AUTHENTICATION CONFIGURATION
@@ -243,22 +238,50 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Some really nice defaults
+ACCOUNT_ADAPTER = 'ibiza_comunidad.users.adapters.AccountAdapter'
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+# Moved to loacl settings
+# ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USERNAME_REQUIRED = False
-
-ACCOUNT_ADAPTER = 'ibiza_comunidad.users.adapters.AccountAdapter'
+SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_ADAPTER = 'ibiza_comunidad.users.adapters.SocialAccountAdapter'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'https'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': True,
+        'VERSION': 'v2.5',
+    }
+}
 
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:private-profile'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'account_login'
 
 # SLUGLIFIER
@@ -266,16 +289,8 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 
 ########## CELERY
 INSTALLED_APPS += ['ibiza_comunidad.taskapp.celery.CeleryConfig']
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
-if CELERY_BROKER_URL == 'django://':
-    CELERY_RESULT_BACKEND = 'redis://'
-else:
-    CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_BROKER_URL = 'redis://'
 ########## END CELERY
-
-
-# Location of root django.contrib.admin URL, use {% url 'admin:index' %}
-ADMIN_URL = r'^admin/'
 
 LOGGING = {
     'version': 1,
@@ -304,6 +319,11 @@ LOGGING = {
             'formatter': 'verbose',
             'filters': ['require_debug_true'],
         },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false'],
+        },
         'null': {
             "class": 'logging.NullHandler',
         },
@@ -313,6 +333,15 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
             'level': 'DEBUG',
+        },
+        'django': {
+            'handlers': ['console', 'mail_admins'],
+            'level': 'DEBUG',
+        },
+        'django.db.backends': {
+            'handlers': ['null'],
+            'propagate': False,
+            'level':'DEBUG',
         },
     }
 }

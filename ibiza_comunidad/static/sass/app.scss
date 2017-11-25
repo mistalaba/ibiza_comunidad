@@ -1,9 +1,13 @@
 @import 'foundation/settings';
 @import '../bower_components/foundation-sites/scss/foundation';
+@import '../bower_components/foundation-sites/scss/util/mixins';
+
 @import '_components/forms';
 @import '_components/fonts';
 @import '_components/cards';
 @import '_components/user';
+@import '_components/social';
+@import '_components/callout';
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
@@ -99,6 +103,10 @@ body.ic__center {
         width: 24px;
         height: 24px;
     }
+    &.medium {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 
@@ -108,10 +116,16 @@ i {
     display: inline-block;
     font-style: normal;
     margin-right: 0.5em;
+    vertical-align: inherit;
 }
 .ic__logo-large {
     width: 64px;
     height: 64px;
+}
+
+.ic__logo-medium {
+    width: 32px;
+    height: 32px;
 }
 
 .ic__logo-small {
