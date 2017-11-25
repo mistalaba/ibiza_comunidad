@@ -15,4 +15,4 @@ class EventForm(forms.Form):
     description = forms.CharField(max_length=600, required=False, widget=forms.Textarea)
     start = forms.DateTimeField(widget=widgets.DateTimeInput(attrs={'class': '_datetimepicker'}), required=True)
     end = forms.DateTimeField(widget=widgets.DateTimeInput(attrs={'class': '_datetimepicker'}), required=True)
-    price = forms.DecimalField(max_digits=10, decimal_places=2, required=True)
+    price = forms.DecimalField(widget=widgets.NumberInput(attrs={'step': 0.50}), max_digits=10, decimal_places=2, required=True)

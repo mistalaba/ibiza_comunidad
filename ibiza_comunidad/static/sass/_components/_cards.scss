@@ -51,3 +51,9 @@
         margin-bottom: 0.5em;
     }
 }
+
+.ic__card-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
