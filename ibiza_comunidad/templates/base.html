@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{% block title %}Ibiza Comunidad{% endblock title %}{% block subtitle %}{% if request.path_info != '/' %} | Ibiza Comunidad{% endif %}{% endblock subtitle %}</title>
+    <title>{% block head_title %}Ibiza Comunidad{% endblock %}{% block subtitle %}{% if request.path_info != '/' %} | Ibiza Comunidad{% endif %}{% endblock subtitle %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -51,6 +51,7 @@
                 <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
                     <li><a href="#">{% trans "Settings" %}</a>
                         <ul class="menu">
                             <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
@@ -80,10 +81,9 @@
 
             {% block page_title_container %}
             <div class="grid-x grid-margin-x ic__title-container">
-                <div class="small-12 medium-6 cell"><h1>{% block page_title %}Default title{% endblock page_title %}</h1></div>
+                <div class="small-12 cell"><h1>{% block page_title %}Default title{% endblock page_title %}</h1></div>
             </div>
             {% endblock page_title_container %}
-
 
             {% block content %}
                 <div class="grid-x grid-margin-x">
