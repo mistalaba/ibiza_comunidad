@@ -23,6 +23,7 @@ class User(AbstractUser):
     name = models.CharField(_('Name of User'), blank=True, max_length=255)
     first_name = models.CharField(_('first name'), max_length=100, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
+    email = models.EmailField(_('email address'), blank=True, unique=True)
 
     def __str__(self):
         return self.username
@@ -41,8 +42,13 @@ def user_email_confirmed(request, email_address, **kwargs):
 def user_email_changed(request, user, from_email_address, to_email_address, **kwargs):
     logger.info("Email is changed")
 
+def user_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True)
     def is_incomplete(self):
         incomplete_fields = [self.user.first_name, self.user.last_name, self.user.email]
         for field in incomplete_fields:

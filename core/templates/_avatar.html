@@ -1,0 +1,6 @@
+
+{% if user.user_profile.avatar %}
+    <div class="ic__user-avatar-image" style="background-image: url({{ user.user_profile.avatar.url }})" title="{{ user.username }}"></div>
+{% else %}
+    <span class="ic__user-without-avatar">{{ user.username|make_list|slice:":2"|join:"" }}</span>
+{% endif %}

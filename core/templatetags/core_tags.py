@@ -11,3 +11,8 @@ register = template.Library()
 def include_svg(file_name):
     full_path = finders.find('images/' + file_name)
     return mark_safe(open(full_path).read())
+
+# Get initials or avatar
+@register.inclusion_tag('_avatar.html')
+def avatar(user):
+    return {'user': user}
