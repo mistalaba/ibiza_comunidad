@@ -81,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.UpgradeUserProfileMiddleware'
 ]
 
 # MIGRATIONS CONFIGURATION
@@ -166,6 +167,8 @@ TEMPLATES = [
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
                 # Your stuff: custom template context processors go here
+                # 'core.context_processors.user_profile_complete',
+                # 'core.context_processors.has_profile',
             ],
         },
     },
@@ -278,7 +281,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:private-profile'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'account_login'
 
 # SLUGLIFIER
