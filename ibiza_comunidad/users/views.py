@@ -5,14 +5,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 from django.utils.translation import ugettext_lazy as _
 
 from allauth.account.models import EmailAddress
 
 from .models import User
-from .forms import ProfileForm
+from .forms import ProfileForm_v2, UserForm
 
 import logging
 logger = logging.getLogger(__name__)
@@ -28,26 +28,24 @@ def list_users(request):
 
 @login_required
 def private_user_profile(request):
-    User = get_user_model()
     user = request.user
     email = user.emailaddress_set.get_primary(user).email
     email_verified = user.emailaddress_set.get_primary(user).verified
     if request.method == 'POST':
-        form = ProfileForm(request.POST, user=user)
-        if form.is_valid():
-            form.save(request)
+        profile_form = ProfileForm_v2(request.POST, request.FILES, instance=user.user_profile)
+        user_form = UserForm(request.POST, request.FILES, instance=user)
+        if profile_form.is_valid() and user_form.is_valid():
+            profile_form.save()
+            user_form.save()
             messages.success(request, _("Your user profile is updated"))
+            return redirect('users:private-profile')
     else:
-        data = {
-            'username': user.username,
-            'email': email,
-            'first_name': user.first_name,
-            'last_name': user.last_name,
-        }
-        form = ProfileForm(data, user=user)
+        user_form = UserForm(instance=user)
+        profile_form = ProfileForm_v2(instance=user.user_profile)
     return render(request, 'profile/private_profile.html', {
         'user': request.user,
-        'form': form,
+        'user_form': user_form,
+        'profile_form': profile_form,
         'email': email,
         'email_verified': email_verified,
     })

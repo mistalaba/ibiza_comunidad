@@ -7,7 +7,12 @@
 
 {% block inner %}
     <form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
-        {% for field in form %}{% include 'forms/_form_field.html' %}{% endfor %}
+        {% with profile_form.avatar as field %}{% include 'forms/_form_field.html' %}{% endwith %}
+        {% with user_form.username as field %}{% include 'forms/_form_field.html' %}{% endwith %}
+        {% with user_form.email as field %}{% include 'forms/_form_field.html' %}{% endwith %}
+        {% with user_form.first_name as field %}{% include 'forms/_form_field.html' %}{% endwith %}
+        {% with user_form.last_name as field %}{% include 'forms/_form_field.html' %}{% endwith %}
+
         <div class="ic__buttons">
             <button class="button primary" type="submit">{% trans 'Save profile' %}</button>
         </div>
