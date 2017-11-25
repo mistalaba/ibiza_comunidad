@@ -19,6 +19,14 @@ logger = logging.getLogger(__name__)
 
 
 @login_required
+def list_users(request):
+    users = User.objects.all()
+    return render(request, 'list_users.html', {
+        'users': users,
+    })
+
+
+@login_required
 def private_user_profile(request):
     User = get_user_model()
     user = request.user
@@ -42,6 +50,14 @@ def private_user_profile(request):
         'form': form,
         'email': email,
         'email_verified': email_verified,
+    })
+
+
+@login_required
+def public_user_profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'profile/public_profile.html', {
+        'user': user,
     })
 
 
