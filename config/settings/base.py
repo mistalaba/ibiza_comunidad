@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'anymail',
+    'algoliasearch_django',
 ]
 
 # Apps specific for this project go here.
@@ -344,4 +345,10 @@ LOGGING = {
             'level':'DEBUG',
         },
     }
+}
+
+ALGOLIA = {
+    'APPLICATION_ID': env('ALGOLIA_APPLICATION_ID'),
+    'API_KEY': env('ALGOLIA_ADMIN_API_KEY'),
+    'INDEX_SUFFIX': env('ALGOLIA_INDEX_SUFFIX'),
 }

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block css %}
+    {{ block.super }}
+<!-- Algolia -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch.min.css">
+<!-- Necessary? -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch-theme-algolia.min.css">
+{% endblock %}
+
+
+{# Hide topnav search #}
+{% block inline_search %}{% endblock %}
+
+{% block content %}
+<p>
+    <img src="{% static 'images/search-by-algolia.png' %}" alt="">
+</p>
+<div id="search-box">
+    <!-- SearchBox widget will appear here -->
+</div>
+
+<p>Refinement</p>
+<div id="refinement-list">
+    <!-- RefinementList widget will appear here -->
+</div>
+<div id="clear-all">
+    <!-- ClearAll widget will appear here -->
+  </div>
+
+<p>Hits are here:</p>
+<div id="hits">
+    <!-- Hits widget will appear here -->
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <!-- Algolia -->
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch.min.js"></script>
+    <script>
+        const search = instantsearch({
+            appId: '0TQUM0HNRP',
+            apiKey: '38e7a153ed72238b7b15bc61a897f21d',
+            indexName: 'Event_dev',
+            urlSync: true
+          });
+
+            // initialize SearchBox
+            search.addWidget(
+                instantsearch.widgets.searchBox({
+                    container: '#search-box',
+                    placeholder: 'Search for events'
+                })
+            );
+
+            // initialize RefinementList
+            search.addWidget(
+                instantsearch.widgets.refinementList({
+                container: '#refinement-list',
+                attributeName: 'created_by'
+                })
+            );
+
+            search.addWidget(
+                instantsearch.widgets.hits({
+                container: '#hits',
+                templates: {
+                    empty: 'No results',
+                    item: '<em>Hit {% templatetag openvariable %} objectID {% templatetag closevariable %}</em>: {% templatetag openvariable %}{_highlightResult.title.value}{% templatetag closevariable %}'
+                }
+                })
+            );
+
+            // initialize clearAll
+            search.addWidget(
+                instantsearch.widgets.clearAll({
+                    container: '#clear-all',
+                    templates: {
+                        link: 'Reset everything'
+                    },
+                    autoHideContainer: false
+                })
+            );
+
+          search.start();
+      </script>
+{% endblock %}
