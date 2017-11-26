@@ -38,6 +38,21 @@
 {% block javascript %}
     {{ block.super }}
     <!-- Algolia -->
+    {% verbatim %}
+    <script type="text/html" id="hit-template">
+        <div class="hit">
+          <div class="hit-image">
+            <img src="{{image}}" alt="{{name}}">
+          </div>
+          <div class="hit-content">
+            <!-- <h3 class="hit-price">${{price}}</h3> -->
+            <h2 class="hit-name">{{{_highlightResult.title.value}}}</h2>
+            <!-- <p class="hit-description">{{{_highlightResult.description.value}}}</p> -->
+          </div>
+        </div>
+    </script>
+    {% endverbatim %}
+
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch.min.js"></script>
     <script>
         const search = instantsearch({
@@ -68,7 +83,8 @@
                 container: '#hits',
                 templates: {
                     empty: 'No results',
-                    item: '<em>Hit {% templatetag openvariable %} objectID {% templatetag closevariable %}</em>: {% templatetag openvariable %}{_highlightResult.title.value}{% templatetag closevariable %}'
+                    item: document.getElementById('hit-template').innerHTML,
+                    // item: '<em>Hit {% templatetag openvariable %} objectID {% templatetag closevariable %}</em>: {% templatetag openvariable %}{_highlightResult.title.value}{% templatetag closevariable %}'
                 }
                 })
             );
