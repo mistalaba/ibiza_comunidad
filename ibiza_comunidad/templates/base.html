@@ -13,13 +13,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <![endif]-->
 
-        {% block css %}
-        <!-- Your stuff: Third-party CSS libraries go here -->
+    {% block css %}
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+    {% endblock %}
 
-        <!-- This file stores project-specific CSS -->
-        <link href="{% static 'css/app.css' %}" rel="stylesheet">
-
-        {% endblock %}
     {% block ga %}
     {% include "_google_analytics_beta.html" %}
     {% endblock ga %}
@@ -49,6 +46,18 @@
             </div>
             <div class="top-bar-right">
                 <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
+                    {% block inline_search %}
+                    <li>
+                        <form action="{% url 'search' %}" class="ic__inline-search-container" method="get">
+                        <div class="input-group">
+                            <input class="input-group-field" type="search" name="q">
+                            <div class="input-group-button">
+                                <input type="submit" class="button" value="Search">
+                            </div>
+                        </div>
+                        </form>
+                    </li>
+                    {% endblock inline_search %}
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
