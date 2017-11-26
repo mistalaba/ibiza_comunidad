@@ -30,7 +30,7 @@
   </div>
 
 <p>Hits are here:</p>
-<div id="hits">
+<div class="grid-x grid-padding-x" id="hits">
     <!-- Hits widget will appear here -->
 </div>
 {% endblock %}
@@ -40,17 +40,22 @@
     <!-- Algolia -->
     {% verbatim %}
     <script type="text/html" id="hit-template">
-        <div class="hit">
-          <div class="hit-image">
-            <img src="{{image}}" alt="{{name}}">
-          </div>
-          <div class="hit-content">
-            <!-- <h3 class="hit-price">${{price}}</h3> -->
-            <h2 class="hit-name">{{{_highlightResult.title.value}}}</h2>
-            <!-- <p class="hit-description">{{{_highlightResult.description.value}}}</p> -->
-          </div>
-        </div>
+    <div class="small-12 medium-3 large-1 cell">
+        <a class="ic__card-container" href="{{get_absolute_url}}">
+            <div class="ic__card-photo" style="background-image:url({{algolia_photo_url}})">
+                <div class="ic__card-title">
+                    <h2>{{title}}</h2>
+                </div>
+            </div>
+            <p class="ic__card-description">{{description}}</p>
+            <p class="ic__card-details-item">
+                <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
+                <span>{{start_datetime}} - {{end_datetime}}</span>
+            </p>
+        </a>
+    </div>
     </script>
+
     {% endverbatim %}
 
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch.min.js"></script>

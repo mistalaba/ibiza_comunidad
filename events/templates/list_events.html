@@ -15,7 +15,7 @@
 <div class="grid-x grid-padding-x">
     {% for event in events %}
         <div class="small-12 medium-6 large-4 cell">
-            <a class="ic__card-container" href="{% url 'events:event-detail' event_slug=event.slug %}">
+            <a class="ic__card-container" href="{{ event.get_absolute_url }}">
                 <div class="ic__card-photo" style="background-image:url({% if event.photo %}{{ event.photo.url }}{% else %}
                     https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
                     <div class="ic__user-avatar top right" title="{{ event.created_by.username }}">
