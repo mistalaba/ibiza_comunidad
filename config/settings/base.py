@@ -343,5 +343,10 @@ LOGGING = {
             'propagate': False,
             'level':'DEBUG',
         },
+        'django.template': {
+            'handlers': ['null'],
+            'propagate': False,
+            'level':'DEBUG',
+        },
     }
 }
