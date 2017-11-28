@@ -20,6 +20,10 @@ if settings.DEBUG:
     # favicon_url = staticfiles_storage.url('favicon/')
     favicon_url = join(str(settings.ROOT_DIR), 'ibiza_comunidad/static/favicon/')
     urlpatterns += [
+        # robots.txt
+        url(r'^robots\.txt$', RedirectView.as_view(url=staticfiles_storage.url('robots_comingsoon.txt'), permanent=True)),
+
+        # favicons
         url(r'^favicon\.ico$', serve, {'document_root': favicon_url, 'path': 'favicon.ico'}),
         url(r'^apple-touch-icon\.png$', serve, {'document_root': favicon_url, 'path': 'apple-touch-icon.png'}),
         url(r'^favicon-32x32\.png$', serve, {'document_root': favicon_url, 'path': 'favicon-32x32.png'}),
