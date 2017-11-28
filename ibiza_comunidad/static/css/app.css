@@ -2483,6 +2483,8 @@ a.thumbnail image { box-shadow: none; }
 
 .clearfix::after { clear: both; }
 
+html, body { height: 100%; width: 100%; }
+
 .menu-text > a { padding: 0 !important; color: inherit; }
 
 body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pack: center; justify-content: center; }
@@ -2518,5 +2520,7 @@ i { display: inline-block; font-style: normal; margin-right: 0.5em; vertical-ali
 .menu a.ic__logo-link { padding: 0; }
 
 .ic__logo-link-small { padding: 5px; }
+
+.ic__not_found_bg { background-image: url(../images/stock_photos/tommy-ferraz-124023.jpg); background-position: center; background-repeat: no-repeat; background-size: cover; }
 
 /*# sourceMappingURL=app.css.map */

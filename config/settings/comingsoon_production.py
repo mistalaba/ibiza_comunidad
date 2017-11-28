@@ -11,7 +11,9 @@ import logging
 import os
 import raven
 
-print('Loading production')
+SITE_ID = 2
+ROOT_URLCONF = 'config.urls_comingsoon'
+print('Loading comingsoon_production')
 
 RAVEN_CONFIG = {
     'dsn': env('DJANGO_SENTRY_DSN'),
