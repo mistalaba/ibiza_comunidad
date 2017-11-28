@@ -8,21 +8,13 @@ from django.views import defaults as default_views
 from django.views.decorators.cache import never_cache
 from django.views.static import serve
 
+from comingsoon import views
+
+handler404 = "comingsoon.views.handler404"
+handler500 = "comingsoon.views.handler500"
+
 urlpatterns = [
-    url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
-    url(r'^search/$', TemplateView.as_view(template_name='pages/search.html'), name='search'),
-
-    # Django Admin, use {% url 'admin:index' %}
-    url(r'^admin/', admin.site.urls),
-
-    # User management
-    url(r'^users/', include('ibiza_comunidad.users.urls', namespace='users')),
-    url(r'^accounts/', include('allauth.urls')),
-
-    # Your stuff: custom urls includes go here
-    url(r'^events/', include('events.urls', namespace='events')),
-
+    url(r'^', include('comingsoon.urls', namespace='comingsoon')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
@@ -33,6 +25,10 @@ if settings.DEBUG:
     # favicon_url = staticfiles_storage.url('favicon/')
     favicon_url = join(str(settings.ROOT_DIR), 'ibiza_comunidad/static/favicon/')
     urlpatterns += [
+        # robots.txt
+        url(r'^robots\.txt$', RedirectView.as_view(url=staticfiles_storage.url('robots_comingsoon.txt'), permanent=True)),
+
+        # favicons
         url(r'^favicon\.ico$', serve, {'document_root': favicon_url, 'path': 'favicon.ico'}),
         url(r'^apple-touch-icon\.png$', serve, {'document_root': favicon_url, 'path': 'apple-touch-icon.png'}),
         url(r'^favicon-32x32\.png$', serve, {'document_root': favicon_url, 'path': 'favicon-32x32.png'}),
@@ -42,8 +38,8 @@ if settings.DEBUG:
 
         url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
         url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
-        url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
-        url(r'^500/$', default_views.server_error),
+        url(r'^404/$', views.handler404, kwargs={'exception': Exception('Page Not Found!')}),
+        url(r'^500/$', views.handler500),
     ]
     if 'debug_toolbar' in settings.INSTALLED_APPS:
         import debug_toolbar

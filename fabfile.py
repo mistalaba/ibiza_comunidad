@@ -3,12 +3,12 @@
     repo: git@bitbucket.org:mistalaba/ibiza_comunidad.git
 """
 
+import os
 # from fabric.api import *
 from fabric.api import (
     task, env, prompt, cd, run,
     prefix
 )
-import os
 
 env.hosts = ['mistalaba@178.62.251.213']
 env.user = 'mistalaba'
@@ -59,6 +59,11 @@ def supervisord_changes():
 def restart_gunicorn():
     run("supervisorctl restart %s" % env.project_name)
 
+@task
+def restart_gunicorn_comingsoon():
+    update_comingsoon = prompt("Did you make any changes to the comingsoon site? (y/n)", default='n')
+    if update_comingsoon == 'y':
+        run("supervisorctl restart ibiza_comunidad_comingsoon")
 
 @task
 def restart_nginx():
@@ -82,5 +87,6 @@ def deploy(mode=None):
     collect_static()
     supervisord_changes()
     restart_gunicorn()
+    restart_gunicorn_comingsoon()
     restart_celery()
     restart_nginx()
