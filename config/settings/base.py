@@ -343,6 +343,11 @@ LOGGING = {
             'propagate': False,
             'level':'DEBUG',
         },
+        'django.request': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
         'django.template': {
             'handlers': ['null'],
             'propagate': False,
