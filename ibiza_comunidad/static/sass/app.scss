@@ -50,6 +50,11 @@
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 // Foundation 6.4.1 fixes
 .menu-text > a {
     padding: 0 !important;
@@ -149,3 +154,9 @@ i {
     padding: 5px;
 }
 
+.ic__not_found_bg {
+    background-image: url(../images/stock_photos/tommy-ferraz-124023.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
