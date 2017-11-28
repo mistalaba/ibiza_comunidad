@@ -9,4 +9,4 @@ ADDRESS=0.0.0.0:8001
 cd $HOME/projects/ibiza_comunidad
 source $VENV/bin/activate
 test -d $LOGDIR || mkdir -p $LOGDIR
-exec DJANGO_SETTINGS_MODULE=config.settings.comingsoon_production gunicorn config.wsgi_comingsoon:application -w $NUM_WORKERS --max-requests 500 --timeout 600 --bind=$ADDRESS --log-level=info --log-file=$LOGFILE 2>>$LOGFILE
+exec gunicorn config.wsgi_comingsoon:application -w $NUM_WORKERS --max-requests 500 --timeout 600 --bind=$ADDRESS --log-level=info --log-file=$LOGFILE 2>>$LOGFILE --env DJANGO_SETTINGS_MODULE=config.settings.comingsoon_production
