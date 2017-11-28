@@ -6,5 +6,5 @@ def index(request):
     return render(request, 'index.html', {
         })
 
-def handler404(request):
-    return page_not_found(request, "comingsoon/404.html")
+def handler404(request, exception):
+    return page_not_found(request, exception, template_name="comingsoon_404.html")
