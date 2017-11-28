@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 """
 Local settings for ibiza_comunidad project.
 
@@ -40,10 +43,21 @@ DATABASES = {
 
 # Mail settings
 # ------------------------------------------------------------------------------
+EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND')
 
-EMAIL_PORT = 1025
+DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL', default=DEFAULT_FROM_EMAIL)
+EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[ibiza_comunidad]')
+# EMAIL_HOST = env('DJANGO_EMAIL_HOST')
+# EMAIL_PORT = 1025
+# EMAIL_HOST_USER = env('DJANGO_EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS', default=False)
 
-EMAIL_HOST = 'localhost'
+ANYMAIL = {
+    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
+    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN')
+}
 
 
 # CACHING
@@ -77,10 +91,4 @@ INSTALLED_APPS += ['django_extensions', ]
 # ------------------------------------------------------------------------------
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-########## CELERY
-# In development, all tasks will be executed locally by blocking until the task returns
-CELERY_ALWAYS_EAGER = True
-########## END CELERY
-
-# Your local stuff: Below this line define 3rd party library settings
-# ------------------------------------------------------------------------------
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'

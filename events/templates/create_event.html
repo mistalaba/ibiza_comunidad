@@ -1,0 +1,32 @@
+{% extends "forms/base.html" %}
+{% load staticfiles i18n %}
+
+{% block head_title %}{% trans "Create a new event" %}{% endblock %}
+
+{% block page_title_container %}{% endblock page_title_container %}
+
+{% block form_title %}{% trans "Create a new event" %}{% endblock form_title %}
+
+{% block inner %}
+<form class="login ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
+    {% for field in form %}{% include 'forms/_form_field.html' %}{% endfor %}
+    <div class="ic__buttons">
+        <button class="button primary" type="submit">{% trans 'Create event' %}</button>
+        <a class="" href="{% url 'events:list-events' %}">{% trans "Cancel" %}</a>
+    </div>
+</form>
+{% endblock inner %}
+
+{% block javascript %}
+{{ block.super }}
+<script>
+    $(document).ready(function() {
+        $("._datetimepicker").flatpickr({
+            enableTime: true,
+            minDate: "today",
+            time_24hr: true,
+            closeOnSelect: true
+        });
+    });
+</script>
+{% endblock javascript %}

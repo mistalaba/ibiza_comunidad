@@ -42,7 +42,7 @@ var paths = pathsConfig();
 
 var sassOptions = {
   errLogToConsole: true,
-  outputStyle: 'expanded'
+  outputStyle: 'compact'
 };
 
 ////////////////////////////////

@@ -69,17 +69,19 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #1779ba,
+  // primary: #1779ba,
+  primary: #03a9f4,
   secondary: #767676,
-  success: #3adb76,
-  warning: #ffae00,
-  alert: #cc4b37,
+  // success: #3adb76,
+  success: #4CAF50,
+  warning: #ff9800,
+  alert: #F44336,
 );
 $superlight-gray: #fafafa;
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
-$black: #0a0a0a;
+$black: #545454;
 $white: #fefefe;
 $body-background: $superlight-gray;
 $body-font-color: $black;
@@ -90,14 +92,14 @@ $global-padding: 1rem;
 $global-position: 1rem;
 $global-weight-normal: normal;
 $global-weight-bold: bold;
-$global-radius: 0;
+$global-radius: 4px;
 $global-menu-padding: 0.7rem 1rem;
 $global-menu-nested-margin: 1rem;
 $global-text-direction: ltr;
 $global-flexbox: true;
 $global-prototype-breakpoints: false;
 $global-button-cursor: auto;
-$global-color-pick-contrast-tolerance: 0;
+$global-color-pick-contrast-tolerance: 100;
 $print-transparent-backgrounds: true;
 
 @include add-foundation-colors;
@@ -314,14 +316,14 @@ $buttongroup-radius-on-each: true;
 // -----------
 
 $callout-background: $white;
-$callout-background-fade: 85%;
+$callout-background-fade: 0%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-padding: 1rem;
-$callout-font-color: $body-font-color;
-$callout-font-color-alt: $body-background;
+$callout-font-color: $body-background;
+$callout-font-color-alt: $body-font-color;
 $callout-radius: $global-radius;
-$callout-link-tint: 30%;
+$callout-link-tint: false;
 
 // 14. Card
 // --------
@@ -868,3 +870,5 @@ $grid-container-padding: $grid-padding-gutters;
 $grid-container-max: $global-width;
 $xy-block-grid-max: 8;
 
+// Defaults
+$callout-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);

@@ -2,15 +2,4 @@
 #	production that aren't in development.
 -r base.txt
 
-
-
-# WSGI Handler
-# ------------------------------------------------
-# Static and Media Storage
-# ------------------------------------------------
-# Email backends for Mailgun, Postmark, SendGrid and more
-# -------------------------------------------------------
-# Raven is the Sentry client
-# --------------------------
-
-
+raven==6.2.1

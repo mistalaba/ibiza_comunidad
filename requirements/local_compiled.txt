@@ -77,7 +77,6 @@ pytest==3.2.3             # via pytest-django, pytest-sugar
 python-dateutil==2.6.1    # via botocore, faker
 python3-openid==3.1.0     # via django-allauth
 pytz==2017.2
-raven==6.2.1
 redis==2.10.6
 regex==2017.9.23          # via awesome-slugify
 requests-oauthlib==0.8.0  # via django-allauth

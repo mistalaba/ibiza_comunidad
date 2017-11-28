@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles i18n %}
+
+{% block head_title %}{{ event.title }}{% endblock %}
+{% block page_title %}{{ event.title }}{% endblock page_title %}
+
+{% block bodyclass %}ic__center{% endblock bodyclass %}
+
+{% block content %}
+<div class="grid-x grid-padding-x ic__content">
+    <div class="small-12 medium-6 cell">
+        <img src="{% if event.photo %}{{ event.photo.url }}{% else %}https://picsum.photos/1200/800?random={{event.pk}}{% endif %}" alt="{{ event.title }}">
+        <p class="ic__card-description">{{ event.description }}</p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
+            {% with sd=event.start_datetime ed=event.end_datetime %}
+            <span>
+                {% if sd|date:'Y-m-d' == ed|date:'Y-m-d' %}
+                    {% if sd.year == now.year %}
+                        {% if sd.month == now.month %}
+                            {{ sd|date:'D, j H:i' }} - {{ ed|date:'H:i' }}
+                        {% else %}
+                            {{ sd|date:'D, M j H:i' }} - {{ ed|date:'H:i' }}
+                        {% endif %}
+                    {% else %}
+                        {{ sd }} - {{ ed }}
+                    {% endif %}
+                {% else %}
+                    {% if sd.year == now.year %}
+                        {% if sd.month == now.month %}
+                            {{ sd|date:'D, j H:i' }} - {{ ed|date:'D, j H:i' }}
+                        {% else %}
+                            {{ sd|date:'D, M j H:i' }} - {{ ed|date:'D, M j H:i' }}
+                        {% endif %}
+                    {% else %}
+                        {{ sd }} - {{ ed }}
+                    {% endif %}
+                {% endif %}
+            </span>
+            {% endwith %}
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
+            <span>{% if event.price > 0 %}{{ event.price }}{% else %}{% trans 'Free' %}{% endif %}</span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
+            <span>Santa Eulalia</span>
+        </p>
+        <div class="ic__buttons">
+            {% if request.user == event.created_by %}
+            <a href="{% url 'events:event-delete' event_slug=event.slug %}" class="button warning">{% trans 'Delete event' %}</a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

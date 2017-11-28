@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load staticfiles i18n %}
+
+{% block head_title %}{% trans 'Members' %}{% endblock %}
+{% block page_title %}{% trans 'Members' %}{% endblock page_title %}
+
+{% block content %}
+    <ul>
+    {% for user in users %}
+    <li><a href="{% url 'users:public-profile' user.username %}">{{ user.username }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock content %}
