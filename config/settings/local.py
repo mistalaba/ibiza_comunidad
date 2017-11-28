@@ -14,6 +14,8 @@ Local settings for ibiza_comunidad project.
 
 from .base import *  # noqa
 
+print('Loading local')
+
 # DEBUG
 # ------------------------------------------------------------------------------
 DEBUG = env.bool('DJANGO_DEBUG')

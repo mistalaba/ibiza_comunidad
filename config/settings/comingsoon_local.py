@@ -15,6 +15,7 @@ Local settings for ibiza_comunidad project.
 from .base import *  # noqa
 
 # Settings changed from base.py
+print('Loading comingsoon_local')
 SITE_ID = 2
 ROOT_URLCONF = 'config.urls_comingsoon'
 

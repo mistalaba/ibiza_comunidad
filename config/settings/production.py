@@ -11,6 +11,8 @@ import logging
 import os
 import raven
 
+print('Loading production')
+
 RAVEN_CONFIG = {
     'dsn': env('DJANGO_SENTRY_DSN'),
     # If you are using git, you can also automatically configure the
