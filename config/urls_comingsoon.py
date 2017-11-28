@@ -8,8 +8,8 @@ from django.views import defaults as default_views
 from django.views.decorators.cache import never_cache
 from django.views.static import serve
 
-handler404 = "ibiza_comunidad.comingsoon.views.handler404"
-handler500 = "ibiza_comunidad.comingsoon.views.handler500"
+handler404 = "comingsoon.views.handler404"
+handler500 = "comingsoon.views.handler500"
 
 urlpatterns = [
     url(r'^', include('comingsoon.urls', namespace='comingsoon')),
