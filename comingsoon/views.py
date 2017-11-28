@@ -8,3 +8,6 @@ def index(request):
 
 def handler404(request, exception):
     return page_not_found(request, exception, template_name="comingsoon_404.html")
+
+def handler500(request):
+    return server_error(request, template_name="comingsoon_500.html")
