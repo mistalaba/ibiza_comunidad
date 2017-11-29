@@ -72,6 +72,16 @@ div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
 
 .ic__user-avatar-image { width: 100%; height: 100%; background-size: cover; background-repeat: no-repeat; background-position: center center; }
 
+.ic__avatar_big_container { max-width: 320px; max-width: 20rem; position: relative; }
+
+.ic__avatar_big_container:before { display: block; content: ""; width: 100%; padding-top: 100%; }
+
+.ic__avatar_big_container > .ar__content { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+
+.ic__avatar-container { text-align: center; }
+
+.ic__avatar_big { object-fit: cover; width: 20em; height: 20em; border-radius: 50%; padding: 2em; }
+
 .social { margin-right: 4px; margin-right: .25rem; }
 
 .social.facebook { background-color: #3b5998; color: #fefefe; }

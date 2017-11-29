@@ -7,6 +7,13 @@
 
 {% block inner %}
     <form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
+        {% if user.user_profile.avatar %}
+        <div class="grid-x grid-margin-x">
+            <div class="small-12 cell ic__avatar-container">
+                    <img class="ic__avatar_big" src="{{ user.user_profile.avatar.url }}" alt="">
+            </div>
+        </div>
+        {% endif %}
         {% with profile_form.avatar as field %}{% include 'forms/_form_field.html' %}{% endwith %}
         {% with user_form.username as field %}{% include 'forms/_form_field.html' %}{% endwith %}
         {% with user_form.email as field %}{% include 'forms/_form_field.html' %}{% endwith %}

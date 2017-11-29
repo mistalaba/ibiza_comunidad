@@ -43,3 +43,21 @@
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+.ic__avatar_big_container {
+    max-width: 20rem;
+    @include aspect-ratio(1,1);
+}
+
+.ic__avatar-container {
+    text-align: center;
+}
+
+.ic__avatar_big {
+    // Used on private profile page
+    object-fit: cover;
+    width: 20em;
+    height: 20em;
+    border-radius: 50%;
+    padding: 2em;
+}
