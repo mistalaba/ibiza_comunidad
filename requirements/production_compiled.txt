@@ -68,6 +68,7 @@ requests==2.18.4          # via django-allauth, django-anymail, requests-oauthli
 s3transfer==0.1.11        # via boto3
 simplegeneric==0.8.1      # via ipython
 six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-environ, fabric3, pip-tools, prompt-toolkit, pynacl, python-dateutil, traitlets
+sorl-thumbnail==12.4.1
 traitlets==4.3.2          # via ipython
 unidecode==0.4.21         # via awesome-slugify
 urllib3==1.22             # via requests
