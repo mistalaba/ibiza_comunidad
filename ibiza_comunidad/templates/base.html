@@ -14,11 +14,7 @@
         <![endif]-->
 
         {% block css %}
-        <!-- Your stuff: Third-party CSS libraries go here -->
-
-        <!-- This file stores project-specific CSS -->
         <link href="{% static 'css/app.css' %}" rel="stylesheet">
-
         {% endblock %}
     {% block ga %}
     {% include "_google_analytics_beta.html" %}
@@ -28,6 +24,7 @@
     <body class="{% block bodyclass %}{% endblock bodyclass %}">
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
+        {% block topnav %}
         <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium" style="display:none;">
             <!-- Should be to the left -->
             <a class="ic__logo-link-small" href="{% url 'home' %}">
@@ -66,6 +63,7 @@
                 </ul>
             </div>
         </div>
+        {% endblock topnav %}
 
         <div class="grid-container">
             {% if messages %}

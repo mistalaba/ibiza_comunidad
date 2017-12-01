@@ -1,12 +1,30 @@
 {% extends "forms/base.html" %}
 {% load staticfiles i18n %}
 
+{% block css %}
+    {{ block.super }}
+    <link href="{% static 'bower_components/cropper/dist/cropper.min.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block head_title %}{% trans 'Profile' %}{% endblock %}
 
 {% block form_title %}{% trans 'Profile' %}{% endblock form_title %}
 
 {% block inner %}
     <form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
+        {% if user.user_profile.avatar %}
+        <div class="grid-x grid-margin-x">
+            <div class="small-12 cell ic__avatar-container">
+                    <img class="ic__avatar_big" src="{{ user.user_profile.avatar.url }}" alt="">
+            </div>
+        </div>
+        {% endif %}
+        {# hidden fields #}
+        {{ profile_form.x }}
+        {{ profile_form.y }}
+        {{ profile_form.width }}
+        {{ profile_form.height }}
+
         {% with profile_form.avatar as field %}{% include 'forms/_form_field.html' %}{% endwith %}
         {% with user_form.username as field %}{% include 'forms/_form_field.html' %}{% endwith %}
         {% with user_form.email as field %}{% include 'forms/_form_field.html' %}{% endwith %}
@@ -17,4 +35,90 @@
             <button class="button primary" type="submit">{% trans 'Save profile' %}</button>
         </div>
     </form>
+
+<!-- Modal -->
+<div class="reveal modal" id="modalCrop" data-reveal>
+        <h4 class="modal-title">Crop the photo</h4>
+        <div class="modal-body">
+            <img src="" id="image" style="max-width: 100%;">
+        </div>
+        <button type="button" class="button" data-close>Cancel</button>
+        <button type="button" class="button js-crop-and-upload">Crop and upload</button>
+
+        <div class="btn-group pull-left" role="group">
+            <button type="button" class="button js-zoom-in">
+                <span class="glyphicon glyphicon-zoom-in">+</span>
+            </button>
+            <button type="button" class="button js-zoom-out">
+                <span class="glyphicon glyphicon-zoom-out">-</span>
+            </button>
+        </div>
+
+
+
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 {% endblock inner %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'bower_components/cropper/dist/cropper.min.js' %}"></script>
+
+    <script>
+        $("#id_avatar").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#image").attr("src", e.target.result);
+                    $('#modalCrop').foundation('open');
+                    // $("#modalCrop").modal("show");
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        var $image = $("#image");
+        var cropBoxData;
+        var canvasData;
+        $("#modalCrop").on("open.zf.reveal", function () {
+            $image.cropper({
+                viewMode: 1,
+                aspectRatio: 1/1,
+                minCropBoxWidth: 200,
+                minCropBoxHeight: 200,
+                ready: function () {
+                    $image.cropper("setCanvasData", canvasData);
+                    $image.cropper("setCropBoxData", cropBoxData);
+                }
+            });
+        }).on("closed.zf.reveal", function () {
+            cropBoxData = $image.cropper("getCropBoxData");
+            canvasData = $image.cropper("getCanvasData");
+            $image.cropper("destroy");
+
+            // TODO: Clear file input if closing the modal
+            // https://stackoverflow.com/questions/20549241/how-to-reset-input-type-file
+        });
+
+        // Enable zoom in button
+        $(".js-zoom-in").click(function () {
+            $image.cropper("zoom", 0.1);
+        });
+
+        // Enable zoom out button
+        $(".js-zoom-out").click(function () {
+            $image.cropper("zoom", -0.1);
+        });
+
+        $(".js-crop-and-upload").click(function () {
+            var cropData = $image.cropper("getData");
+            $("#id_x").val(cropData["x"]);
+            $("#id_y").val(cropData["y"]);
+            $("#id_height").val(cropData["height"]);
+            $("#id_width").val(cropData["width"]);
+            $(".ic__form").submit();
+        });
+    </script>
+{% endblock %}
