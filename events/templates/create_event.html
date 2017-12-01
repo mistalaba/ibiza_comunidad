@@ -36,10 +36,6 @@
             <input type="radio" name="type" id="changetype-geocode">
             <label for="changetype-geocode">Geocodes</label>
           </div>
-          <div id="strict-bounds-selector" class="pac-controls">
-            <input type="checkbox" id="use-strict-bounds" value="">
-            <label for="use-strict-bounds">Strict Bounds</label>
-          </div>
         </div>
         <div id="pac-container">
           <input id="pac-input" type="text"
@@ -79,21 +75,36 @@
         lat: 38.8941,
         lng: 1.4164
       },
-      zoom: 9
+      zoom: 9,
+      fullscreenControl: false
     });
     var card = document.getElementById('pac-card');
     var input = document.getElementById('pac-input');
     var types = document.getElementById('type-selector');
-    var strictBounds = document.getElementById('strict-bounds-selector');
 
     // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(38.61832897089113, 1.114488769531249),
+        new google.maps.LatLng(39.162784082252756, 1.7626884765625164)
+        );
 
+    var options = {
+        bounds: defaultBounds,
+        strictBounds: true
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.setComponentRestrictions(
+        {
+            'country': ['es']
+            //'postalCode': '07840'
+        }
+    );
     // Bind the map's bounds (viewport) property to the autocomplete object,
     // so that the autocomplete requests use the current map bounds for the
     // bounds option in the request.
-    autocomplete.bindTo('bounds', map);
+    // autocomplete.bindTo('bounds', map);
 
     var infowindow = new google.maps.InfoWindow();
     var infowindowContent = document.getElementById('infowindow-content');
@@ -153,19 +164,24 @@
     setupClickListener('changetype-establishment', ['establishment']);
     setupClickListener('changetype-geocode', ['geocode']);
 
-    document.getElementById('use-strict-bounds')
-      .addEventListener('click', function () {
-        console.log('Checkbox clicked! New state=' + this.checked);
-        autocomplete.setOptions({
-          strictBounds: this.checked
-        });
-      });
+    //   google.maps.event.addListener(map, 'rightclick', function(event) {
+    //     var lat = event.latLng.lat();
+    //     var lng = event.latLng.lng();
+    //     console.log("Lat=" + lat + "; Lng=" + lng);
+    //     });
 
-      google.maps.event.addListener(map, 'rightclick', function(event) {
-        var lat = event.latLng.lat();
-        var lng = event.latLng.lng();
-        console.log("Lat=" + lat + "; Lng=" + lng);
-        });
+    // Test highlighting
+    var baleares = new google.maps.Rectangle({
+        bounds: defaultBounds,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35
+      });
+      baleares.setMap(map);
+
+
 
   }
 
