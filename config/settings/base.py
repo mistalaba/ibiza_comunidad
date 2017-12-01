@@ -297,6 +297,9 @@ CELERY_BROKER_URL = 'redis://'
 THUMBNAIL_DEBUG = env.bool('DJANGO_DEBUG', False)
 THUMBNAIL_QUALITY = 85
 
+# GOOGLE API
+GOOGLE_API_KEY = env('GOOGLE_API_KEY')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
