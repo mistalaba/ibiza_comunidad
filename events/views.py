@@ -37,7 +37,10 @@ def create_event(request):
                 start_datetime=data['start'],
                 end_datetime=data['end'],
                 price=data['price'],
-                created_by=request.user)
+                created_by=request.user,
+                location_friendly_name=data['location'],
+                location_gmaps_place_id=data['location_gmaps_place_id'],
+            )
 
             return redirect('events:list-events')
     else:

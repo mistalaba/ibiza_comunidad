@@ -17,3 +17,4 @@ class EventForm(forms.Form):
     end = forms.DateTimeField(widget=widgets.DateTimeInput(attrs={'class': '_datetimepicker'}), required=True)
     price = forms.DecimalField(widget=widgets.NumberInput(attrs={'step': 0.50}), max_digits=10, decimal_places=2, required=True)
     location = forms.CharField(max_length=255, required=True)
+    location_gmaps_place_id = forms.CharField(widget=forms.HiddenInput(), max_length=255, required=True)
