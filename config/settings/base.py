@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'anymail',
+    'sorl.thumbnail',
 ]
 
 # Apps specific for this project go here.
@@ -291,6 +292,13 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 INSTALLED_APPS += ['ibiza_comunidad.taskapp.celery.CeleryConfig']
 CELERY_BROKER_URL = 'redis://'
 ########## END CELERY
+
+# SORL-THUMBNAILS
+THUMBNAIL_DEBUG = env.bool('DJANGO_DEBUG', False)
+THUMBNAIL_QUALITY = 85
+
+# GOOGLE API
+GOOGLE_API_KEY = env('GOOGLE_API_KEY')
 
 LOGGING = {
     'version': 1,

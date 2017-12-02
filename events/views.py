@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -36,7 +37,10 @@ def create_event(request):
                 start_datetime=data['start'],
                 end_datetime=data['end'],
                 price=data['price'],
-                created_by=request.user)
+                created_by=request.user,
+                location_friendly_name=data['location'],
+                location_gmaps_place_id=data['location_gmaps_place_id'],
+            )
 
             return redirect('events:list-events')
     else:
@@ -45,6 +49,7 @@ def create_event(request):
 
     return render(request, 'create_event.html', {
         'form': form,
+        'google_api': settings.GOOGLE_API_KEY,
     })
 
 

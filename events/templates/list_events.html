@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles i18n core_tags %}
+{% load staticfiles i18n core_tags thumbnail %}
 
 {% block head_title %}{% trans 'Events' %}{% endblock %}
 {% block page_title %}{% trans 'Events' %}{% endblock page_title %}
@@ -16,10 +16,12 @@
     {% for event in events %}
         <div class="small-12 medium-6 large-4 cell">
             <a class="ic__card-container" href="{% url 'events:event-detail' event_slug=event.slug %}">
-                <div class="ic__card-photo" style="background-image:url({% if event.photo %}{{ event.photo.url }}{% else %}
+                <div class="ic__card-photo" style="background-image:url({% if event.photo %}
+                    {% thumbnail event.photo '512' as img %}{{ img.url }}{% endthumbnail %}
+                    {% else %}
                     https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
                     <div class="ic__user-avatar top right" title="{{ event.created_by.username }}">
-                        {% avatar event.created_by %}
+                        {% avatar event.created_by 'small' %}
                     </div>
                     <div class="ic__card-title">
                         <h2>{{ event }}</h2>
@@ -62,7 +64,7 @@
                 </p>
                 <p class="ic__card-details-item">
                     <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
-                    <span>Santa Eulalia</span>
+                    <span>{{ event.location_friendly_name }}</span>
                 </p>
             </a>
         </div>

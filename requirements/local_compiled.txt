@@ -85,6 +85,7 @@ s3transfer==0.1.11        # via boto3
 simplegeneric==0.8.1      # via ipython
 six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-coverage-plugin, django-environ, django-extensions, fabric3, faker, pip-tools, prompt-toolkit, pynacl, python-dateutil, sphinx, traitlets
 snowballstemmer==1.2.1    # via sphinx
+sorl-thumbnail==12.4.1
 sphinx==1.6.3
 sphinxcontrib-websupport==1.0.1  # via sphinx
 sqlparse==0.2.4           # via django-debug-toolbar
