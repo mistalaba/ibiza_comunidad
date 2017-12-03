@@ -9,6 +9,7 @@
 @import '_components/user';
 @import '_components/social';
 @import '_components/callout';
+@import '_components/modal';
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
@@ -173,6 +174,7 @@ i {
 
 .ic__map {
     margin: 0 0 1rem;
+    background: #ffaaaa;
 }
 
 #description {

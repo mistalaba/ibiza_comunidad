@@ -170,6 +170,7 @@ TEMPLATES = [
                 # Your stuff: custom template context processors go here
                 # 'core.context_processors.user_profile_complete',
                 # 'core.context_processors.has_profile',
+                'core.context_processors.common_variables',
             ],
         },
     },

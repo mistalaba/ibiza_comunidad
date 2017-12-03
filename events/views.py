@@ -1,14 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from .forms import EventForm
+from .forms import EventForm, EventForm2
 from .models import Event
 
 import logging
@@ -46,10 +45,25 @@ def create_event(request):
     else:
         form = EventForm(user=request.user)
 
-
     return render(request, 'create_event.html', {
         'form': form,
-        'google_api': settings.GOOGLE_API_KEY,
+    })
+
+@login_required
+def edit_event(request, event_slug):
+    event = get_object_or_404(Event, created_by=request.user, slug=event_slug)
+    if request.method == 'POST':
+        form = EventForm2(request.POST, request.FILES, user=request.user, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _("Event successfully updated."))
+            return redirect('events:list-events')
+    else:
+        form = EventForm2(user=request.user, instance=event)
+
+    return render(request, 'edit_event.html', {
+        'event': event,
+        'form': form,
     })
 
 

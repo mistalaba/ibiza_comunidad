@@ -1,16 +1,39 @@
 {% extends "base.html" %}
-{% load staticfiles i18n %}
+{% load staticfiles i18n thumbnail %}
 
 {% block head_title %}{{ event.title }}{% endblock %}
-{% block page_title %}{{ event.title }}{% endblock page_title %}
+{% block page_title %}{% endblock page_title %}
 
-{% block bodyclass %}ic__center{% endblock bodyclass %}
+{% block bodyclass %}{% endblock bodyclass %}
 
 {% block content %}
-<div class="grid-x grid-padding-x ic__content">
-    <div class="small-12 medium-6 cell">
-        <img src="{% if event.photo %}{{ event.photo.url }}{% else %}https://picsum.photos/1200/800?random={{event.pk}}{% endif %}" alt="{{ event.title }}">
+<div class="grid-x grid-padding-x ic__modal">
+    <div class="small-12 medium-8 cell">
+        <div class="small-12 cell">
+            <img class="ic__big-cover-image" src="
+                {% if event.photo %}
+                    {% thumbnail event.photo '1024' as img %}{{ img.url }}{% endthumbnail %}
+                {% else %}
+                    https://picsum.photos/1200/800?random={{event.pk}}
+                {% endif %}
+                " alt="">
+        </div>
+        <h2>{{ event.title }}</h2>
         <p class="ic__card-description">{{ event.description }}</p>
+
+        <div class="grid-x grid-padding-x ic__content">
+            <div class="small-12 medium-6 cell">
+                <div class="ic__buttons">
+                    {% if request.user == event.created_by %}
+                    <a href="{% url 'events:edit-event' event_slug=event.slug %}" class="button warning">{% trans 'Edit event' %}</a>
+                    <a href="{% url 'events:event-delete' event_slug=event.slug %}" class="button warning">{% trans 'Delete event' %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="small-12 medium-4 cell ic__details-container">
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
             {% with sd=event.start_datetime ed=event.end_datetime %}
@@ -47,12 +70,40 @@
             <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
             <span>{{ event.location_friendly_name }}</span>
         </p>
-        <div class="ic__buttons">
-            {% if request.user == event.created_by %}
-            <a href="{% url 'events:event-delete' event_slug=event.slug %}" class="button warning">{% trans 'Delete event' %}</a>
-            {% endif %}
-        </div>
+        <div class="ic__map" id="map">here's a map</div>
 
     </div>
 </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+        function initMap() {
+            var request = {
+                placeId: '{{ event.location_gmaps_place_id }}'
+            };
+
+            function callback(place, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: place.geometry.location
+                });
+                map.setCenter(marker.getPosition());
+                }
+            }
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                fullscreenControl: false
+            });
+
+            service = new google.maps.places.PlacesService(map);
+            service.getDetails(request, callback);
+        }
+        // google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api }}&libraries=places&callback=initMap" async defer></script>
+
+{% endblock %}
