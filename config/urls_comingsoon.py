@@ -15,6 +15,7 @@ handler500 = "comingsoon.views.handler500"
 
 urlpatterns = [
     url(r'^', include('comingsoon.urls', namespace='comingsoon')),
+    url(r'^newsletter/', include('newsletter.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

@@ -67,6 +67,7 @@ LOCAL_APPS = [
     'core',
     'comingsoon',
     'events',
+    'newsletter',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
