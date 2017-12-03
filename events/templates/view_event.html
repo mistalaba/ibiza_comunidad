@@ -25,6 +25,7 @@
             <div class="small-12 medium-6 cell">
                 <div class="ic__buttons">
                     {% if request.user == event.created_by %}
+                    <a href="{% url 'events:edit-event' event_slug=event.slug %}" class="button warning">{% trans 'Edit event' %}</a>
                     <a href="{% url 'events:event-delete' event_slug=event.slug %}" class="button warning">{% trans 'Delete event' %}</a>
                     {% endif %}
                 </div>
