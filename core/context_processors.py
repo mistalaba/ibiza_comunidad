@@ -1,10 +1,17 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 
 from ibiza_comunidad.users.models import UserProfile
+
+def common_variables(request):
+
+    return {
+        'google_api': settings.GOOGLE_API_KEY,
+    }
 
 def user_profile_complete(request):
     incomplete = None

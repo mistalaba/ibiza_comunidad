@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -46,10 +45,8 @@ def create_event(request):
     else:
         form = EventForm(user=request.user)
 
-
     return render(request, 'create_event.html', {
         'form': form,
-        'google_api': settings.GOOGLE_API_KEY,
     })
 
 
