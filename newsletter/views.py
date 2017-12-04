@@ -7,14 +7,14 @@ from .models import Category
 from .forms import SignupForm
 
 def signup(request):
-    category = Category.objects.get(title='Coming Soon')
+    category = Category.objects.get(tag='coming-soon')
     form = SignupForm(request.POST or None, category=category)
     # Manage templates depending on site
     site_id = get_current_site(request).pk
     if site_id == 2:
         template_name = 'comingsoon_signup.html'
     else:
-        raise NotImplementedError
+        template_name = 'signup.html'
 
     if request.method == 'POST':
         if form.is_valid():
@@ -31,6 +31,6 @@ def thankyou(request):
     if site_id == 2:
         template_name = 'comingsoon_thankyou.html'
     else:
-        raise NotImplementedError
+        template_name = 'thankyou.html'
 
     return render(request, template_name, {})
