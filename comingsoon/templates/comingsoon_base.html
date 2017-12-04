@@ -67,6 +67,7 @@
         {% endblock topnav %}
 
         <div class="grid-container">
+            {% block messages %}
             {% if messages %}
                 {% for message in messages %}
                     <div class="callout {% if message.tags %}{{ message.tags }}{% endif %}" data-closable>
@@ -77,6 +78,17 @@
                     </div>
                 {% endfor %}
             {% endif %}
+            {% if form.non_field_errors %}
+                {% for message in form.non_field_errors %}
+                    <div class="callout error" data-closable>
+                        {{ message }}
+                        <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% endblock messages %}
 
             {% block page_title_container %}
             <div class="grid-x grid-margin-x ic__title-container">
