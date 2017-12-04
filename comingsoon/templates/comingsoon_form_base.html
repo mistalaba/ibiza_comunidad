@@ -4,6 +4,20 @@
 {# Forms should never have the title h1 #}
 {% block page_title_container %}{% endblock page_title_container %}
 
+{% block messages %}
+{% if form.non_field_errors %}
+    {% for message in form.non_field_errors %}
+        <div class="callout error" data-closable>
+            {{ message }}
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock messages %}
+
+
 {% block content %}
 <div class="ic__form-container grid-x align-center">
     <div class="small-12 medium-6 cell ic__form-wrapper">
