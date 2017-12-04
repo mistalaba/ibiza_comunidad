@@ -15,6 +15,7 @@
         </div>
         <div class="grid-container">
         {% block inner %}
+            {% if debug %}
             <form class="ic__form" method="POST" action="" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %}
                 {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
                 {% for field in form.visible_fields  %}{% include 'forms/_form_field.html' %}{% endfor %}
@@ -22,6 +23,7 @@
                     <button class="button primary" type="submit">{% trans 'Sign up' %}</button>
                 </div>
             </form>
+            {% endif %}
         {% endblock %}
         </div>
     </div>
