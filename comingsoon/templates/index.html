@@ -7,4 +7,24 @@
 
 {% block content %}
 <p>Hello!<br>We're coming soon!</p>
+
+<div class="ic__form-container grid-x align-center">
+    <div class="small-12 medium-6 cell ic__form-wrapper">
+        <div class="ic__form-header">
+            <h1>{% block form_title %}{% trans 'Sign up for our waiting list' %}{% endblock form_title %}</h1>
+        </div>
+        <div class="grid-container">
+        {% block inner %}
+            <form class="ic__form" method="POST" action="{% url 'newsletter:signup' %}" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %}
+                {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
+                {% for field in form.visible_fields  %}{% include 'forms/_form_field.html' %}{% endfor %}
+                <div class="ic__buttons">
+                    <button class="button primary" type="submit">{% trans 'Sign up' %}</button>
+                </div>
+            </form>
+        {% endblock %}
+        </div>
+    </div>
+</div>
+
 {% endblock %}
