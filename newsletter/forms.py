@@ -4,11 +4,6 @@ from django.core.mail import EmailMessage
 
 from .models import Subscriber
 
-# class SignupForm(forms.ModelForm):
-#     class Meta:
-#         model = Subscriber
-#         fields = ['email']
-
 class SignupForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.category = kwargs.pop('category')
