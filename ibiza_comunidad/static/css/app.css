@@ -1396,6 +1396,10 @@ select[multiple] { height: auto; background-image: none; }
 
 .button.alert:hover, .button.alert:focus { background-color: #e21b0c; color: #fefefe; }
 
+.button.error { background-color: #F44336; color: #fefefe; }
+
+.button.error:hover, .button.error:focus { background-color: #e21b0c; color: #fefefe; }
+
 .button.disabled, .button[disabled] { opacity: 0.25; cursor: not-allowed; }
 
 .button.disabled, .button.disabled:hover, .button.disabled:focus, .button[disabled], .button[disabled]:hover, .button[disabled]:focus { background-color: #03a9f4; color: #fefefe; }
@@ -1419,6 +1423,10 @@ select[multiple] { height: auto; background-image: none; }
 .button.disabled.alert, .button[disabled].alert { opacity: 0.25; cursor: not-allowed; }
 
 .button.disabled.alert, .button.disabled.alert:hover, .button.disabled.alert:focus, .button[disabled].alert, .button[disabled].alert:hover, .button[disabled].alert:focus { background-color: #F44336; color: #fefefe; }
+
+.button.disabled.error, .button[disabled].error { opacity: 0.25; cursor: not-allowed; }
+
+.button.disabled.error, .button.disabled.error:hover, .button.disabled.error:focus, .button[disabled].error, .button[disabled].error:hover, .button[disabled].error:focus { background-color: #F44336; color: #fefefe; }
 
 .button.hollow { border: 1px solid #03a9f4; color: #03a9f4; }
 
@@ -1459,6 +1467,12 @@ select[multiple] { height: auto; background-image: none; }
 .button.hollow.alert:hover, .button.hollow.alert:focus { border-color: #8d1108; color: #8d1108; }
 
 .button.hollow.alert:hover.disabled, .button.hollow.alert:hover[disabled], .button.hollow.alert:focus.disabled, .button.hollow.alert:focus[disabled] { border: 1px solid #F44336; color: #F44336; }
+
+.button.hollow.error { border: 1px solid #F44336; color: #F44336; }
+
+.button.hollow.error:hover, .button.hollow.error:focus { border-color: #8d1108; color: #8d1108; }
+
+.button.hollow.error:hover.disabled, .button.hollow.error:hover[disabled], .button.hollow.error:focus.disabled, .button.hollow.error:focus[disabled] { border: 1px solid #F44336; color: #F44336; }
 
 .button.clear { border: 1px solid #03a9f4; color: #03a9f4; }
 
@@ -1512,6 +1526,14 @@ select[multiple] { height: auto; background-image: none; }
 
 .button.clear.alert, .button.clear.alert.disabled, .button.clear.alert[disabled], .button.clear.alert:hover, .button.clear.alert:hover.disabled, .button.clear.alert:hover[disabled], .button.clear.alert:focus, .button.clear.alert:focus.disabled, .button.clear.alert:focus[disabled] { border-color: transparent; }
 
+.button.clear.error { border: 1px solid #F44336; color: #F44336; }
+
+.button.clear.error:hover, .button.clear.error:focus { border-color: #8d1108; color: #8d1108; }
+
+.button.clear.error:hover.disabled, .button.clear.error:hover[disabled], .button.clear.error:focus.disabled, .button.clear.error:focus[disabled] { border: 1px solid #F44336; color: #F44336; }
+
+.button.clear.error, .button.clear.error.disabled, .button.clear.error[disabled], .button.clear.error:hover, .button.clear.error:hover.disabled, .button.clear.error:hover[disabled], .button.clear.error:focus, .button.clear.error:focus.disabled, .button.clear.error:focus[disabled] { border-color: transparent; }
+
 .button.dropdown::after { display: block; width: 0; height: 0; border: inset 0.4em; content: ''; border-bottom-width: 0; border-top-style: solid; border-color: #fefefe transparent transparent; position: relative; top: 0.4em; display: inline-block; float: right; margin-left: 1em; }
 
 .button.dropdown.hollow::after { border-top-color: #03a9f4; }
@@ -1525,6 +1547,8 @@ select[multiple] { height: auto; background-image: none; }
 .button.dropdown.hollow.warning::after { border-top-color: #ff9800; }
 
 .button.dropdown.hollow.alert::after { border-top-color: #F44336; }
+
+.button.dropdown.hollow.error::after { border-top-color: #F44336; }
 
 .button.arrow-only::after { top: -0.1em; float: none; margin-left: 0; }
 
@@ -1596,6 +1620,8 @@ a.button:hover, a.button:focus { text-decoration: none; }
 
 .badge.alert { background: #F44336; color: #fefefe; }
 
+.badge.error { background: #F44336; color: #fefefe; }
+
 .breadcrumbs { margin: 0 0 16px 0; margin: 0 0 1rem 0; list-style: none; }
 
 .breadcrumbs::before, .breadcrumbs::after { display: table; content: ' '; -ms-flex-preferred-size: 0; flex-basis: 0; -ms-flex-order: 1; order: 1; }
@@ -1650,6 +1676,10 @@ a.button:hover, a.button:focus { text-decoration: none; }
 
 .button-group.alert .button:hover, .button-group.alert .button:focus { background-color: #e21b0c; color: #fefefe; }
 
+.button-group.error .button { background-color: #F44336; color: #fefefe; }
+
+.button-group.error .button:hover, .button-group.error .button:focus { background-color: #e21b0c; color: #fefefe; }
+
 .button-group.stacked, .button-group.stacked-for-small, .button-group.stacked-for-medium { -ms-flex-wrap: wrap; flex-wrap: wrap; }
 
 .button-group.stacked .button, .button-group.stacked-for-small .button, .button-group.stacked-for-medium .button { -ms-flex: 0 0 100%; flex: 0 0 100%; }
@@ -1678,6 +1708,8 @@ a.button:hover, a.button:focus { text-decoration: none; }
 .callout.warning { background-color: #ff9800; color: #fafafa; }
 
 .callout.alert { background-color: #f44336; color: #fafafa; }
+
+.callout.error { background-color: #f44336; color: #fafafa; }
 
 .callout.small { padding-top: 8px; padding-top: 0.5rem; padding-right: 8px; padding-right: 0.5rem; padding-bottom: 8px; padding-bottom: 0.5rem; padding-left: 8px; padding-left: 0.5rem; }
 
@@ -1947,6 +1979,8 @@ a.button:hover, a.button:focus { text-decoration: none; }
 
 .label.alert { background: #F44336; color: #fefefe; }
 
+.label.error { background: #F44336; color: #fefefe; }
+
 .media-object { display: -ms-flexbox; display: flex; margin-bottom: 16px; margin-bottom: 1rem; -ms-flex-wrap: nowrap; flex-wrap: nowrap; }
 
 .media-object img { max-width: none; }
@@ -2177,6 +2211,8 @@ a.button:hover, a.button:focus { text-decoration: none; }
 .progress.warning .progress-meter { background-color: #ff9800; }
 
 .progress.alert .progress-meter { background-color: #F44336; }
+
+.progress.error .progress-meter { background-color: #F44336; }
 
 .progress-meter { position: relative; display: block; width: 0%; height: 100%; background-color: #03a9f4; border-radius: 4px; }
 

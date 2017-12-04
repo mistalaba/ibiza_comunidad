@@ -47,6 +47,7 @@
             <div class="top-bar-right">
                 <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
                     <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
+                    <li><a href="{% url 'newsletter:signup' %}">{% trans "Newsletter" %}</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
                     <li><a href="#">{% trans "Settings" %}</a>
