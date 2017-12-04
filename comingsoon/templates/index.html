@@ -8,6 +8,7 @@
 {% block content %}
 <p>Hello!<br>We're coming soon!</p>
 
+{% if debug %}
 <div class="ic__form-container grid-x align-center">
     <div class="small-12 medium-6 cell ic__form-wrapper">
         <div class="ic__form-header">
@@ -15,7 +16,6 @@
         </div>
         <div class="grid-container">
         {% block inner %}
-            {% if debug %}
             <form class="ic__form" method="POST" action="" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %}
                 {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
                 {% for field in form.visible_fields  %}{% include 'forms/_form_field.html' %}{% endfor %}
@@ -23,10 +23,10 @@
                     <button class="button primary" type="submit">{% trans 'Sign up' %}</button>
                 </div>
             </form>
-            {% endif %}
         {% endblock %}
         </div>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}
