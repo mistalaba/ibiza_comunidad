@@ -8,7 +8,7 @@ from newsletter.models import Category
 
 # Create your views here.
 def index(request):
-    category = Category.objects.get(title='Coming Soon')
+    category = Category.objects.get(tag='coming-soon')
     form = SignupForm(request.POST or None, category=category)
 
     if request.method == 'POST':

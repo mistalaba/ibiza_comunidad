@@ -1,6 +1,6 @@
 from django import forms
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 
 from .models import Subscriber
 
@@ -23,11 +23,14 @@ class SignupForm(forms.Form):
         subscriber, created = Subscriber.objects.get_or_create(email=data['email'])
         subscriber.subscriptions.add(self.category)
         # Send confirmation
-        msg = EmailMessage(
+        text_content = 'Welcome to the newsletter.\n\nKind regards,\n/Comunidad Ibiza\n\nUnsubscribe here: %tag_unsubscribe_url%'
+        html_content = '<p>Welcome to the newsletter.</p><p>Kind regards,<br>/Comunidad Ibiza</p><p><a href="%tag_unsubscribe_url%">Unsubscribe</a></p>'
+        msg = EmailMultiAlternatives(
             'You signed up for {}'.format(self.category),
-            'Welcome to the newsletter.\n\nKind regards,\n/Comunidad Ibiza',
+            text_content,
             settings.DEFAULT_FROM_EMAIL,
             [data['email']],
         )
+        msg.attach_alternative(html_content, "text/html")
         msg.tags = [self.category.tag]
         msg.send()
