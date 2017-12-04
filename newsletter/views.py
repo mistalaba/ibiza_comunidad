@@ -3,10 +3,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext_lazy as _
 
+from .models import Category
 from .forms import SignupForm
 
 def signup(request):
-    form = SignupForm(request.POST or None)
+    category = Category.objects.get(title='Coming Soon')
+    form = SignupForm(request.POST or None, category=category)
     # Manage templates depending on site
     site_id = get_current_site(request).pk
     if site_id == 2:
@@ -16,7 +18,7 @@ def signup(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            form.save()
+            subscriber = form.save()
             messages.success(request, _("Signup successful"))
             return redirect('newsletter:thank-you')
 
