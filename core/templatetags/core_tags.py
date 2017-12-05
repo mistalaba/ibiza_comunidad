@@ -14,5 +14,7 @@ def include_svg(file_name):
 
 # Get initials or avatar
 @register.inclusion_tag('_avatar.html')
-def avatar(user):
-    return {'user': user}
+def avatar(user, size):
+    # size: small (48x48), medium, large
+    sizes = {'small': '48', 'medium': '64'}
+    return {'user': user, 'size': sizes[size]}

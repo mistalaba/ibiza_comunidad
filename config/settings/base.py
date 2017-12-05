@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'anymail',
+    'sorl.thumbnail',
 ]
 
 # Apps specific for this project go here.
@@ -66,6 +67,7 @@ LOCAL_APPS = [
     'core',
     'comingsoon',
     'events',
+    'newsletter',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -169,6 +171,7 @@ TEMPLATES = [
                 # Your stuff: custom template context processors go here
                 # 'core.context_processors.user_profile_complete',
                 # 'core.context_processors.has_profile',
+                'core.context_processors.common_variables',
             ],
         },
     },
@@ -291,6 +294,20 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 INSTALLED_APPS += ['ibiza_comunidad.taskapp.celery.CeleryConfig']
 CELERY_BROKER_URL = 'redis://'
 ########## END CELERY
+
+# ANYMAIL
+ANYMAIL = {
+    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
+    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN'),
+    'WEBHOOK_AUTHORIZATION': 'VzhoWuZaXCqbA6Nn:mH4hMjin8XIovNai',
+}
+
+# SORL-THUMBNAILS
+THUMBNAIL_DEBUG = env.bool('DJANGO_DEBUG', False)
+THUMBNAIL_QUALITY = 85
+
+# GOOGLE API
+GOOGLE_API_KEY = env('GOOGLE_API_KEY')
 
 LOGGING = {
     'version': 1,

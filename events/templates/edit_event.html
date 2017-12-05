@@ -1,11 +1,11 @@
 {% extends "forms/base.html" %}
 {% load staticfiles i18n %}
 
-{% block head_title %}{% trans "Create a new event" %}{% endblock %}
+{% block head_title %}{% trans "Edit the event '{{ event.title }}'" %}{% endblock %}
 
 {% block page_title_container %}{% endblock page_title_container %}
 
-{% block form_title %}{% trans "Create a new event" %}{% endblock form_title %}
+{% block form_title %}{% trans "Edit event" %}{% endblock form_title %}
 
 {% block inner %}
 <form class="login ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
@@ -24,7 +24,7 @@
     </div>
 
     <div class="ic__buttons">
-        <button class="button primary" type="submit">{% trans 'Create event' %}</button>
+        <button class="button primary" type="submit">{% trans 'Update event' %}</button>
         <a class="" href="{% url 'events:list-events' %}">{% trans "Cancel" %}</a>
     </div>
 </form>
@@ -54,6 +54,28 @@
 
 <script>
   function initMap() {
+    var request = {
+        placeId: '{{ event.location_gmaps_place_id }}'
+    };
+
+    function callback(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+        var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+        });
+        map.setCenter(marker.getPosition());
+        }
+    }
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        fullscreenControl: false
+    });
+
+    service = new google.maps.places.PlacesService(map);
+    service.getDetails(request, callback);
+    /*
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {
         lat: 38.8941,
@@ -62,10 +84,13 @@
       zoom: 9,
       fullscreenControl: false
     });
+    */
     var card = document.getElementById('pac-card');
-    var input = document.getElementById('id_location');
+    var input = document.getElementById('id_location_friendly_name');
     var placeid_input = document.getElementById('id_location_gmaps_place_id');
 
+
+    // Autocomplete
     var defaultBounds = new google.maps.LatLngBounds(
         // Baleares rectangle
         new google.maps.LatLng(38.61832897089113, 1.114488769531249),
@@ -84,6 +109,7 @@
         }
     );
 
+    // Info window
     var infowindow = new google.maps.InfoWindow();
     var infowindowContent = document.getElementById('infowindow-content');
     infowindow.setContent(infowindowContent);
