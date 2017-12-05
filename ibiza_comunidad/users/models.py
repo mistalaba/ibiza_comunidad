@@ -11,6 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from allauth.account.signals import email_confirmed, email_changed, user_signed_up
 
+from .utils import save_avatar, get_avatar
+
 import logging
 logger = logging.getLogger(__name__)
 
@@ -65,3 +67,7 @@ def create_profile(sender, **kwargs):
     user = kwargs['user']
     UserProfile.objects.create(user=user)
     user.save()
+    # Get avatar
+    email = user.email
+    avatar_url = get_avatar('gravatar', email)
+    save_avatar(user, avatar_url)
