@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^events/', include('events.urls', namespace='events')),
     url(r'^newsletter/', include('newsletter.urls')),
+    url(r'^anymail/', include('anymail.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

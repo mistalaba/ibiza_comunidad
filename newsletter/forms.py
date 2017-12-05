@@ -4,6 +4,9 @@ from django.core import signing
 from django.core.mail import EmailMultiAlternatives
 from django.urls import reverse
 
+from core.utils import remove_unsubscribe
+from core.tasks import async_remove_unsubscribe
+
 from .models import Subscriber
 
 class SignupForm(forms.Form):
@@ -29,6 +32,10 @@ class SignupForm(forms.Form):
         - When subscriber clicks the link, go to activate_subscription, where we save the email and the tag.
         """
         data = self.cleaned_data
+
+        # Check if the email is on the unsubscribe list
+        async_remove_unsubscribe.delay(data['email'], self.category.tag)
+
 
         signing_value = signing.dumps({"tag": self.category.tag, 'email': data['email']})
 
