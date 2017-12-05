@@ -1,12 +1,15 @@
 from django import forms
 from django.conf import settings
+from django.core import signing
 from django.core.mail import EmailMultiAlternatives
+from django.urls import reverse
 
 from .models import Subscriber
 
 class SignupForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.category = kwargs.pop('category')
+        self.request = kwargs.pop('request')
         super(SignupForm, self).__init__(*args, **kwargs)
 
     email = forms.EmailField(max_length=254, required=True)
@@ -19,12 +22,22 @@ class SignupForm(forms.Form):
         return cleaned_data
 
     def save(self):
+        """
+        New logic:
+        - Create a signing thingy here, using the tag and subscriber email address.
+        - Add it to the email
+        - When subscriber clicks the link, go to activate_subscription, where we save the email and the tag.
+        """
         data = self.cleaned_data
-        subscriber, created = Subscriber.objects.get_or_create(email=data['email'])
-        subscriber.subscriptions.add(self.category)
+
+        signing_value = signing.dumps({"tag": self.category.tag, 'email': data['email']})
+
         # Send confirmation
-        text_content = 'Welcome to the newsletter.\n\nKind regards,\n/Comunidad Ibiza\n\nUnsubscribe here: %tag_unsubscribe_url%'
-        html_content = '<p>Welcome to the newsletter.</p><p>Kind regards,<br>/Comunidad Ibiza</p><p><a href="%tag_unsubscribe_url%">Unsubscribe</a></p>'
+        signing_url = reverse('newsletter:activate', kwargs={'signing_value': signing_value})
+        url = self.request.build_absolute_uri(signing_url)
+
+        text_content = 'Welcome to the newsletter.\nPlease activate your subscription by this link: {}\n\nKind regards,\n/Comunidad Ibiza\n\nUnsubscribe here: %tag_unsubscribe_url%'.format(url)
+        html_content = '<p>Welcome to the newsletter.<br>Please activate your subscription <a href="{}">here</a></p><p>Kind regards,<br>/Comunidad Ibiza</p><p><a href="%tag_unsubscribe_url%">Unsubscribe</a></p>'.format(url)
         msg = EmailMultiAlternatives(
             'You signed up for {}'.format(self.category),
             text_content,
