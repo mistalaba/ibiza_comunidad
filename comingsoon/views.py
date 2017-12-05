@@ -9,12 +9,11 @@ from newsletter.models import Category
 # Create your views here.
 def index(request):
     category = Category.objects.get(tag='coming-soon')
-    form = SignupForm(request.POST or None, category=category)
+    form = SignupForm(request.POST or None, category=category, request=request)
 
     if request.method == 'POST':
         if form.is_valid():
             subscriber = form.save()
-            messages.success(request, _("Signup successful"))
             return redirect('newsletter:thank-you')
 
     return render(request, 'index.html', {
