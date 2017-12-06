@@ -1,7 +1,7 @@
 {% load thumbnail %}
 {% if user.user_profile.avatar %}
     {% thumbnail user.user_profile.avatar size as avatar %}
-    <div class="ic__user-avatar-image" style="background-image: url({{ avatar.url }})" title="{{ user.username }}"></div>
+    <span class="ic__user-avatar-image" style="background-image: url({{ avatar.url }})" title="{{ user.username }}"></span>
     {% endthumbnail %}
 {% else %}
     <span class="ic__user-without-avatar">{{ user.username|make_list|slice:":2"|join:"" }}</span>

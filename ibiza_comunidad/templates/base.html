@@ -50,7 +50,14 @@
                     <li><a href="{% url 'newsletter:signup' %}">{% trans "Newsletter" %}</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
-                    <li><a href="#">{% trans "Settings" %}</a>
+                    <li>
+                        <a href="{% url 'users:public-profile' request.user.username %}">
+                                <i class="ic__user-avatar small normal ic__nomargin" title="{{ event.created_by.username }}">
+                                        {% avatar request.user 'small' %}
+                                </i>
+                        </a>
+                    </li>
+                    <li><a href="#"><i class="ic__nomargin"><svg class="ic__icon small"><use xlink:href="#icon-settings"></use></svg></i></a>
                         <ul class="menu">
                             <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
                             <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
