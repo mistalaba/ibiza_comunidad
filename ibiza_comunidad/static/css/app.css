@@ -58,7 +58,11 @@ div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
 
 .ic__card-description { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.ic__user-avatar { position: absolute; height: 3em; width: 3em; border: 2px solid #ffffff; border-radius: 50%; background-color: white; cursor: default; overflow: hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); display: -ms-flexbox; display: flex; -ms-flex-pack: center; justify-content: center; -ms-flex-align: baseline; align-items: baseline; }
+.ic__user-avatar { position: absolute; height: 3em; width: 3em; border: 2px solid #ffffff; border-radius: 50%; background-color: white; overflow: hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); display: -ms-flexbox; display: flex; -ms-flex-pack: center; justify-content: center; -ms-flex-align: baseline; align-items: baseline; }
+
+.ic__user-avatar.small { height: 2em; width: 2em; }
+
+.ic__user-avatar.normal { position: relative; }
 
 .ic__user-avatar.top { top: -16px; top: -1rem; }
 
@@ -2557,7 +2561,11 @@ body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pa
 
 .ic__icon.medium { width: 32px; height: 32px; }
 
+a > i.ic__nomargin { padding: 0; }
+
 i { display: inline-block; font-style: normal; margin-right: 0.5em; vertical-align: inherit; }
+
+i.ic__nomargin { margin-right: 0; }
 
 .ic__logo-large { width: 64px; height: 64px; }
 
