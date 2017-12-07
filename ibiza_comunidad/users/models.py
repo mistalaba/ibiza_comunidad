@@ -71,8 +71,8 @@ def create_profile(sender, **kwargs):
     user.save()
     # Get avatar
     email = user.email
-    avatar_url = get_avatar('gravatar', email)
-    save_avatar(user, avatar_url)
+    avatar_obj = get_avatar('gravatar', email)
+    save_avatar(user, avatar_obj)
 
 # @receiver(pre_social_login)
 # def test(sender, **kwargs):
