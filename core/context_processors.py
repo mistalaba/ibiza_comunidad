@@ -22,8 +22,8 @@ def user_profile_complete(request):
             user = None
 
         if user:
-            if getattr(user, 'user_profile', None):
-                incomplete = user.user_profile.is_incomplete()
+            if getattr(user, 'profile', None):
+                incomplete = user.profile.is_incomplete()
 
     return {
         'is_user_profile_incomplete': incomplete,
@@ -32,7 +32,7 @@ def user_profile_complete(request):
 def has_profile(request):
     has_user_profile = False
     if request.user.is_authenticated():
-        if not getattr(request.user, 'user_profile', None):
+        if not getattr(request.user, 'profile', None):
             # User has no profile
             # Create it
             UserProfile.objects.create(user=request.user)

@@ -1,10 +1,10 @@
 {% load thumbnail %}
-{% if user.user_profile.avatar %}
-    {% thumbnail user.user_profile.avatar size as avatar %}
+{% if user.profile.avatar %}
+    {% thumbnail user.profile.avatar size as avatar %}
     <span class="ic__user-avatar-image" style="background-image: url({{ avatar.url }})" title="{{ user.username }}"></span>
     {% endthumbnail %}
 {% else %}
-    <span class="ic__user-without-avatar" style="background-color: {{ user.user_profile.color }}">
+    <span class="ic__user-without-avatar" style="background-color: {{ user.profile.color }}">
         {% if not user.first_name and not user.last_name %}
             {{ user.username|make_list|slice:":2"|join:"" }}
         {% else %}

@@ -39,7 +39,7 @@ def get_avatar(source, email=None):
 
 def save_avatar(user, image_object):
     if image_object:
-        user.user_profile.avatar.save(
+        user.profile.avatar.save(
             os.path.basename(image_object.name),
             File(image_object)
         )
@@ -49,8 +49,8 @@ def assign_random_user_color(user=None):
     if user is None:
         return color[1]
     else:
-        if user.user_profile.color == '#000000':
+        if user.profile.color == '#000000':
             # Assign a color
-            user.user_profile.color = color[1]
-            user.user_profile.save()
+            user.profile.color = color[1]
+            user.profile.save()
         return user

@@ -8,7 +8,7 @@
 {% block page_title %}{% blocktrans with username=user.username %}{{ username }} profile{% endblocktrans %}{% endblock page_title %}
 
 {% block inner %}
-<p>Profile picture: {{ user.user_profile.avatar }}</p>
+<p>Profile picture: {{ user.profile.avatar }}</p>
 <p>Username: {{ user.username }}</p>
 <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
 {% endblock inner %}
