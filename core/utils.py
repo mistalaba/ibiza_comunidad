@@ -62,3 +62,25 @@ def remove_unsubscribe(email, tag='*'):
         )
     logger.info("Response: {}".format(result.text))
     return result
+
+material_color_palette = [
+    ('red700', '#D32F2F'),
+    ('pink700', '#C2185B'),
+    ('purple700', '#7B1FA2'),
+    ('deepPurple700', '#512DA8'),
+    ('indigo700', '#303F9F'),
+    ('blue700', '#1976D2'),
+    ('lightBlue700', '#0288D1'),
+    ('cyan700', '#0097A7'),
+    ('teal700', '#00796B'),
+    ('green700', '#388E3C'),
+    ('lightGreen700', '#689F38'),
+    ('lime700', '#AFB42B'),
+    ('yellow700', '#FBC02D'),
+    ('amber700', '#FFA000'),
+    ('orange700', '#F57C00'),
+    ('deepOrange700', '#E64A19'),
+    ('brown700', '#5D4037'),
+    ('blueGrey700', '#455A64'),
+    # ('name', 'hex'),
+]

@@ -17,6 +17,9 @@
     &.small {
         height: 2em;
         width: 2em;
+        .ic__user-without-avatar {
+            font-size: 75%;
+        }
     }
 
     &.normal {
@@ -42,7 +45,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1.5rem;
+    height: 100%;
+    font-size: 100%;
+    text-transform: uppercase;
+    // background-color: attr(data-color);
+    color: $white;
 }
 
 .ic__user-avatar-image {
