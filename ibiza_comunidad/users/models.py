@@ -70,8 +70,11 @@ def create_profile(sender, **kwargs):
     UserProfile.objects.create(user=user)
     user.save()
     # Get avatar
-    email = user.email
-    avatar_obj = get_avatar('gravatar', email)
+    sociallogin = kwargs.get('sociallogin', None)
+    if sociallogin:
+        avatar_obj = get_avatar(sociallogin.account.provider, user, sociallogin.account)
+    else:
+        avatar_obj = get_avatar('gravatar', user)
     save_avatar(user, avatar_obj)
 
 # @receiver(pre_social_login)
