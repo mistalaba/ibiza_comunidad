@@ -51,7 +51,7 @@ def user_directory_path(instance, filename):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
-    avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True)
+    avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True, blank=True)
     color = models.CharField(max_length=7, default=assign_random_user_color)
     def is_incomplete(self):
         incomplete_fields = [self.user.first_name, self.user.last_name, self.user.email]

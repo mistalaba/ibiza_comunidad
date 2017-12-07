@@ -35,13 +35,14 @@ class ProfileForm_v2(forms.ModelForm):
         w = self.cleaned_data.get('width')
         h = self.cleaned_data.get('height')
 
-        image = Image.open(profile.avatar)
-        cropped_image = image.crop((x, y, w+x, h+y))
-        if cropped_image.width > 1024:
-            resized_image = cropped_image.resize((1024, 1024), Image.ANTIALIAS)
-            resized_image.save(profile.avatar.path)
-        else:
-            cropped_image.save(profile.avatar.path, format='JPEG', quality=85)
+        if self.cleaned_data.get('avatar'):
+            image = Image.open(profile.avatar)
+            cropped_image = image.crop((x, y, w+x, h+y))
+            if cropped_image.width > 1024:
+                resized_image = cropped_image.resize((1024, 1024), Image.ANTIALIAS)
+                resized_image.save(profile.avatar.path)
+            else:
+                cropped_image.save(profile.avatar.path, format='JPEG', quality=85)
 
         return profile
 
