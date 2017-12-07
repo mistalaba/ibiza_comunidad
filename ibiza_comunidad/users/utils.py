@@ -1,8 +1,11 @@
 import hashlib
 import requests
+import random
 
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
+
+from core.utils import material_color_palette
 
 def get_avatar(source, email=None):
     """
@@ -43,3 +46,13 @@ def save_avatar(user, url):
         File(img_temp)
     )
 
+def assign_random_user_color(user=None):
+    color = random.choice(material_color_palette)
+    if user is None:
+        return color[1]
+    else:
+        if user.user_profile.color == '#000000':
+            # Assign a color
+            user.user_profile.color = color[1]
+            user.user_profile.save()
+        return user

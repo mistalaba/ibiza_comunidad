@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles i18n %}
+{% load core_tags staticfiles i18n %}
 
 {% block head_title %}{% trans 'Members' %}{% endblock %}
 {% block page_title %}{% trans 'Members' %}{% endblock page_title %}
@@ -7,7 +7,12 @@
 {% block content %}
     <ul>
     {% for user in users %}
-    <li><a href="{% url 'users:public-profile' user.username %}">{{ user.username }}</a></li>
+    <li><a href="{% url 'users:public-profile' user.username %}">
+            <i class="ic__user-avatar small normal ic__nomargin" title="{{ event.created_by.username }}">
+                {% avatar user 'medium' %}
+            </i>{{ user.username }}
+        </a>
+    </li>
     {% endfor %}
     </ul>
 {% endblock content %}

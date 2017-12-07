@@ -10,8 +10,9 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from allauth.account.signals import email_confirmed, email_changed, user_signed_up
+from allauth.socialaccount.signals import pre_social_login, social_account_updated
 
-from .utils import save_avatar, get_avatar
+from .utils import save_avatar, get_avatar, assign_random_user_color
 
 import logging
 logger = logging.getLogger(__name__)
@@ -51,6 +52,7 @@ def user_directory_path(instance, filename):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True)
+    color = models.CharField(max_length=7, default=assign_random_user_color)
     def is_incomplete(self):
         incomplete_fields = [self.user.first_name, self.user.last_name, self.user.email]
         for field in incomplete_fields:
@@ -71,3 +73,11 @@ def create_profile(sender, **kwargs):
     email = user.email
     avatar_url = get_avatar('gravatar', email)
     save_avatar(user, avatar_url)
+
+# @receiver(pre_social_login)
+# def test(sender, **kwargs):
+#     import ipdb; ipdb.set_trace()
+
+# @receiver(social_account_updated)
+# def test(sender, **kwargs):
+#     import ipdb; ipdb.set_trace()
