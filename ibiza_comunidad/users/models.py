@@ -50,7 +50,7 @@ def user_directory_path(instance, filename):
     return 'user_{0}/{1}'.format(instance.user.id, filename)
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     avatar = models.ImageField(upload_to=user_directory_path, max_length=100, null=True, blank=True)
     color = models.CharField(max_length=7, default=assign_random_user_color)
     def is_incomplete(self):
@@ -70,9 +70,12 @@ def create_profile(sender, **kwargs):
     UserProfile.objects.create(user=user)
     user.save()
     # Get avatar
-    email = user.email
-    avatar_url = get_avatar('gravatar', email)
-    save_avatar(user, avatar_url)
+    sociallogin = kwargs.get('sociallogin', None)
+    if sociallogin:
+        avatar_obj = get_avatar(sociallogin.account.provider, user, sociallogin.account)
+    else:
+        avatar_obj = get_avatar('gravatar', user)
+    save_avatar(user, avatar_obj)
 
 # @receiver(pre_social_login)
 # def test(sender, **kwargs):

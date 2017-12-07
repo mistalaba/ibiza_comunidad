@@ -12,10 +12,10 @@
 
 {% block inner %}
     <form class="profile ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
-        {% if user.user_profile.avatar %}
+        {% if user.profile.avatar %}
         <div class="grid-x grid-margin-x">
             <div class="small-12 cell ic__avatar-container">
-                    <img class="ic__avatar_big" src="{{ user.user_profile.avatar.url }}" alt="">
+                    <img class="ic__avatar_big" src="{{ user.profile.avatar.url }}" alt="">
             </div>
         </div>
         {% endif %}

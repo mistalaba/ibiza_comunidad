@@ -14,7 +14,7 @@ class UpgradeUserProfileMiddleware(object):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
         if request.user.is_authenticated():
-            if not getattr(request.user, 'user_profile', None):
+            if not getattr(request.user, 'profile', None):
                 # User has no profile
                 # Create it
                 UserProfile.objects.create(user=request.user)
