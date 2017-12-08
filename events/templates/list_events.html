@@ -7,67 +7,177 @@
 {% block content %}
 {% if request.user.is_authenticated %}
 <div class="grid-x grid-padding-x">
-        <div class="small-12 cell">
-            <a href="{% url 'events:create-event' %}" class="button primary">Add event</a>
-        </div>
+    <div class="small-12 cell">
+        <a href="{% url 'events:create-event' %}" class="button primary">Add event</a>
+    </div>
 </div>
 {% endif %}
-<div class="grid-x grid-padding-x">
-    {% for event in events %}
-        <div class="small-12 medium-6 large-4 cell">
-            <a class="ic__card-container" href="{% url 'events:event-detail' event_slug=event.slug %}">
-                <div class="ic__card-photo" style="background-image:url({% if event.photo %}
-                    {% thumbnail event.photo '512' as img %}{{ img.url }}{% endthumbnail %}
-                    {% else %}
-                    https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
-                    <div class="ic__user-avatar top right" title="{{ event.created_by.username }}">
-                        {% avatar event.created_by 'small' %}
-                    </div>
-                    <div class="ic__card-title">
-                        <h2>{{ event }}</h2>
-                    </div>
-                </div>
-                {% if event.description %}
-                <p class="ic__card-description">{{ event.description }}</p>
-                {% endif %}
-                <p class="ic__card-details-item">
-                    <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
-                    {% with sd=event.start_datetime ed=event.end_datetime %}
-                    <span>
-                        {% if sd|date:'Y-m-d' == ed|date:'Y-m-d' %}
-                            {% if sd.year == now.year %}
-                                {% if sd.month == now.month %}
-                                    {{ sd|date:'D, j H:i' }} - {{ ed|date:'H:i' }}
-                                {% else %}
-                                    {{ sd|date:'D, M j H:i' }} - {{ ed|date:'H:i' }}
-                                {% endif %}
-                            {% else %}
-                                {{ sd }} - {{ ed }}
-                            {% endif %}
-                        {% else %}
-                            {% if sd.year == now.year %}
-                                {% if sd.month == now.month %}
-                                    {{ sd|date:'D, j H:i' }} - {{ ed|date:'D, j H:i' }}
-                                {% else %}
-                                    {{ sd|date:'D, M j H:i' }} - {{ ed|date:'D, M j H:i' }}
-                                {% endif %}
-                            {% else %}
-                                {{ sd }} - {{ ed }}
-                            {% endif %}
-                        {% endif %}
-                    </span>
-                    {% endwith %}
-                </p>
-                <p class="ic__card-details-item">
-                    <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
-                    <span>{% if event.price > 0 %}{{ event.price }}{% else %}{% trans 'Free' %}{% endif %}</span>
-                </p>
-                <p class="ic__card-details-item">
-                    <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
-                    <span>{{ event.location_friendly_name }}</span>
-                </p>
-            </a>
+
+{# Today's events #}
+{% if events_today %}
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <h3>{% trans 'Today' %}</h3>
         </div>
+    </div>
+    <div class="grid-x grid-padding-x">
+    {% for e in events_today %}
+        {% include "_event_card.html" %}
     {% endfor %}
+    </div>
+{% endif %}
+
+{# Tomorrow's events #}
+{% if events_tomorrow %}
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <h3>{% trans 'Tomorrow' %}</h3>
+        </div>
+    </div>
+    <div class="grid-x grid-padding-x">
+    {% for e in events_tomorrow %}
+        {% include "_event_card.html" %}
+    {% endfor %}
+    </div>
+{% endif %}
+
+{# This month's events #}
+{% if events_this_month %}
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <h3>{% trans 'This month' %}</h3>
+        </div>
+    </div>
+    <div class="grid-x grid-padding-x">
+    {% for e in events_this_month %}
+        {% include "_event_card.html" %}
+    {% endfor %}
+    </div>
+{% endif %}
+
+{# All other events by month #}
+{% if all_other_events %}
+    {% for e in all_other_events %}
+        {% ifchanged e.start_datetime.month %}
+        {% if not forloop.first %}
+        </div> {# close <div class="grid-x grid-padding-x"> #}
+        {% endif %}
+        <div class="grid-x grid-padding-x">
+            <div class="small-12 cell">
+                <h3>{{ e.start_datetime|date:"F" }}</h3>
+            </div>
+        </div>
+        <div class="grid-x grid-padding-x">
+        {% endifchanged %}
+        {% include "_event_card.html" %}
+    {% endfor %}
+    </div>
+{% endif %}
+
+{# Modal for popup event #}
+<div class="ic__modal reveal large __event-modal" data-reveal data-reset-on-close="true">
+    <div class="grid-x grid-padding-x __content">
+    <div class="small-12 medium-8 cell">
+        <div class="small-12 cell">
+            <img id='photo' class="ic__big-cover-image" src="" alt="">
+        </div>
+        <h2 id="title"></h2>
+        <p id="description" class="ic__card-description"></p>
+    </div>
+    <div class="small-12 medium-4 cell ic__details-container">
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
+            <span id="date"></span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
+            <span id="price"></span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
+            <span id="location_friendly_name"></span>
+        </p>
+        <div class="ic__map" id="map"></div>
+    </div>
+    </div>
+    <button class="close-button close-reveal-modal" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
 </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api }}&libraries=places" async defer></script>
+
+    <script>
+        $(document).ready(function() {
+            var $modal = $('.__event-modal');
+            var mapLocation = '';
+
+            $('a.ic__card-container').on('click', function(e){
+                event.preventDefault();
+                var url = $(this).attr('href');
+                console.log("Open " + url);
+                $.ajax({
+                    url: url,
+                    success: function(response){
+                        console.log(response);
+                        // Populate ids
+                        $('#photo').attr('src', response['photo']);
+                        $('#title').text(response['title']);
+                        $('#description').text(response['description']);
+                        $('#date').text(response['start_datetime']);
+                        $('#price').text(response['price']);
+                        $('#location_friendly_name').text(response['location_friendly_name']);
+
+                        mapLocation = response['location_friendly_name'];
+                        $modal.foundation('open');
+                    }
+                });
+            });
+
+            /*
+            $(document).on("open.zf.reveal", function(){
+                initMap();
+            });
+            */
+
+            $modal.on("closed.zf.reveal", function () {
+                console.log("I'm closed.");
+                $('#photo').attr('src', '');
+                $('#title').text('');
+                $('#description').text('');
+                $('#date').text('');
+                $('#price').text('');
+                $('#location_friendly_name').text('');
+            });
+
+            function initMap(mapLocation) {
+                var request = {
+                    placeId: mapLocation
+                };
+
+                function callback(place, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+                    map.setCenter(marker.getPosition());
+                    }
+                }
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    fullscreenControl: false
+                });
+
+                service = new google.maps.places.PlacesService(map);
+                service.getDetails(request, callback);
+            }
+            google.maps.event.addDomListener(document, "open.zf.reveal", initMap(mapLocation));
+        });
+    </script>
+
+{% endblock %}

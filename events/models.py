@@ -11,6 +11,8 @@ from core.utils import slugify_unique
 
 
 class Event(TimeStampedModel):
+    class Meta:
+        ordering = ['start_datetime']
     title = models.CharField(max_length=400)
     photo = SorlImageField(upload_to='event_photos/', max_length=100, null=True)
     description = models.CharField(max_length=600, blank=True)
