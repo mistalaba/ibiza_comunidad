@@ -3,6 +3,7 @@
 
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
 from sorl.thumbnail import ImageField as SorlImageField
 
@@ -23,6 +24,9 @@ class Event(TimeStampedModel):
     location_gmaps_place_id = models.CharField(max_length=255, blank=True)
     location_friendly_name = models.CharField(max_length=255, blank=True)
     slug = models.CharField(max_length=50, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('events:event-detail', kwargs={'event_slug': self.slug})
 
     def __str__(self):
         return self.title

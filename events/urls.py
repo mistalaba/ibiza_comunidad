@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^(?P<event_slug>[A-Za-z0-9\-\_]+)/edit/$', views.edit_event, name='edit-event'),
     url(r'^(?P<event_slug>[A-Za-z0-9\-\_]+)/$', views.event_detail, name='event-detail'),
     url(r'^(?P<event_slug>[A-Za-z0-9\-\_]+)/delete/$', views.event_delete, name='event-delete'),
-    url(r'^ajax/(?P<event_slug>[A-Za-z0-9\-\_]+)/$', views.event_detail_ajax, name='event-detail-ajax'),
+    # url(r'^ajax/(?P<event_slug>[A-Za-z0-9\-\_]+)/$', views.event_detail_ajax, name='event-detail-ajax'),
 
 ]

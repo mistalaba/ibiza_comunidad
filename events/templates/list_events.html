@@ -142,26 +142,26 @@
                         $('#price').text(response['price']);
                         $('#location_friendly_name').text(response['location_friendly_name']);
 
-                        mapLocation = response['location_friendly_name'];
+                        mapLocation = response['location_gmaps_place_id'];
                         $modal.foundation('open');
+                        if (mapLocation) {
+                            google.maps.event.addDomListener(document, "open.zf.reveal", initMap(mapLocation));
+                        }
+                        // Update URL
+                        history.pushState(null, null, url);
                     }
                 });
             });
 
-            /*
-            $(document).on("open.zf.reveal", function(){
-                initMap();
-            });
-            */
-
             $modal.on("closed.zf.reveal", function () {
-                console.log("I'm closed.");
+                mapLocation = '';
                 $('#photo').attr('src', '');
                 $('#title').text('');
                 $('#description').text('');
                 $('#date').text('');
                 $('#price').text('');
                 $('#location_friendly_name').text('');
+                history.pushState(null, null, '{% url "events:list-events" %}');
             });
 
             function initMap(mapLocation) {
@@ -187,7 +187,7 @@
                 service = new google.maps.places.PlacesService(map);
                 service.getDetails(request, callback);
             }
-            google.maps.event.addDomListener(document, "open.zf.reveal", initMap(mapLocation));
+
         });
     </script>
 
