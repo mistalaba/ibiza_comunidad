@@ -1,6 +1,7 @@
 import requests
 
 from django.conf import settings
+from django.core.files.temp import NamedTemporaryFile
 from django.utils.text import slugify
 
 import logging
@@ -84,3 +85,17 @@ material_color_palette = [
     ('blueGrey700', '#455A64'),
     # ('name', 'hex'),
 ]
+
+def create_tempfile(url, prefix='', filext=''):
+    """
+    Return a NamedTemporaryFile from url
+    """
+    img_temp = NamedTemporaryFile(delete=True, prefix=prefix, suffix=filext)
+    request = requests.get(url, stream=True)
+    if request.status_code == requests.codes.ok:
+        for block in request.iter_content(1024 * 8):
+            if not block:
+                break
+            # Write image block to temporary file
+            img_temp.write(block)
+        return img_temp
