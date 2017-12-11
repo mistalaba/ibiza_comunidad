@@ -11,16 +11,12 @@ from django.views.static import serve
 urlpatterns = [
     url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
-
-    # Django Admin, use {% url 'admin:index' %}
     url(r'^admin/', admin.site.urls),
-
-    # User management
     url(r'^users/', include('ibiza_comunidad.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
-
-    # Your stuff: custom urls includes go here
     url(r'^events/', include('events.urls', namespace='events')),
+    url(r'^newsletter/', include('newsletter.urls')),
+    url(r'^anymail/', include('anymail.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

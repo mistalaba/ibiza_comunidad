@@ -118,12 +118,19 @@ body.ic__center {
 
 
 // LOGO
+a > i.ic__nomargin {
+    padding: 0;
+}
 i {
     // Hijack i for icons
     display: inline-block;
     font-style: normal;
     margin-right: 0.5em;
     vertical-align: inherit;
+    &.ic__nomargin {
+        // Don't want so much space between icon and dropdown arrow
+        margin-right: 0;
+    }
 }
 .ic__logo-large {
     width: 64px;
@@ -237,10 +244,10 @@ i {
   border-color: #4d90fe;
 }
 
-#title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
-}
+// #title {
+//   color: #fff;
+//   background-color: #4d90fe;
+//   font-size: 25px;
+//   font-weight: 500;
+//   padding: 6px 12px;
+// }
