@@ -33,16 +33,23 @@ def get_avatar(source, user, social_account=None):
             url = '{0}{1}{3}?s={2}&d=404'.format(base_url, user_hash, size, filext)
 
     if url:
-        img_temp = NamedTemporaryFile(delete=True, prefix=prefix, suffix=filext)
-        request = requests.get(url, stream=True)
-        if request.status_code == requests.codes.ok:
-            for block in request.iter_content(1024 * 8):
-                if not block:
-                    break
-                # Write image block to temporary file
-                img_temp.write(block)
-            return img_temp
+        create_tempfile(url, prefix, filext)
     return None
+
+def create_tempfile(url, prefix='', filext=''):
+    """
+    Return a NamedTemporaryFile from url
+    """
+    img_temp = NamedTemporaryFile(delete=True, prefix=prefix, suffix=filext)
+    request = requests.get(url, stream=True)
+    if request.status_code == requests.codes.ok:
+        for block in request.iter_content(1024 * 8):
+            if not block:
+                break
+            # Write image block to temporary file
+            img_temp.write(block)
+        return img_temp
+
 
 def save_avatar(user, image_object):
     if image_object:
