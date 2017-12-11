@@ -67,6 +67,10 @@
             <span>{% if event.price > 0 %}{{ event.price }}{% else %}{% trans 'Free' %}{% endif %}</span>
         </p>
         <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
+            <span class="ic__source" id="source"><a href="{{ event.source }}">{{ event.source }}</a></span>
+        </p>
+        <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
             <span>{{ event.location_friendly_name }}</span>
         </p>

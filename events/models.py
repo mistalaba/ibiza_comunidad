@@ -24,6 +24,7 @@ class Event(TimeStampedModel):
     location_gmaps_place_id = models.CharField(max_length=255, blank=True)
     location_friendly_name = models.CharField(max_length=255, blank=True)
     slug = models.CharField(max_length=50, blank=True)
+    source = models.URLField(blank=True)
 
     def get_absolute_url(self):
         return reverse('events:event-detail', kwargs={'event_slug': self.slug})

@@ -66,6 +66,7 @@ def create_event(request):
                 created_by=request.user,
                 location_friendly_name=data['location'],
                 location_gmaps_place_id=data['location_gmaps_place_id'],
+                source=data['source'],
             )
 
             return redirect('events:list-events')
@@ -107,6 +108,7 @@ def event_detail(request, event_slug):
             'start_datetime': event.start_datetime,
             'end_datetime': event.end_datetime,
             'price': event.price,
+            'source': event.source,
             'location_friendly_name': event.location_friendly_name,
             'location_gmaps_place_id': event.location_gmaps_place_id,
             'created_by': {
