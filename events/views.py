@@ -5,10 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+
+from sorl.thumbnail import get_thumbnail
 
 from .forms import EventForm, EventForm2
 from .models import Event
@@ -97,10 +98,10 @@ def edit_event(request, event_slug):
 def event_detail(request, event_slug):
     event = Event.objects.get(slug=event_slug)
     if request.is_ajax():
-        logger.info("Is ajax")
+        photo = get_thumbnail(event.photo, '1024', quality=85)
         response = {
             'canonical_url': event.get_absolute_url(),
-            'photo': event.photo.url,
+            'photo': photo.url,
             'title': event.title,
             'description': event.description,
             'start_datetime': event.start_datetime,
@@ -118,7 +119,6 @@ def event_detail(request, event_slug):
         return render(request, 'view_event.html', {
             'event': event,
         })
-
 
 
 @login_required
