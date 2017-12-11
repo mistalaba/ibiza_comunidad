@@ -4,9 +4,8 @@ import random
 import os
 
 from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
 
-from core.utils import material_color_palette
+from core.utils import material_color_palette, create_tempfile
 
 def get_avatar(source, user, social_account=None):
     """
@@ -35,20 +34,6 @@ def get_avatar(source, user, social_account=None):
     if url:
         create_tempfile(url, prefix, filext)
     return None
-
-def create_tempfile(url, prefix='', filext=''):
-    """
-    Return a NamedTemporaryFile from url
-    """
-    img_temp = NamedTemporaryFile(delete=True, prefix=prefix, suffix=filext)
-    request = requests.get(url, stream=True)
-    if request.status_code == requests.codes.ok:
-        for block in request.iter_content(1024 * 8):
-            if not block:
-                break
-            # Write image block to temporary file
-            img_temp.write(block)
-        return img_temp
 
 
 def save_avatar(user, image_object):
