@@ -108,6 +108,10 @@
             <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
             <span id="location_friendly_name"></span>
         </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
+            <span id="source" class="ic__source"><a href=""></a></span>
+        </p>
         <div class="ic__map" id="map"></div>
     </div>
     </div>
@@ -140,6 +144,7 @@
                         $('#description').text(response['description']);
                         $('#date').text(response['start_datetime']);
                         $('#price').text(response['price']);
+                        $('#source a').text(response['source']).attr('href', response['source']);
                         $('#location_friendly_name').text(response['location_friendly_name']);
 
                         mapLocation = response['location_gmaps_place_id'];
