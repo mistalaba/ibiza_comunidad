@@ -13,66 +13,77 @@
 </div>
 {% endif %}
 
+<div class="grid-x grid-padding-x">
+    <div class="small-12 medium-4 cell">
+
+    </div>
+    <div class="small-12 medium-8 cell">
+
 {# Today's events #}
 {% if events_today %}
-    <div class="grid-x grid-padding-x">
-        <div class="small-12 cell">
-            <h3>{% trans 'Today' %}</h3>
-        </div>
+<div class="grid-x grid-padding-x">
+    <div class="small-12 cell">
+        <h3>{% trans 'Today' %}</h3>
     </div>
-    <div class="grid-x grid-padding-x">
-    {% for e in events_today %}
-        {% include "_event_card.html" %}
-    {% endfor %}
-    </div>
+</div>
+<div class="grid-x grid-padding-x">
+{% for e in events_today %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
 {% endif %}
 
 {# Tomorrow's events #}
 {% if events_tomorrow %}
-    <div class="grid-x grid-padding-x">
-        <div class="small-12 cell">
-            <h3>{% trans 'Tomorrow' %}</h3>
-        </div>
+<div class="grid-x grid-padding-x">
+    <div class="small-12 cell">
+        <h3>{% trans 'Tomorrow' %}</h3>
     </div>
-    <div class="grid-x grid-padding-x">
-    {% for e in events_tomorrow %}
-        {% include "_event_card.html" %}
-    {% endfor %}
-    </div>
+</div>
+<div class="grid-x grid-padding-x">
+{% for e in events_tomorrow %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
 {% endif %}
 
 {# This month's events #}
 {% if events_this_month %}
-    <div class="grid-x grid-padding-x">
-        <div class="small-12 cell">
-            <h3>{% trans 'This month' %}</h3>
-        </div>
+<div class="grid-x grid-padding-x">
+    <div class="small-12 cell">
+        <h3>{% trans 'This month' %}</h3>
     </div>
-    <div class="grid-x grid-padding-x">
-    {% for e in events_this_month %}
-        {% include "_event_card.html" %}
-    {% endfor %}
-    </div>
+</div>
+<div class="grid-x grid-padding-x">
+{% for e in events_this_month %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
 {% endif %}
 
 {# All other events by month #}
 {% if all_other_events %}
-    {% for e in all_other_events %}
-        {% ifchanged e.start_datetime.month %}
-        {% if not forloop.first %}
-        </div> {# close <div class="grid-x grid-padding-x"> #}
-        {% endif %}
-        <div class="grid-x grid-padding-x">
-            <div class="small-12 cell">
-                <h3>{{ e.start_datetime|date:"F" }}</h3>
-            </div>
+{% for e in all_other_events %}
+    {% ifchanged e.start_datetime.month %}
+    {% if not forloop.first %}
+    </div> {# close <div class="grid-x grid-padding-x"> #}
+    {% endif %}
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <h3>{{ e.start_datetime|date:"F" }}</h3>
         </div>
-        <div class="grid-x grid-padding-x">
-        {% endifchanged %}
-        {% include "_event_card.html" %}
-    {% endfor %}
     </div>
+    <div class="grid-x grid-padding-x">
+    {% endifchanged %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
 {% endif %}
+
+
+    </div>
+</div>
+
 
 {# Modal for popup event #}
 <div class="ic__modal reveal large __event-modal" data-reveal data-reset-on-close="true">
@@ -131,26 +142,26 @@
                         $('#price').text(response['price']);
                         $('#location_friendly_name').text(response['location_friendly_name']);
 
-                        mapLocation = response['location_friendly_name'];
+                        mapLocation = response['location_gmaps_place_id'];
                         $modal.foundation('open');
+                        if (mapLocation) {
+                            google.maps.event.addDomListener(document, "open.zf.reveal", initMap(mapLocation));
+                        }
+                        // Update URL
+                        history.pushState(null, null, url);
                     }
                 });
             });
 
-            /*
-            $(document).on("open.zf.reveal", function(){
-                initMap();
-            });
-            */
-
             $modal.on("closed.zf.reveal", function () {
-                console.log("I'm closed.");
+                mapLocation = '';
                 $('#photo').attr('src', '');
                 $('#title').text('');
                 $('#description').text('');
                 $('#date').text('');
                 $('#price').text('');
                 $('#location_friendly_name').text('');
+                history.pushState(null, null, '{% url "events:list-events" %}');
             });
 
             function initMap(mapLocation) {
@@ -176,7 +187,7 @@
                 service = new google.maps.places.PlacesService(map);
                 service.getDetails(request, callback);
             }
-            google.maps.event.addDomListener(document, "open.zf.reveal", initMap(mapLocation));
+
         });
     </script>
 

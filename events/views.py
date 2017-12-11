@@ -5,10 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+
+from sorl.thumbnail import get_thumbnail
 
 from .forms import EventForm, EventForm2
 from .models import Event
@@ -33,7 +34,7 @@ def list_events(request):
     print(excluded_events)
 
     # This month's events
-    events_this_month = Event.objects.filter(start_datetime__year=today.year, start_datetime__month=today.month).exclude(pk__in=excluded_events)
+    events_this_month = Event.objects.filter(end_datetime__gte=today, start_datetime__year=today.year, start_datetime__month=today.month).exclude(pk__in=excluded_events)
     excluded_events = excluded_events | events_this_month.values_list('pk', flat=True)
 
     # The rest
@@ -96,31 +97,28 @@ def edit_event(request, event_slug):
 
 def event_detail(request, event_slug):
     event = Event.objects.get(slug=event_slug)
-
-    return render(request, 'view_event.html', {
-        'event': event,
-    })
-
-
-def event_detail_ajax(request, event_slug):
-    event = Event.objects.get(slug=event_slug)
-    # import ipdb; ipdb.set_trace()
-    response = {
-        'photo': event.photo.url,
-        'title': event.title,
-        'description': event.description,
-        'start_datetime': event.start_datetime,
-        'end_datetime': event.end_datetime,
-        'price': event.price,
-        'location_friendly_name': event.location_friendly_name,
-        'location_gmaps_place_id': event.location_gmaps_place_id,
-        'created_by': {
-            'username': event.created_by.username,
-            'avatar': event.created_by.profile.avatar.url,
+    if request.is_ajax():
+        photo = get_thumbnail(event.photo, '1024', quality=85)
+        response = {
+            'canonical_url': event.get_absolute_url(),
+            'photo': photo.url,
+            'title': event.title,
+            'description': event.description,
+            'start_datetime': event.start_datetime,
+            'end_datetime': event.end_datetime,
+            'price': event.price,
+            'location_friendly_name': event.location_friendly_name,
+            'location_gmaps_place_id': event.location_gmaps_place_id,
+            'created_by': {
+                'username': event.created_by.username,
+                'avatar': event.created_by.profile.avatar.url,
+            }
         }
-    }
-    # return HttpResponse(response, content_type='application/json')
-    return JsonResponse(response, safe=False)
+        return JsonResponse(response, safe=False)
+    else:
+        return render(request, 'view_event.html', {
+            'event': event,
+        })
 
 
 @login_required

@@ -1,6 +1,6 @@
 {% load staticfiles i18n core_tags thumbnail %}
-<div class="small-12 medium-6 large-4 cell">
-    <a class="ic__card-container" href="{% url 'events:event-detail-ajax' event_slug=e.slug %}">
+<div class="small-12 medium-6 large-6 cell">
+    <a class="ic__card-container" href="{% url 'events:event-detail' event_slug=e.slug %}">
         <div class="ic__card-photo" style="background-image:url({% thumbnail e.photo '512' as img %}{{ img.url }}{% endthumbnail %})">
             <div class="ic__user-avatar top right" title="{{ e.created_by.username }}">
                 {% avatar e.created_by 'small' %}
