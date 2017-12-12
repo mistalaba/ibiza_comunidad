@@ -11,7 +11,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from sorl.thumbnail import get_thumbnail
 
-from .forms import EventForm, EventForm2
+from users.utils import get_initials
+from .forms import EventForm, EventForm2, CommentForm
 from .models import Event
 
 import logging
@@ -100,6 +101,24 @@ def event_detail(request, event_slug):
     event = Event.objects.get(slug=event_slug)
     if request.is_ajax():
         photo = get_thumbnail(event.photo, '1024', quality=85)
+        comments = []
+        for comment in event.comments.all():
+            if comment.created_by.profile.avatar:
+                avatar_url = get_thumbnail(comment.created_by.profile.avatar, '48', quality=85).url
+            else:
+                avatar_url = ''
+            current_comment = {
+                'comment': comment.comment,
+                'created': comment.created,
+                'created_by': {
+                    'username': comment.created_by.username,
+                    'avatar_url': avatar_url,
+                    'color': comment.created_by.profile.color,
+                    'initials': get_initials(comment.created_by),
+                },
+
+            }
+            comments.append(current_comment)
         response = {
             'canonical_url': event.get_absolute_url(),
             'photo': photo.url,
@@ -114,12 +133,20 @@ def event_detail(request, event_slug):
             'created_by': {
                 'username': event.created_by.username,
                 'avatar': event.created_by.profile.avatar.url,
-            }
+            },
+            'comments': comments
         }
         return JsonResponse(response, safe=False)
     else:
+        commentform = CommentForm(request.POST or None, user=request.user, event=event)
+        if request.method == 'POST':
+            if commentform.is_valid():
+                commentform.save()
+                return redirect('events:event-detail', event_slug=event_slug)
         return render(request, 'view_event.html', {
             'event': event,
+            'commentform': commentform,
+            'comments': event.comments.all()
         })
 
 

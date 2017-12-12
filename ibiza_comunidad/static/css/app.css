@@ -12,11 +12,23 @@
 
 .ic__form-header h1 { color: #fefefe; margin: -1px; }
 
-div.ic__buttons { display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: nowrap; flex-wrap: nowrap; -ms-flex-align: baseline; align-items: baseline; }
+div.ic__buttons { display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: nowrap; flex-wrap: nowrap; -ms-flex-align: baseline; align-items: baseline; margin-bottom: 16px; margin-bottom: 1rem; }
 
 div.ic__buttons * { margin-bottom: 0; }
 
 div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
+
+.ic__inline_form { width: 100%; }
+
+.ic__comments-container { display: block; }
+
+.ic__comments-container .ic__comment-container { display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: nowrap; flex-wrap: nowrap; -ms-flex-align: start; align-items: flex-start; -ms-flex-line-pack: start; align-content: flex-start; margin-bottom: 16px; margin-bottom: 1rem; }
+
+.ic__comments-container .ic__comment-container .ic__comment-profile { margin-right: 16px; margin-right: 1rem; -ms-flex: 0 1 auto; flex: 0 1 auto; }
+
+.ic__comments-container .ic__comment-container .ic__comment-body { -ms-flex: 1 0 auto; flex: 1 0 auto; -ms-flex-item-align: stretch; -ms-grid-row-align: stretch; align-self: stretch; border-bottom: 1px solid #e6e6e6; }
+
+.ic__comments-container .ic__comment-container .ic__comment-body .ic__comment-meta { color: #cacaca; }
 
 @font-face { font-family: 'Roboto'; src: url("../fonts/roboto/roboto-regular-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-regular-webfont.woff") format("woff"); font-weight: normal; font-style: normal; }
 
@@ -2611,5 +2623,7 @@ i.ic__nomargin { margin-right: 0; }
 #pac-input { background-color: #fff; font-family: Roboto; font-size: 15px; font-weight: 300; margin-left: 12px; padding: 0 11px 0 13px; text-overflow: ellipsis; width: 400px; }
 
 #pac-input:focus { border-color: #4d90fe; }
+
+.ic__small-text { font-size: 12px; font-size: 0.75rem; }
 
 /*# sourceMappingURL=app.css.map */

@@ -114,30 +114,20 @@ ADMINS = [
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
-# Uses django-environ to accept uri format
-# See: https://django-environ.readthedocs.io/en/latest/#supported-types
-# GENERAL CONFIGURATION
-# ------------------------------------------------------------------------------
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Europe/Madrid'
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
+TIME_ZONE = 'Europe/Madrid'
+# LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'en-us'
 USE_I18N = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
 USE_L10N = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+TIME = 'H:i'
+DATE_FORMAT = 'D j, M Y'
+DATETIME_FORMAT = 'D j, M Y H:i'
+SHORT_DATE_FORMAT = 'Y-m-d'
+SHORT_DATETIME_FORMAT = 'Y-m-d H:i'
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
