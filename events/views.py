@@ -120,7 +120,8 @@ def event_detail(request, event_slug):
             }
             comments.append(current_comment)
         response = {
-            'canonical_url': event.get_absolute_url(),
+            'type': 'event',
+            'id': event.pk,
             'photo': photo.url,
             'title': event.title,
             'description': event.description,
@@ -149,6 +150,19 @@ def event_detail(request, event_slug):
             'comments': event.comments.all()
         })
 
+
+@login_required
+def save_ajax_comment(request):
+    if request.method == 'POST':
+        # Get event
+        event_id = request.POST.get('event')
+        event = Event.objects.get(pk=event_id)
+        comment = request.POST.get('comment')
+        # Create comment
+        event.comments.create(comment=comment, created_by=request.user)
+
+    response = {}
+    return JsonResponse(response, safe=False)
 
 @login_required
 def event_delete(request, event_slug):
