@@ -11,6 +11,10 @@ def common_variables(request):
 
     return {
         'google_api': settings.GOOGLE_API_KEY,
+        'date_format': settings.DATE_FORMAT,
+        'datetime_format': settings.DATETIME_FORMAT,
+        'short_date_format': settings.SHORT_DATE_FORMAT,
+        'short_datetime_format': settings.SHORT_DATETIME_FORMAT,
     }
 
 def user_profile_complete(request):

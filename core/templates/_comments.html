@@ -1,0 +1,29 @@
+{% load staticfiles i18n l10n core_tags thumbnail %}
+<div class="ic__comments-container">
+    {% for comment in comments %}
+    <div class="ic__comment-container">
+        <div class="ic__comment-profile">
+            <div class="ic__user-avatar normal small" title="{{ comment.created_by.username }}">{% avatar comment.created_by 'small' %}</div>
+        </div>
+        <div class="ic__comment-body">
+            <div class="ic__comment">{{ comment.comment }}</div>
+            <div class="ic__comment-meta">
+                <time class="timeago ic__small-text" datetime="{{ comment.created|date:"c" }}">
+                    {{ comment.created|date:datetime_format }}
+                </time>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <form class="ic__comment-container" method="POST" action="" novalidate>{% csrf_token %}
+        <div class="ic__comment-profile">
+            <div class="ic__user-avatar normal">{% avatar request.user 'small' %}</div>
+        </div>
+        <div class="ic__comment-body">
+            {{ commentform.comment }}
+            <div class="ic__buttons">
+                <button type="submit" class="button">Post</button>
+            </div>
+        </div>
+    </form>
+</div>

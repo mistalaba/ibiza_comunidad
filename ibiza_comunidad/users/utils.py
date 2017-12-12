@@ -43,6 +43,7 @@ def save_avatar(user, image_object):
             File(image_object)
         )
 
+
 def assign_random_user_color(user=None):
     color = random.choice(material_color_palette)
     if user is None:
@@ -53,3 +54,12 @@ def assign_random_user_color(user=None):
             user.profile.color = color[1]
             user.profile.save()
         return user
+
+
+def get_initials(user):
+    if not user.first_name and not user.last_name:
+        # Get initials from username
+        initials = user.username[:2]
+    else:
+        initials = '{}{}'.format(user.first_name[:1], user.last_name[:1])
+    return initials.upper()
