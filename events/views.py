@@ -159,9 +159,26 @@ def save_ajax_comment(request):
         event = Event.objects.get(pk=event_id)
         comment = request.POST.get('comment')
         # Create comment
-        event.comments.create(comment=comment, created_by=request.user)
+        comment_created = event.comments.create(comment=comment, created_by=request.user)
 
-    response = {}
+        if comment_created.created_by.profile.avatar:
+            avatar_url = get_thumbnail(comment_created.created_by.profile.avatar, '48', quality=85).url
+        else:
+            avatar_url = ''
+
+        current_comment = {
+            'id': comment_created.pk,
+            'comment': comment_created.comment,
+            'created': comment_created.created,
+            'created_by': {
+                'username': comment_created.created_by.username,
+                'avatar_url': avatar_url,
+                'color': comment_created.created_by.profile.color,
+                'initials': get_initials(comment_created.created_by),
+            },
+        }
+
+    response = current_comment
     return JsonResponse(response, safe=False)
 
 @login_required

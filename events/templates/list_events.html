@@ -139,11 +139,9 @@
             $('a.ic__card-container').on('click', function(e){
                 event.preventDefault();
                 var url = $(this).attr('href');
-                console.log("Open " + url);
                 $.ajax({
                     url: url,
                     success: function(response){
-                        console.log(response);
                         // Populate ids
                         $('#photo').attr('src', response['photo']);
                         $('#title').text(response['title']);
@@ -159,7 +157,6 @@
                         current_id = response['id'];
 
                         if (response['comments'].length != 0){
-                            console.log(response['comments']);
                             var comments = response['comments'];
 
                             // Build avatar
@@ -239,14 +236,32 @@
                     'event': current_id,
                     'csrfmiddlewaretoken': '{{csrf_token}}'
                 }
-                console.log(form_data);
 
                 $.ajax({
                     method: "POST",
                     url: '{% url "events:save-ajax-comment" %}',
-                    data: form_data
-                });
+                    data: form_data,
+                    success: function(response){
+                        // Append comment to template
+                        var created = response['created'];
+                        var comment_id = '__comment_' + response['id'];
+                        var comment_html =
+                            '<div class="ic__comment-container" id="' + comment_id + '">' +
+                            '<div class="ic__comment-profile">' +
+                            '<div class="ic__user-avatar normal small" title="">' + current_user_avatar + '</div>' +
+                            '</div>' +
+                            '<div class="ic__comment-body">' +
+                            '<div class="ic__comment">' + form_data['comment'] + '</div>' +
+                            '<div class="ic__comment-meta">' +
+                            '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
+                            '</div></div></div>';
 
+                        $('#__comment_form_ajax').before(comment_html);
+                        $('#id_comment').val('');
+                        $('#' + comment_id).find("time.timeago").timeago();
+                        // $("time.timeago").timeago();
+                    }
+                });
                 return false;
             });
 
