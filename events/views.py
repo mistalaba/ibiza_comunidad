@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import calendar
+import datetime
+from dateutil.relativedelta import relativedelta
 
+from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
@@ -24,22 +28,23 @@ def list_events(request):
 
     # Today's events
     today = timezone.now().date()
-    events_today = Event.objects.filter(start_datetime__date=today)
-    excluded_events = events_today.values_list('pk', flat=True)
-    print(excluded_events)
+    q_today = Q(start_datetime__date=today)
+    events_today = Event.objects.filter(q_today)
 
     # Tomorrow's events
     tomorrow = today + timezone.timedelta(days=1)
-    events_tomorrow = Event.objects.filter(start_datetime__date=tomorrow).exclude(pk__in=excluded_events)
-    excluded_events = excluded_events | events_tomorrow.values_list('pk', flat=True)
-    print(excluded_events)
+    q_tomorrow = Q(start_datetime__date=tomorrow)
+    events_tomorrow = Event.objects.filter(q_tomorrow)
 
     # This month's events
-    events_this_month = Event.objects.filter(end_datetime__gte=today, start_datetime__year=today.year, start_datetime__month=today.month).exclude(pk__in=excluded_events)
-    excluded_events = excluded_events | events_this_month.values_list('pk', flat=True)
+    end_of_month = datetime.date(today.year, today.month, calendar.monthrange(today.year, today.month)[1])
+    q_this_month = Q(start_datetime__date__gt=tomorrow) & Q(start_datetime__date__lte=end_of_month)
+    events_this_month = Event.objects.filter(q_this_month)
 
     # The rest
-    all_other_events = Event.objects.exclude(pk__in=excluded_events)
+    next_month = today.replace(day=1) + relativedelta(months=1)
+    q_rest = Q(start_datetime__gte=next_month)
+    all_other_events = Event.objects.filter(q_rest)
 
     return render(request, 'list_events.html', {
         'events': events,
