@@ -138,7 +138,7 @@ def event_detail(request, event_slug):
             'location_gmaps_place_id': event.location_gmaps_place_id,
             'created_by': {
                 'username': event.created_by.username,
-                'avatar': event.created_by.profile.avatar.url,
+                'avatar': event.created_by.profile.avatar.url if event.created_by.profile.avatar else '',
             },
             'comments': comments
         }
