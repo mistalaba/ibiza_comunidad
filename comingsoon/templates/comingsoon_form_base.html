@@ -1,0 +1,43 @@
+{% extends "comingsoon_base.html" %}
+{% block head_title %}{% endblock head_title %}
+
+{# Forms should never have the title h1 #}
+{% block page_title_container %}{% endblock page_title_container %}
+
+{% block messages %}
+{% if form.non_field_errors %}
+    {% for message in form.non_field_errors %}
+        <div class="callout error" data-closable>
+            {{ message }}
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock messages %}
+
+
+{% block content %}
+<div class="ic__form-container grid-x align-center">
+    <div class="small-12 medium-6 cell ic__form-wrapper">
+        <div class="ic__form-header">
+            <h1>{% block form_title %}{% endblock form_title %}</h1>
+        </div>
+        <div class="grid-container">
+        {% block inner %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+{% endblock css %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock javascript %}
+

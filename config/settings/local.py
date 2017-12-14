@@ -56,12 +56,6 @@ EMAIL_SUBJECT_PREFIX = env('DJANGO_EMAIL_SUBJECT_PREFIX', default='[ibiza_comuni
 # EMAIL_HOST_PASSWORD = env('DJANGO_EMAIL_HOST_PASSWORD')
 # EMAIL_USE_TLS = env.bool('DJANGO_EMAIL_USE_TLS', default=False)
 
-ANYMAIL = {
-    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
-    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN')
-}
-
-
 # CACHING
 # ------------------------------------------------------------------------------
 CACHES = {
@@ -94,3 +88,5 @@ INSTALLED_APPS += ['django_extensions', ]
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'
+
+ALLOWED_HOSTS = ['*']

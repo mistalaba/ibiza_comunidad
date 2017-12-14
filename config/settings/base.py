@@ -57,6 +57,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'anymail',
+    'sorl.thumbnail',
 ]
 
 # Apps specific for this project go here.
@@ -66,6 +67,7 @@ LOCAL_APPS = [
     'core',
     'comingsoon',
     'events',
+    'newsletter',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -112,30 +114,20 @@ ADMINS = [
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
-# Uses django-environ to accept uri format
-# See: https://django-environ.readthedocs.io/en/latest/#supported-types
-# GENERAL CONFIGURATION
-# ------------------------------------------------------------------------------
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Europe/Madrid'
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
+TIME_ZONE = 'Europe/Madrid'
+# LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'en-us'
 USE_I18N = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
 USE_L10N = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+TIME = 'H:i'
+DATE_FORMAT = 'D j, M Y'
+DATETIME_FORMAT = 'D j, M Y H:i'
+SHORT_DATE_FORMAT = 'Y-m-d'
+SHORT_DATETIME_FORMAT = 'Y-m-d H:i'
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -169,6 +161,7 @@ TEMPLATES = [
                 # Your stuff: custom template context processors go here
                 # 'core.context_processors.user_profile_complete',
                 # 'core.context_processors.has_profile',
+                'core.context_processors.common_variables',
             ],
         },
     },
@@ -291,6 +284,20 @@ AUTOSLUG_SLUGIFY_FUNCTION = 'slugify.slugify'
 INSTALLED_APPS += ['ibiza_comunidad.taskapp.celery.CeleryConfig']
 CELERY_BROKER_URL = 'redis://'
 ########## END CELERY
+
+# ANYMAIL
+ANYMAIL = {
+    'MAILGUN_API_KEY': env('DJANGO_MAILGUN_API_KEY'),
+    'MAILGUN_SENDER_DOMAIN': env('MAILGUN_SENDER_DOMAIN'),
+    'WEBHOOK_AUTHORIZATION': 'VzhoWuZaXCqbA6Nn:mH4hMjin8XIovNai',
+}
+
+# SORL-THUMBNAILS
+THUMBNAIL_DEBUG = env.bool('DJANGO_DEBUG', False)
+THUMBNAIL_QUALITY = 85
+
+# GOOGLE API
+GOOGLE_API_KEY = env('GOOGLE_API_KEY')
 
 LOGGING = {
     'version': 1,

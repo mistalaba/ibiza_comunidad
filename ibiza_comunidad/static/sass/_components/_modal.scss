@@ -1,0 +1,24 @@
+.ic__modal {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+    position: relative;
+    padding: 1rem 0 !important;
+    margin-bottom: 2em;
+    background-color: $white;
+    border-radius: $global-radius;
+}
+
+.ic__big-cover-image {
+    position: relative;
+    height: 20em;
+    width: 100%;
+    object-fit: cover;
+}
+
+.ic__details-container {
+    // Used for full screen event, similar to .ic__card-container but without the extra fluff
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: $global-padding;
+}
+

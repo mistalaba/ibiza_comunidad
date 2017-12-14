@@ -3,13 +3,7 @@
 
 """
 Local settings for ibiza_comunidad project.
-
 - Run in Debug mode
-
-- Use console backend for emails
-
-- Add Django Debug Toolbar
-- Add django-extensions as app
 """
 
 from .base import *  # noqa
