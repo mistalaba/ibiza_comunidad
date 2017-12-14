@@ -3,6 +3,8 @@ from django.conf import settings
 from django.core import signing
 from django.core.mail import EmailMultiAlternatives
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
+
 
 from core.utils import remove_unsubscribe
 from core.tasks import async_remove_unsubscribe
@@ -15,7 +17,7 @@ class SignupForm(forms.Form):
         self.request = kwargs.pop('request')
         super(SignupForm, self).__init__(*args, **kwargs)
 
-    email = forms.EmailField(max_length=254, required=True)
+    email = forms.EmailField(max_length=254, required=True, widget=forms.widgets.EmailInput(attrs={'placeholder': _("Enter your email here")}))
 
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
