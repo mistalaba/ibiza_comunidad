@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from sorl.thumbnail import get_thumbnail
 
-from users.utils import get_initials
+from ibiza_comunidad.users.utils import get_initials
 from .forms import EventForm, EventForm2, CommentForm
 from .models import Event
 
