@@ -130,7 +130,13 @@
             var mapLocation = '';
 
             // Current user avatar
-            var current_user_avatar = '{% spaceless %}{% avatar request.user "small" %}{% endspaceless %}';
+            if (user) {
+                var current_user_avatar = '{% spaceless %}{% avatar request.user "small" %}{% endspaceless %}';
+            }
+            else {
+                var current_user_avatar = '';
+            }
+
             var current_id;
 
 
@@ -188,18 +194,21 @@
                             $("time.timeago").timeago();
                         }
 
+
                         // Comment form
-                        var form =
-                            '<form id="__comment_form_ajax" class="ic__comment-container" method="POST" action="" novalidate>' +
-                            "{% csrf_token %}" +
-                            '<div class="ic__comment-profile">' +
-                            '<div class="ic__user-avatar normal">' + current_user_avatar + '</div>' +
-                            '</div>' +
-                            '<div class="ic__comment-body">' +
-                            '<textarea cols="40" id="id_comment" maxlength="600" name="comment" placeholder="Write your comment here" rows="2"></textarea>' +
-                            '<div class="ic__buttons"><button type="submit" class="button">Post</button></div>' +
-                            '</div></form>';
-                        $comments_container.append(form);
+                        if (user){
+                            var form =
+                                '<form id="__comment_form_ajax" class="ic__comment-container" method="POST" action="" novalidate>' +
+                                "{% csrf_token %}" +
+                                '<div class="ic__comment-profile">' +
+                                '<div class="ic__user-avatar normal">' + current_user_avatar + '</div>' +
+                                '</div>' +
+                                '<div class="ic__comment-body">' +
+                                '<textarea cols="40" id="id_comment" maxlength="600" name="comment" placeholder="Write your comment here" rows="2"></textarea>' +
+                                '<div class="ic__buttons"><button type="submit" class="button">Post</button></div>' +
+                                '</div></form>';
+                            $comments_container.append(form);
+                        }
 
                         mapLocation = response['location_gmaps_place_id'];
                         $modal.foundation('open');
@@ -227,39 +236,40 @@
 
 
             $modal.on('submit', '#__comment_form_ajax', function(e){
-                e.preventDefault();
+                if (user) {
+                    e.preventDefault();
 
-                var form_data = {
-                    'comment': $('#id_comment').val(),
-                    'event': current_id,
-                    'csrfmiddlewaretoken': '{{csrf_token}}'
-                }
-
-                $.ajax({
-                    method: "POST",
-                    url: '{% url "events:save-ajax-comment" %}',
-                    data: form_data,
-                    success: function(response){
-                        // Append comment to template
-                        var created = response['created'];
-                        var comment_id = '__comment_' + response['id'];
-                        var comment_html =
-                            '<div class="ic__comment-container" id="' + comment_id + '">' +
-                            '<div class="ic__comment-profile">' +
-                            '<div class="ic__user-avatar normal small" title="">' + current_user_avatar + '</div>' +
-                            '</div>' +
-                            '<div class="ic__comment-body">' +
-                            '<div class="ic__comment">' + form_data['comment'] + '</div>' +
-                            '<div class="ic__comment-meta">' +
-                            '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
-                            '</div></div></div>';
-
-                        $('#__comment_form_ajax').before(comment_html);
-                        $('#id_comment').val('');
-                        $('#' + comment_id).find("time.timeago").timeago();
-                        // $("time.timeago").timeago();
+                    var form_data = {
+                        'comment': $('#id_comment').val(),
+                        'event': current_id,
+                        'csrfmiddlewaretoken': '{{csrf_token}}'
                     }
-                });
+
+                    $.ajax({
+                        method: "POST",
+                        url: '{% url "events:save-ajax-comment" %}',
+                        data: form_data,
+                        success: function(response){
+                            // Append comment to template
+                            var created = response['created'];
+                            var comment_id = '__comment_' + response['id'];
+                            var comment_html =
+                                '<div class="ic__comment-container" id="' + comment_id + '">' +
+                                '<div class="ic__comment-profile">' +
+                                '<div class="ic__user-avatar normal small" title="">' + current_user_avatar + '</div>' +
+                                '</div>' +
+                                '<div class="ic__comment-body">' +
+                                '<div class="ic__comment">' + form_data['comment'] + '</div>' +
+                                '<div class="ic__comment-meta">' +
+                                '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
+                                '</div></div></div>';
+
+                            $('#__comment_form_ajax').before(comment_html);
+                            $('#id_comment').val('');
+                            $('#' + comment_id).find("time.timeago").timeago();
+                        }
+                    });
+                }
                 return false;
             });
 
@@ -288,6 +298,7 @@
             }
 
         });
+
     </script>
 
 {% endblock %}
