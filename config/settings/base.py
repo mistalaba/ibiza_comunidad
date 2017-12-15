@@ -24,6 +24,7 @@ def get_secret(setting, secrets=secrets):
 
 ROOT_DIR = environ.Path(__file__) - 3  # (ibiza_comunidad/config/settings/base.py - 3 = ibiza_comunidad/)
 APPS_DIR = ROOT_DIR.path('ibiza_comunidad')
+# APPS_DIR = ROOT_DIR  # Works with comingsoon bt not with the rest
 
 # Load operating system environment variables and then prepare to use them
 env = environ.Env()

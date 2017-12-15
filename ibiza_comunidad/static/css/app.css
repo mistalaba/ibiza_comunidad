@@ -2626,4 +2626,16 @@ i.ic__nomargin { margin-right: 0; }
 
 .ic__small-text { font-size: 12px; font-size: 0.75rem; }
 
+.ic__cs-wrapper { display: -ms-flexbox; display: flex; width: 100%; min-height: 100vh; }
+
+.ic__cs-container { max-width: 100%; width: 560px; width: 35rem; display: -ms-flexbox; display: flex; margin: 0 auto; -ms-flex-direction: column; flex-direction: column; -ms-flex-pack: center; justify-content: center; -ms-flex-align: center; align-items: center; padding: 16px; padding: 1rem; color: #fefefe; text-align: center; }
+
+.ic__cs-container h3 { font-size: 19.2px; font-size: 1.2rem; }
+
+.ic__cs-container p { font-weight: 300; }
+
+.ic__cs-description { text-align: center; }
+
+.ic__comingsoon { background: linear-gradient(rgba(72, 57, 106, 0.5), rgba(72, 57, 106, 0.5)), url(/static/comingsoon/img/comingsoon.jpg); background-size: cover; background-position: center 70%; }
+
 /*# sourceMappingURL=app.css.map */
