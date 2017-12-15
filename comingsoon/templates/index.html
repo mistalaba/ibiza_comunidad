@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{% block head_title %}Comunidad Ibiza{% endblock %}{% block subtitle %}{% if request.path_info != '/' %} | Comunidad Ibiza{% endif %}{% endblock subtitle %}</title>
+        <title>{% block head_title %}Comunidad Ibiza - Local knowledge working together{% endblock %}{% block subtitle %}{% if request.path_info != '/' %} | Comunidad Ibiza{% endif %}{% endblock subtitle %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="">
         {% include "_meta.html" %}
@@ -23,22 +23,51 @@
 
     <body class="ic__comingsoon">
         {% include_svg 'symbol-defs.svg' %}
+
+        {% block messages %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="callout {% if message.tags %}{{ message.tags }}{% endif %}" data-closable>
+                    {{ message }}
+                    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if form.non_field_errors %}
+            {% for message in form.non_field_errors %}
+                <div class="callout error" data-closable>
+                    {{ message }}
+                    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endblock messages %}
+
+
         <div class="ic__cs-wrapper">
             <div class="ic__cs-container">
                     <svg class="ic__icon ic__logo-large ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
-                <h1>Hello</h1>
-                <h2>Welcome to Comunidad Ibiza</h2>
+                <h1>{% trans "Comunidad Ibiza" %}</h1>
+                <h2>{% trans "Local knowledge matters." %}</h2>
                 <div class="grid-x grid-margin-x align-center">
                     <div class="small-12{% if debug %} medium-6{% endif %} cell ic__cs-description">
-                        <p>Te dicat everti abhorreant has. Mel cu qualisque scripserit voluptatibus, agam dissentias in has. Vel veniam pertinax cu, vel nobis antiopam conceptam ea. Et sed paulo partem regione, nam feugiat salutandi ad. Usu wisi nulla omnium in.</p>
+                        <p>
+                            {% blocktrans %}We work towards a better use of local knowledge on the island of Ibiza.
+                            By participating, we can help each other discover events, new food experiences, music and friends, all in one place.{% endblocktrans %}
+                        </p>
+                        <p>Make the information available for everyone, new and old residents.</p>
                     </div>
-                    {% if debug %}
                     <div class="small-12 medium-6 cell">
                         <form class="ic__form" method="POST" action="" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %}
                             {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
                             <div class="grid-x">
                                 <div class="small-12 cell">
-                                    <h3>{% trans "Don't miss the opportunity to be part of Comunidad Ibiza" %}</h3>
+                                    <h3>{% trans "Don't miss the opportunity to be part of the community" %}</h3>
+                                    <p>{% trans "Sign up for our newsletter to get updates about our progress." %}</p>
                                     {{ form.email }}
                                     {% if form.email.errors %}{{ form.email.errors }}{% endif %}
                                 </div>
@@ -48,7 +77,6 @@
                             </div>
                         </form>
                     </div>
-                    {% endif %}
                 </div>
 
             </div>

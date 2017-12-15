@@ -23,7 +23,7 @@ class SignupForm(forms.Form):
         cleaned_data = super(SignupForm, self).clean()
         # Check if the email exist with the category
         if Subscriber.objects.filter(email=cleaned_data['email'], subscriptions=self.category).exists():
-            raise forms.ValidationError("You are already subscribed to this")
+            raise forms.ValidationError(_("You are already subscribed"))
         return cleaned_data
 
     def save(self):
