@@ -10,6 +10,7 @@ from core.utils import remove_unsubscribe
 from core.tasks import async_remove_unsubscribe
 
 from .models import Subscriber
+from .utils import send_newsletter_signup
 
 class SignupForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -45,14 +46,24 @@ class SignupForm(forms.Form):
         signing_url = reverse('newsletter:activate', kwargs={'signing_value': signing_value})
         url = self.request.build_absolute_uri(signing_url)
 
-        text_content = 'Welcome to the newsletter.\nPlease activate your subscription by this link: {}\n\nKind regards,\n/Comunidad Ibiza\n\nUnsubscribe here: %tag_unsubscribe_url%'.format(url)
-        html_content = '<p>Welcome to the newsletter.<br>Please activate your subscription <a href="{}">here</a></p><p>Kind regards,<br>/Comunidad Ibiza</p><p><a href="%tag_unsubscribe_url%">Unsubscribe</a></p>'.format(url)
-        msg = EmailMultiAlternatives(
-            'You signed up for {}'.format(self.category),
-            text_content,
-            settings.DEFAULT_FROM_EMAIL,
-            [data['email']],
-        )
-        msg.attach_alternative(html_content, "text/html")
-        msg.tags = [self.category.tag]
-        msg.send()
+        c = {
+            'subject': _("Confirm your subscription"),
+            'recipient_email': data['email'],
+            'category': self.category,
+            'button_link': url,
+            'button_text': _("Confirm email")
+
+        }
+        send_newsletter_signup(self.request, c)
+
+        # text_content = 'Welcome to the newsletter.\nPlease activate your subscription by this link: {}\n\nKind regards,\n/Comunidad Ibiza\n\nUnsubscribe here: %tag_unsubscribe_url%'.format(url)
+        # html_content = '<p>Welcome to the newsletter.<br>Please activate your subscription <a href="{}">here</a></p><p>Kind regards,<br>/Comunidad Ibiza</p><p><a href="%tag_unsubscribe_url%">Unsubscribe</a></p>'.format(url)
+        # msg = EmailMultiAlternatives(
+        #     'You signed up for {}'.format(self.category),
+        #     text_content,
+        #     settings.DEFAULT_FROM_EMAIL,
+        #     [data['email']],
+        # )
+        # msg.attach_alternative(html_content, "text/html")
+        # msg.tags = [self.category.tag]
+        # msg.send()

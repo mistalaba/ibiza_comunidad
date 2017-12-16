@@ -7,6 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Category, Subscriber
 from .forms import SignupForm
 
+import logging
+logger = logging.getLogger(__name__)
+
+
 def signup(request):
     category = Category.objects.get(tag='coming-soon')
     form = SignupForm(request.POST or None, category=category, request=request)
