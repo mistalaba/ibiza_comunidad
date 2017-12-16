@@ -16,7 +16,7 @@ def index(request):
 
     meta = Meta(
         title=_("Comunidad Ibiza - Local knowledge working together"),
-        description=_("The community for crowdsourcing your stay in Ibiza"),
+        description=_("The community for crowdsourcing information in Ibiza"),
         image=static('comingsoon/img/comingsoon.jpg'),
         twitter_card='summary_large_image',
         twitter_site='@com_ibiza',
