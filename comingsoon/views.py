@@ -14,7 +14,8 @@ def index(request):
     if request.method == 'POST':
         if form.is_valid():
             subscriber = form.save()
-            return redirect('newsletter:thank-you')
+            messages.success(request, _("Thank you for subscribing! We have sent a confirmation to your email address, please verify it to continue."))
+            return redirect('comingsoon:index')
 
     return render(request, 'index.html', {
         'form': form,

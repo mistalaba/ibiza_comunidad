@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-
+        {% include "_comments.html" %}
     </div>
     <div class="small-12 medium-4 cell ic__details-container">
         <p class="ic__card-details-item">
@@ -65,6 +65,10 @@
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
             <span>{% if event.price > 0 %}{{ event.price }}{% else %}{% trans 'Free' %}{% endif %}</span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
+            <span class="ic__source" id="source"><a href="{{ event.source }}">{{ event.source }}</a></span>
         </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>

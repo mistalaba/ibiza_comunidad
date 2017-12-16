@@ -1,6 +1,7 @@
 import requests
 
 from django.conf import settings
+from django.core.files.temp import NamedTemporaryFile
 from django.utils.text import slugify
 
 import logging
@@ -62,3 +63,39 @@ def remove_unsubscribe(email, tag='*'):
         )
     logger.info("Response: {}".format(result.text))
     return result
+
+material_color_palette = [
+    ('red700', '#D32F2F'),
+    ('pink700', '#C2185B'),
+    ('purple700', '#7B1FA2'),
+    ('deepPurple700', '#512DA8'),
+    ('indigo700', '#303F9F'),
+    ('blue700', '#1976D2'),
+    ('lightBlue700', '#0288D1'),
+    ('cyan700', '#0097A7'),
+    ('teal700', '#00796B'),
+    ('green700', '#388E3C'),
+    ('lightGreen700', '#689F38'),
+    ('lime700', '#AFB42B'),
+    ('yellow700', '#FBC02D'),
+    ('amber700', '#FFA000'),
+    ('orange700', '#F57C00'),
+    ('deepOrange700', '#E64A19'),
+    ('brown700', '#5D4037'),
+    ('blueGrey700', '#455A64'),
+    # ('name', 'hex'),
+]
+
+def create_tempfile(url, prefix='', filext=''):
+    """
+    Return a NamedTemporaryFile from url
+    """
+    img_temp = NamedTemporaryFile(delete=True, prefix=prefix, suffix=filext)
+    request = requests.get(url, stream=True)
+    if request.status_code == requests.codes.ok:
+        for block in request.iter_content(1024 * 8):
+            if not block:
+                break
+            # Write image block to temporary file
+            img_temp.write(block)
+        return img_temp

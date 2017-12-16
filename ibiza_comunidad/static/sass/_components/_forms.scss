@@ -28,10 +28,41 @@ div.ic__buttons {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: baseline;
+    margin-bottom: $global-margin;
     * {
         margin-bottom: 0;
         &:not(:last-child) {
             margin-right: $global-margin;
+        }
+    }
+}
+
+.ic__inline_form {
+    // For example used by comments
+    width: 100%
+}
+
+.ic__comments-container {
+    display: block;
+    .ic__comment-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        align-content: flex-start;
+        margin-bottom: $global-margin;
+        .ic__comment-profile {
+            margin-right: $global-margin;
+            flex: 0 1 auto;
+        }
+        .ic__comment-body {
+            flex: 1 0 auto;
+            align-self: stretch;
+            border-bottom: 1px solid $light-gray;
+            .ic__comment-meta {
+                color: $medium-gray;
+            }
+
         }
     }
 }

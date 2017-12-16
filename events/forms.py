@@ -4,8 +4,11 @@
 from django import forms
 from django.forms import widgets
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
+from core.models import Comment
 from .models import Event
+
 
 class EventForm(forms.Form):
     def __init__(self, *args, **kwargs):
@@ -18,6 +21,7 @@ class EventForm(forms.Form):
     start = forms.DateTimeField(widget=widgets.DateTimeInput(attrs={'class': '_datetimepicker'}), required=True)
     end = forms.DateTimeField(widget=widgets.DateTimeInput(attrs={'class': '_datetimepicker'}), required=True)
     price = forms.DecimalField(widget=widgets.NumberInput(attrs={'step': 0.50}), max_digits=10, decimal_places=2, required=True)
+    source = forms.URLField(required=False)
     location = forms.CharField(max_length=255, required=True)
     location_gmaps_place_id = forms.CharField(widget=forms.HiddenInput(), max_length=255, required=True)
 
@@ -40,3 +44,16 @@ class EventForm2(forms.ModelForm):
             'end_datetime': widgets.DateTimeInput(attrs={'class': '_datetimepicker'}),
             'location_gmaps_place_id': forms.HiddenInput,
         }
+
+
+class CommentForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        self.event = kwargs.pop('event')
+        super(CommentForm, self).__init__(*args, **kwargs)
+
+    comment = forms.CharField(max_length=600, required=False, widget=forms.Textarea(attrs={'placeholder': _('Write your comment here'), 'rows': '2'}))
+
+    def save(self):
+        data = self.cleaned_data
+        self.event.comments.create(comment=data['comment'], created_by=self.user)

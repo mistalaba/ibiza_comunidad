@@ -3,13 +3,7 @@
 
 """
 Local settings for ibiza_comunidad project.
-
 - Run in Debug mode
-
-- Use console backend for emails
-
-- Add Django Debug Toolbar
-- Add django-extensions as app
 """
 
 from .base import *  # noqa
@@ -19,6 +13,7 @@ print('Loading comingsoon_local')
 SITE_ID = 2
 ROOT_URLCONF = 'config.urls_comingsoon'
 
+ALLOWED_HOSTS = ['*']
 
 # DEBUG
 # ------------------------------------------------------------------------------

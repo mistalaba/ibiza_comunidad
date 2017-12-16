@@ -7,67 +7,287 @@
 {% block content %}
 {% if request.user.is_authenticated %}
 <div class="grid-x grid-padding-x">
-        <div class="small-12 cell">
-            <a href="{% url 'events:create-event' %}" class="button primary">Add event</a>
-        </div>
+    <div class="small-12 cell">
+        <a href="{% url 'events:create-event' %}" class="button primary">Add event</a>
+    </div>
 </div>
 {% endif %}
+
 <div class="grid-x grid-padding-x">
-    {% for event in events %}
-        <div class="small-12 medium-6 large-4 cell">
-            <a class="ic__card-container" href="{% url 'events:event-detail' event_slug=event.slug %}">
-                <div class="ic__card-photo" style="background-image:url({% if event.photo %}
-                    {% thumbnail event.photo '512' as img %}{{ img.url }}{% endthumbnail %}
-                    {% else %}
-                    https://picsum.photos/1200/800?random={{event.pk}}{% endif %})">
-                    <div class="ic__user-avatar top right" title="{{ event.created_by.username }}">
-                        {% avatar event.created_by 'small' %}
-                    </div>
-                    <div class="ic__card-title">
-                        <h2>{{ event }}</h2>
-                    </div>
-                </div>
-                {% if event.description %}
-                <p class="ic__card-description">{{ event.description }}</p>
-                {% endif %}
-                <p class="ic__card-details-item">
-                    <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
-                    {% with sd=event.start_datetime ed=event.end_datetime %}
-                    <span>
-                        {% if sd|date:'Y-m-d' == ed|date:'Y-m-d' %}
-                            {% if sd.year == now.year %}
-                                {% if sd.month == now.month %}
-                                    {{ sd|date:'D, j H:i' }} - {{ ed|date:'H:i' }}
-                                {% else %}
-                                    {{ sd|date:'D, M j H:i' }} - {{ ed|date:'H:i' }}
-                                {% endif %}
-                            {% else %}
-                                {{ sd }} - {{ ed }}
-                            {% endif %}
-                        {% else %}
-                            {% if sd.year == now.year %}
-                                {% if sd.month == now.month %}
-                                    {{ sd|date:'D, j H:i' }} - {{ ed|date:'D, j H:i' }}
-                                {% else %}
-                                    {{ sd|date:'D, M j H:i' }} - {{ ed|date:'D, M j H:i' }}
-                                {% endif %}
-                            {% else %}
-                                {{ sd }} - {{ ed }}
-                            {% endif %}
-                        {% endif %}
-                    </span>
-                    {% endwith %}
-                </p>
-                <p class="ic__card-details-item">
-                    <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
-                    <span>{% if event.price > 0 %}{{ event.price }}{% else %}{% trans 'Free' %}{% endif %}</span>
-                </p>
-                <p class="ic__card-details-item">
-                    <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
-                    <span>{{ event.location_friendly_name }}</span>
-                </p>
-            </a>
+    <div class="small-12 medium-4 cell">
+
+    </div>
+    <div class="small-12 medium-8 cell">
+
+{# Today's events #}
+{% if events_today %}
+<div class="grid-x grid-padding-x">
+    <div class="small-12 cell">
+        <h3>{% trans 'Today' %}</h3>
+    </div>
+</div>
+<div class="grid-x grid-padding-x">
+{% for e in events_today %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
+{% endif %}
+
+{# Tomorrow's events #}
+{% if events_tomorrow %}
+<div class="grid-x grid-padding-x">
+    <div class="small-12 cell">
+        <h3>{% trans 'Tomorrow' %}</h3>
+    </div>
+</div>
+<div class="grid-x grid-padding-x">
+{% for e in events_tomorrow %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
+{% endif %}
+
+{# This month's events #}
+{% if events_this_month %}
+<div class="grid-x grid-padding-x">
+    <div class="small-12 cell">
+        <h3>{% trans 'This month' %}</h3>
+    </div>
+</div>
+<div class="grid-x grid-padding-x">
+{% for e in events_this_month %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
+{% endif %}
+
+{# All other events by month #}
+{% if all_other_events %}
+{% for e in all_other_events %}
+    {% ifchanged e.start_datetime.month %}
+    {% if not forloop.first %}
+    </div> {# close <div class="grid-x grid-padding-x"> #}
+    {% endif %}
+    <div class="grid-x grid-padding-x">
+        <div class="small-12 cell">
+            <h3>{{ e.start_datetime|date:"F" }}</h3>
         </div>
-    {% endfor %}
+    </div>
+    <div class="grid-x grid-padding-x">
+    {% endifchanged %}
+    {% include "_event_card.html" %}
+{% endfor %}
+</div>
+{% endif %}
+    </div>
+</div>
+
+
+{# Modal for popup event #}
+<div class="ic__modal reveal large __event-modal" data-reveal data-reset-on-close="true">
+    <div class="grid-x grid-padding-x __content">
+    <div class="small-12 medium-8 cell">
+        <div class="small-12 cell">
+            <img id='photo' class="ic__big-cover-image" src="" alt="">
+        </div>
+        <h2 id="title"></h2>
+        <p id="description" class="ic__card-description"></p>
+        <div class="ic__comments-container"></div>
+    </div>
+    <div class="small-12 medium-4 cell ic__details-container">
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
+            <span id="date"></span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
+            <span id="price"></span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
+            <span id="location_friendly_name"></span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
+            <span id="source" class="ic__source"><a href=""></a></span>
+        </p>
+        <div class="ic__map" id="map"></div>
+    </div>
+    </div>
+    <button class="close-button close-reveal-modal" data-close aria-label="Close reveal" type="button">
+            <span aria-hidden="true">&times;</span>
+          </button>
 </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api }}&libraries=places" async defer></script>
+
+    <script>
+        $(document).ready(function() {
+            var $modal = $('.__event-modal');
+            var mapLocation = '';
+
+            // Current user avatar
+            var current_user_avatar = '{% spaceless %}{% avatar request.user "small" %}{% endspaceless %}';
+            var current_id;
+
+
+            $('a.ic__card-container').on('click', function(e){
+                event.preventDefault();
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    success: function(response){
+                        // Populate ids
+                        $('#photo').attr('src', response['photo']);
+                        $('#title').text(response['title']);
+                        $('#description').text(response['description']);
+                        $('#date').text(response['start_datetime']);
+                        $('#price').text(response['price']);
+                        $('#source a').text(response['source']).attr('href', response['source']);
+                        $('#location_friendly_name').text(response['location_friendly_name']);
+
+                        var $comments_container = $('.ic__comments-container');
+
+                        // Set global var current_id
+                        current_id = response['id'];
+
+                        if (response['comments'].length != 0){
+                            var comments = response['comments'];
+
+                            // Build avatar
+                            var av_with_pic = '<span class="ic__user-avatar-image"></span>';
+                            var av_without_pic = '<span class="ic__user-without-avatar"></span>';
+
+                            jQuery.each(comments, function(){
+                                // Insert html
+                                var created = this['created'];
+                                var user = this['created_by'];
+                                var avatar = '';
+                                if (user['avatar_url']){
+                                    avatar = '<span class="ic__user-avatar-image" style="background-image: url(' + user['avatar_url'] + ')"></span>';
+                                }
+                                else {
+                                    avatar = '<span class="ic__user-without-avatar" style="background-color: ' + user['color'] + '">' + user['initials'] + '</span>';
+                                }
+
+                                var comment_html =
+                                    '<div class="ic__comment-container">' +
+                                    '<div class="ic__comment-profile">' +
+                                    '<div class="ic__user-avatar normal small" title="">' + avatar + '</div>' +
+                                    '</div>' +
+                                    '<div class="ic__comment-body">' +
+                                    '<div class="ic__comment">' + this['comment'] + '</div>' +
+                                    '<div class="ic__comment-meta">' +
+                                    '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
+                                    '</div></div></div>';
+                                $comments_container.append(comment_html);
+                            });
+                            $("time.timeago").timeago();
+                        }
+
+                        // Comment form
+                        var form =
+                            '<form id="__comment_form_ajax" class="ic__comment-container" method="POST" action="" novalidate>' +
+                            "{% csrf_token %}" +
+                            '<div class="ic__comment-profile">' +
+                            '<div class="ic__user-avatar normal">' + current_user_avatar + '</div>' +
+                            '</div>' +
+                            '<div class="ic__comment-body">' +
+                            '<textarea cols="40" id="id_comment" maxlength="600" name="comment" placeholder="Write your comment here" rows="2"></textarea>' +
+                            '<div class="ic__buttons"><button type="submit" class="button">Post</button></div>' +
+                            '</div></form>';
+                        $comments_container.append(form);
+
+                        mapLocation = response['location_gmaps_place_id'];
+                        $modal.foundation('open');
+                        if (mapLocation) {
+                            google.maps.event.addDomListener(document, "open.zf.reveal", initMap(mapLocation));
+                        }
+                        // Update URL
+                        history.pushState(null, null, url);
+                    }
+                });
+            });
+
+            $modal.on("closed.zf.reveal", function () {
+                mapLocation = '';
+                $('#photo').attr('src', '');
+                $('#title').text('');
+                $('#description').text('');
+                $('#date').text('');
+                $('#price').text('');
+                $('#location_friendly_name').text('');
+                $('.ic__comments-container').html('');
+                history.pushState(null, null, '{% url "events:list-events" %}');
+            });
+
+
+
+            $modal.on('submit', '#__comment_form_ajax', function(e){
+                e.preventDefault();
+
+                var form_data = {
+                    'comment': $('#id_comment').val(),
+                    'event': current_id,
+                    'csrfmiddlewaretoken': '{{csrf_token}}'
+                }
+
+                $.ajax({
+                    method: "POST",
+                    url: '{% url "events:save-ajax-comment" %}',
+                    data: form_data,
+                    success: function(response){
+                        // Append comment to template
+                        var created = response['created'];
+                        var comment_id = '__comment_' + response['id'];
+                        var comment_html =
+                            '<div class="ic__comment-container" id="' + comment_id + '">' +
+                            '<div class="ic__comment-profile">' +
+                            '<div class="ic__user-avatar normal small" title="">' + current_user_avatar + '</div>' +
+                            '</div>' +
+                            '<div class="ic__comment-body">' +
+                            '<div class="ic__comment">' + form_data['comment'] + '</div>' +
+                            '<div class="ic__comment-meta">' +
+                            '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
+                            '</div></div></div>';
+
+                        $('#__comment_form_ajax').before(comment_html);
+                        $('#id_comment').val('');
+                        $('#' + comment_id).find("time.timeago").timeago();
+                        // $("time.timeago").timeago();
+                    }
+                });
+                return false;
+            });
+
+            function initMap(mapLocation) {
+                var request = {
+                    placeId: mapLocation
+                };
+
+                function callback(place, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location
+                    });
+                    map.setCenter(marker.getPosition());
+                    }
+                }
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    fullscreenControl: false
+                });
+
+                service = new google.maps.places.PlacesService(map);
+                service.getDetails(request, callback);
+            }
+
+        });
+    </script>
+
+{% endblock %}

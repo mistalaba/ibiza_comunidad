@@ -118,12 +118,19 @@ body.ic__center {
 
 
 // LOGO
+a > i.ic__nomargin {
+    padding: 0;
+}
 i {
     // Hijack i for icons
     display: inline-block;
     font-style: normal;
     margin-right: 0.5em;
     vertical-align: inherit;
+    &.ic__nomargin {
+        // Don't want so much space between icon and dropdown arrow
+        margin-right: 0;
+    }
 }
 .ic__logo-large {
     width: 64px;
@@ -237,10 +244,63 @@ i {
   border-color: #4d90fe;
 }
 
-#title {
-  color: #fff;
-  background-color: #4d90fe;
-  font-size: 25px;
-  font-weight: 500;
-  padding: 6px 12px;
+// #title {
+//   color: #fff;
+//   background-color: #4d90fe;
+//   font-size: 25px;
+//   font-weight: 500;
+//   padding: 6px 12px;
+// }
+
+.ic__small-text {
+    font-size: rem-calc(12);
+}
+
+.ic__cs-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+.ic__cs-container {
+    max-width: 100%;
+    width: 35rem;
+    display: flex;
+    // background: #ff0000;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    color: $white;
+    text-align: center;
+
+    // Font sizes
+    h3 {
+        font-size: 1.2rem;
+    }
+    p {
+        font-weight: 300;
+    }
+}
+
+.ic__cs-description {
+    text-align: center;
+}
+
+.ic__comingsoon {
+    // &:before {
+    //     content: "";
+    //     position: fixed;
+    //     left: 0;
+    //     right: 0;
+    //     top: 0;
+    //     bottom: 0;
+    //     display: block;
+    // }
+    $background: darken(rgba(95, 75, 139, 0.5), 10%);
+
+    background: linear-gradient($background, $background), url(/static/comingsoon/img/comingsoon.jpg);
+    // background-image: ;
+    background-size: cover;
+    background-position: center 70%;
 }
