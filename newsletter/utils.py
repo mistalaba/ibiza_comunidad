@@ -29,7 +29,7 @@ def send_newsletter_signup(request, extra_context):
     c = Context(context)
     text_content = render_to_string('email_templates/confirm.txt', c)
     html_content = render_to_string('email_templates/beefree-confirm.html', c)
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
     msg = EmailMultiAlternatives(
         extra_context['subject'],
         text_content,
