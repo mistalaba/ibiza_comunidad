@@ -31,6 +31,7 @@ django-crispy-forms==1.6.1
 django-debug-toolbar==1.8
 django-environ==0.4.4
 django-extensions==1.9.1
+django-meta==1.4
 django-model-utils==3.0.0
 django-redis==4.8.0
 django-storages==1.6.5
