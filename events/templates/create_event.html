@@ -10,7 +10,9 @@
 {% block inner %}
 <form class="login ic__form" method="POST" action="" novalidate enctype="multipart/form-data">{% csrf_token %}
     {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
+    <div class="grid-x grid-margin-x">
     {% for field in form.visible_fields  %}{% include 'forms/_form_field.html' %}{% endfor %}
+    </div>
 
     <div class="grid-x">
         <div class="small-12 cell">
