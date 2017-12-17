@@ -13,6 +13,7 @@ print('Loading comingsoon_local')
 SITE_ID = 2
 ROOT_URLCONF = 'config.urls_comingsoon'
 
+ALLOWED_HOSTS = ['*']
 
 # DEBUG
 # ------------------------------------------------------------------------------

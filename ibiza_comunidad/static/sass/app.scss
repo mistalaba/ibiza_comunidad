@@ -251,3 +251,56 @@ i {
 //   font-weight: 500;
 //   padding: 6px 12px;
 // }
+
+.ic__small-text {
+    font-size: rem-calc(12);
+}
+
+.ic__cs-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+.ic__cs-container {
+    max-width: 100%;
+    width: 35rem;
+    display: flex;
+    // background: #ff0000;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    color: $white;
+    text-align: center;
+
+    // Font sizes
+    h3 {
+        font-size: 1.2rem;
+    }
+    p {
+        font-weight: 300;
+    }
+}
+
+.ic__cs-description {
+    text-align: center;
+}
+
+.ic__comingsoon {
+    // &:before {
+    //     content: "";
+    //     position: fixed;
+    //     left: 0;
+    //     right: 0;
+    //     top: 0;
+    //     bottom: 0;
+    //     display: block;
+    // }
+    $background: darken(rgba(95, 75, 139, 0.5), 10%);
+
+    background: linear-gradient($background, $background), url(/static/comingsoon/img/comingsoon.jpg);
+    // background-image: ;
+    background-size: cover;
+    background-position: center 70%;
+}

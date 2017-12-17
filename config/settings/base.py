@@ -24,6 +24,7 @@ def get_secret(setting, secrets=secrets):
 
 ROOT_DIR = environ.Path(__file__) - 3  # (ibiza_comunidad/config/settings/base.py - 3 = ibiza_comunidad/)
 APPS_DIR = ROOT_DIR.path('ibiza_comunidad')
+# APPS_DIR = ROOT_DIR  # Works with comingsoon bt not with the rest
 
 # Load operating system environment variables and then prepare to use them
 env = environ.Env()
@@ -58,6 +59,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.facebook',
     'anymail',
     'sorl.thumbnail',
+    'meta',
 ]
 
 # Apps specific for this project go here.
@@ -114,30 +116,20 @@ ADMINS = [
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
-# Uses django-environ to accept uri format
-# See: https://django-environ.readthedocs.io/en/latest/#supported-types
-# GENERAL CONFIGURATION
-# ------------------------------------------------------------------------------
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'Europe/Madrid'
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = 'en-us'
-
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
+TIME_ZONE = 'Europe/Madrid'
+# LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'en-us'
 USE_I18N = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
 USE_L10N = True
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
+TIME = 'H:i'
+DATE_FORMAT = 'D j, M Y'
+DATETIME_FORMAT = 'D j, M Y H:i'
+SHORT_DATE_FORMAT = 'Y-m-d'
+SHORT_DATETIME_FORMAT = 'Y-m-d H:i'
 
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -308,6 +300,18 @@ THUMBNAIL_QUALITY = 85
 
 # GOOGLE API
 GOOGLE_API_KEY = env('GOOGLE_API_KEY')
+
+# DJANGO-META
+META_USE_SITES = True
+META_SITE_PROTOCOL = env('META_SITE_PROTOCOL')
+META_USE_OG_PROPERTIES = True
+META_FB_APPID = '1658212564224354'
+META_USE_GOOGLEPLUS_PROPERTIES = True
+META_SITE_NAME = 'La Comunidad Ibiza'
+META_SITE_TYPE = 'website'
+META_USE_TWITTER_PROPERTIES = True
+META_TWITTER_SITE = '@com_ibiza'  # NOT WORKING!
+META_TWITTER_TYPE = 'summary_large_image'  # NOT WORKING!
 
 LOGGING = {
     'version': 1,

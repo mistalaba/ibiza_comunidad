@@ -1,0 +1,7 @@
+Welcome to the newsletter.
+
+Almost done! You only need to confirm your email address, then you are set to go.
+Please activate your subscription by this link: {{ button_link }}
+
+Kind regards,
+Comunidad Ibiza
