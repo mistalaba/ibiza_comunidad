@@ -8,17 +8,24 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def slugify_unique(instance, field_to_slugify):
+def slugify_unique(instance, field_to_slugify, max_length=50):
     """
     Idea taken from http://fazle.me/auto-generating-unique-slug-in-django/
     """
     model = instance._meta.model
     base_slug = slugify(getattr(instance, field_to_slugify))
+    while len(base_slug) > max_length:
+        words = base_slug.split('-')[:-1]
+        base_slug = slugify(words)
     # Continue the slugification
     unique_slug = base_slug
     num = 1
     while model.objects.filter(slug=unique_slug).exists():
-        unique_slug = '{}-{}'.format(slug, num)
+        # Make sure length is not more than slug field's max_length
+        while len(''.join((base_slug, '-', str(num)))) > max_length:
+            words = base_slug.split('-')[:-1]
+            base_slug = slugify(words)
+        unique_slug = '{}-{}'.format(base_slug, num)
         num += 1
     return unique_slug
 
