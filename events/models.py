@@ -36,5 +36,5 @@ class Event(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify_unique(self, 'title')
+            self.slug = slugify_unique(self, 'title', max_length=50)
         super().save()

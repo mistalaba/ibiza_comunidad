@@ -1,8 +1,6 @@
-<div class="grid-x">
-    <div class="small-12 cell">
+    <div class="small-12{% if field.field.widget.attrs.class == '_datetimepicker' %} medium-6{% endif %} cell">
         <label>{{ field.label }}{% if field.field.required %} (required){% endif %}
             {{ field }}
         </label>
         {% if field.errors %}{{ field.errors }}{% endif %}
     </div>
-</div>
