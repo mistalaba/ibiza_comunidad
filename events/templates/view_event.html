@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles i18n thumbnail %}
+{% load staticfiles i18n thumbnail core_tags thumbnail %}
 
 {% block head_title %}{{ event.title }}{% endblock %}
 {% block page_title %}{% endblock page_title %}
@@ -34,6 +34,12 @@
         {% include "_comments.html" %}
     </div>
     <div class="small-12 medium-4 cell ic__details-container">
+        <p class="ic__card-details-item ic__event_creator">
+            <i><span id="event_created_by_avatar" class="ic__user-avatar normal" title="">
+                {% spaceless %}{% avatar event.created_by "small" %}{% endspaceless %}
+            </span></i>
+            <span id="event_created_by">{{ event.created_by.username }}</span>
+        </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
             {% with sd=event.start_datetime ed=event.end_datetime %}
