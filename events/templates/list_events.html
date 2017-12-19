@@ -95,6 +95,10 @@
         <div class="ic__comments-container"></div>
     </div>
     <div class="small-12 medium-4 cell ic__details-container">
+        <p class="ic__card-details-item ic__event_creator">
+            <i><span id="event_created_by_avatar" class="ic__user-avatar normal" title=""></span></i>
+            <span id="event_created_by"></span>
+        </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
             <span id="date"></span>
@@ -104,12 +108,12 @@
             <span id="price"></span>
         </p>
         <p class="ic__card-details-item">
-            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
-            <span id="location_friendly_name"></span>
-        </p>
-        <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
             <span id="source" class="ic__source"><a href=""></a></span>
+        </p>
+        <p class="ic__card-details-item">
+            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
+            <span id="location_friendly_name"></span>
         </p>
         <div class="ic__map" id="map"></div>
     </div>
@@ -146,10 +150,20 @@
                 $.ajax({
                     url: url,
                     success: function(response){
+                        // Build creator avatar
+                        var created_by_avatar = '';
+                        if (response['created_by']['avatar_url']){
+                            created_by_avatar = '<span class="ic__user-avatar-image" style="background-image: url(' + response['created_by']['avatar_url'] + ')"></span>';
+                        }
+                        else {
+                            created_by_avatar = '<span class="ic__user-without-avatar" style="background-color: ' + response['created_by']['color'] + '">' + response['created_by']['initials'] + '</span>';
+                        }
                         // Populate ids
                         $('#photo').attr('src', response['photo']);
                         $('#title').text(response['title']);
                         $('#description').text(response['description']);
+                        $('#event_created_by_avatar').append(created_by_avatar);
+                        $('#event_created_by').html('<span id="created_by_userename">' + response['created_by']['username'] + '</span>');
                         $('#date').text(response['start_datetime']);
                         $('#price').text(response['price']);
                         $('#source a').text(response['source']).attr('href', response['source']);
@@ -230,6 +244,8 @@
                 $('#price').text('');
                 $('#location_friendly_name').text('');
                 $('.ic__comments-container').html('');
+                $('#event_created_by_avatar').html('');
+                $('#event_created_by').html('');
                 history.pushState(null, null, '{% url "events:list-events" %}');
             });
 

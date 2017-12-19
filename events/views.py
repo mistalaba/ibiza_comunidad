@@ -125,6 +125,7 @@ def event_detail(request, event_slug):
 
             }
             comments.append(current_comment)
+
         response = {
             'type': 'event',
             'id': event.pk,
@@ -139,7 +140,9 @@ def event_detail(request, event_slug):
             'location_gmaps_place_id': event.location_gmaps_place_id,
             'created_by': {
                 'username': event.created_by.username,
-                'avatar': event.created_by.profile.avatar.url if event.created_by.profile.avatar else '',
+                'avatar_url': get_thumbnail(event.created_by.profile.avatar, '48', quality=85).url if event.created_by.profile.avatar else '',
+                'color': event.created_by.profile.color,
+                'initials': get_initials(event.created_by),
             },
             'comments': comments
         }
