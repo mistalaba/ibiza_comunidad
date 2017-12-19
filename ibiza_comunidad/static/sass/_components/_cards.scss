@@ -34,26 +34,39 @@
             opacity: 1;
         }
     }
-    .ic__card-title {
-        position: absolute;
-        bottom: 0;
-        padding: 0.5em 1em;
-        z-index: 1;
-        h2 {
-            font-size: 1.75em;
-            color: $white;
-            margin: 0;
-        }
+}
+
+.ic__card-title {
+    position: absolute;
+    bottom: 0;
+    padding: 0.5em 1em;
+    z-index: 1;
+    h2 {
+        font-size: 1.75em;
+        color: $white;
+        margin: 0;
     }
-    .ic__card-details-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.5em;
-    }
+}
+
+.ic__card-details-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;
 }
 
 .ic__card-description {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ic__source {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ic__event_creator {
+    margin-top: -0.75rem;
+    margin-left: -0.75rem;
 }

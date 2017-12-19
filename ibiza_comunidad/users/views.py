@@ -32,7 +32,7 @@ def private_user_profile(request):
     email = user.emailaddress_set.get_primary(user).email
     email_verified = user.emailaddress_set.get_primary(user).verified
     if request.method == 'POST':
-        profile_form = ProfileForm_v2(request.POST, request.FILES, instance=user.user_profile)
+        profile_form = ProfileForm_v2(request.POST, request.FILES, instance=user.profile)
         user_form = UserForm(request.POST, request.FILES, instance=user)
         if profile_form.is_valid() and user_form.is_valid():
             profile_form.save()
@@ -41,7 +41,7 @@ def private_user_profile(request):
             return redirect('users:private-profile')
     else:
         user_form = UserForm(instance=user)
-        profile_form = ProfileForm_v2(instance=user.user_profile)
+        profile_form = ProfileForm_v2(instance=user.profile)
     return render(request, 'profile/private_profile.html', {
         'user': request.user,
         'user_form': user_form,

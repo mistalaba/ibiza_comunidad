@@ -1,0 +1,23 @@
+{% extends "comingsoon_form_base.html" %}
+{% load static i18n core_tags %}
+
+{% block topnav %}{% endblock %}
+
+{% block page_title_container %}{% endblock %}
+
+{% block head_title %}{% trans "Sign up for the newsletter" %}{% endblock %}
+
+{% block form_title %}{% trans "Sign up for the newsletter" %}{% endblock form_title %}
+
+{% block inner %}
+<form class="ic__form" method="POST" action="" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %}
+    {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
+    {% for field in form.visible_fields  %}{% include 'forms/_form_field.html' %}{% endfor %}
+    <div class="ic__buttons">
+        <button class="button primary" type="submit">{% trans 'Sign up' %}</button>
+    </div>
+</form>
+{% endblock inner %}
+
+
+

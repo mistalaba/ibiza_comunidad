@@ -27,6 +27,7 @@ django-allauth==0.33.0
 django-anymail==1.0
 django-crispy-forms==1.6.1
 django-environ==0.4.4
+django-meta==1.4
 django-model-utils==3.0.0
 django-redis==4.8.0
 django-storages==1.6.5
@@ -71,6 +72,7 @@ requests[security]==2.18.4  # via algoliasearch, django-allauth, django-anymail,
 s3transfer==0.1.11        # via boto3
 simplegeneric==0.8.1      # via ipython
 six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-environ, fabric3, pip-tools, prompt-toolkit, pynacl, pyopenssl, python-dateutil, traitlets
+sorl-thumbnail==12.4.1
 traitlets==4.3.2          # via ipython
 unidecode==0.4.21         # via awesome-slugify
 urllib3==1.22             # via requests

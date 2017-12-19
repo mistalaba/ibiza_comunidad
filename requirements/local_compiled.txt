@@ -33,6 +33,7 @@ django-crispy-forms==1.6.1
 django-debug-toolbar==1.8
 django-environ==0.4.4
 django-extensions==1.9.1
+django-meta==1.4
 django-model-utils==3.0.0
 django-redis==4.8.0
 django-storages==1.6.5
@@ -88,6 +89,7 @@ s3transfer==0.1.11        # via boto3
 simplegeneric==0.8.1      # via ipython
 six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-coverage-plugin, django-environ, django-extensions, fabric3, faker, pip-tools, prompt-toolkit, pynacl, pyopenssl, python-dateutil, sphinx, traitlets
 snowballstemmer==1.2.1    # via sphinx
+sorl-thumbnail==12.4.1
 sphinx==1.6.3
 sphinxcontrib-websupport==1.0.1  # via sphinx
 sqlparse==0.2.4           # via django-debug-toolbar

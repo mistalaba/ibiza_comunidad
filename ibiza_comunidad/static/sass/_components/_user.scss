@@ -5,7 +5,7 @@
     border: 2px solid #ffffff;
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
-    cursor: default;
+    // cursor: default;
     overflow: hidden;
     @include shadow($callout-shadow);
 
@@ -13,6 +13,18 @@
     display: flex;
     justify-content: center;
     align-items: baseline;
+
+    &.small {
+        height: 2em;
+        width: 2em;
+        .ic__user-without-avatar {
+            font-size: 75%;
+        }
+    }
+
+    &.normal {
+        position: relative;
+    }
 
     &.top {
         top: -1rem;
@@ -33,7 +45,11 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 1.5rem;
+    height: 100%;
+    font-size: 100%;
+    text-transform: uppercase;
+    // background-color: attr(data-color);
+    color: $white;
 }
 
 .ic__user-avatar-image {
@@ -42,4 +58,22 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+.ic__avatar_big_container {
+    max-width: 20rem;
+    @include aspect-ratio(1,1);
+}
+
+.ic__avatar-container {
+    text-align: center;
+}
+
+.ic__avatar_big {
+    // Used on private profile page
+    object-fit: cover;
+    width: 20em;
+    height: 20em;
+    border-radius: 50%;
+    padding: 2em;
 }

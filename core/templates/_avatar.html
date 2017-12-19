@@ -1,6 +1,8 @@
-
-{% if user.user_profile.avatar %}
-    <div class="ic__user-avatar-image" style="background-image: url({{ user.user_profile.avatar.url }})" title="{{ user.username }}"></div>
+{% load thumbnail %}
+{% if user.profile.avatar %}
+    {% thumbnail user.profile.avatar size as avatar %}
+    <span class="ic__user-avatar-image" style="background-image: url({{ avatar.url }})" title="{{ user.username }}"></span>
+    {% endthumbnail %}
 {% else %}
-    <span class="ic__user-without-avatar">{{ user.username|make_list|slice:":2"|join:"" }}</span>
+    <span class="ic__user-without-avatar" style="background-color: {{ user.profile.color }}">{% if not user.first_name and not user.last_name %}{{ user.username|make_list|slice:":2"|join:"" }}{% else %}{{ user.first_name.0 }}{{ user.last_name.0 }}{% endif %}</span>
 {% endif %}
