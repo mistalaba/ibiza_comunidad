@@ -14,24 +14,24 @@
 {% block inline_search %}{% endblock %}
 
 {% block content %}
-<p>
-    <img src="{% static 'images/search-by-algolia.png' %}" alt="">
-</p>
-<div id="search-box">
-    <!-- SearchBox widget will appear here -->
-</div>
-
-<p>Refinement</p>
-<div id="refinement-list">
-    <!-- RefinementList widget will appear here -->
-</div>
-<div id="clear-all">
-    <!-- ClearAll widget will appear here -->
-  </div>
-
-<p>Hits are here:</p>
-<div class="grid-x grid-padding-x" id="hits">
-    <!-- Hits widget will appear here -->
+<div class="grid-x grid-padding-x">
+    <div class="small-12 medium-4 cell">
+        <div id="search-box">
+            <!-- SearchBox widget will appear here -->
+        </div>
+        <p>Refinement</p>
+        <div id="refinement-list">
+        <!-- RefinementList widget will appear here -->
+        </div>
+        <div id="clear-all">
+        <!-- ClearAll widget will appear here -->
+        </div>
+    </div>
+    <div class="small-12 medium-8 cell" id="hits">
+        <p>
+            <img src="{% static 'images/search-by-algolia.png' %}" alt="">
+        </p>
+    </div>
 </div>
 {% endblock %}
 
@@ -39,32 +39,51 @@
     {{ block.super }}
     <!-- Algolia -->
     {% verbatim %}
-    <script type="text/html" id="hit-template">
-    <div class="small-12 medium-3 large-1 cell">
-        <a class="ic__card-container" href="{{get_absolute_url}}">
-            <div class="ic__card-photo" style="background-image:url({{algolia_photo_url}})">
-                <div class="ic__card-title">
-                    <h2>{{title}}</h2>
+    <script type="text/html" id="hits-template">
+        {{#hits}}
+        <div class="small-12 medium-6 large-6 cell">
+            <a class="ic__card-container" href="{{get_absolute_url}}">
+                <div class="ic__card-photo" style="background-image:url({{algolia_photo_url_medium}})">
+                    <div class="ic__user-avatar top right" title="{{ e.created_by.username }}">
+                        {% avatar e.created_by 'small' %}
+                    </div>
+                    <div class="ic__card-title">
+                        <h2>{{title}}</h2>
+                    </div>
                 </div>
-            </div>
-            <p class="ic__card-description">{{description}}</p>
-            <p class="ic__card-details-item">
-                <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
-                <span>{{start_datetime}} - {{end_datetime}}</span>
-            </p>
-        </a>
-    </div>
+                <p class="ic__card-description">{{description}}</p>
+                <p class="ic__card-details-item">
+                    <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
+                    <span>{{start_datetime_formatted}} - {{end_datetime_formatted}}</span>
+                </p>
+                <p class="ic__card-details-item">
+                    <i><svg class="ic__icon small"><use xlink:href="#icon-price-euro"></use></svg></i>
+                    <span>{{price_formatted}}</span>
+                </p>
+                <p class="ic__card-details-item">
+                    <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
+                    <span>{{location_friendly_name}}</span>
+                </p>
+            </a>
+        </div>
+        {{/hits}}
     </script>
 
     {% endverbatim %}
 
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.5/dist/instantsearch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>
     <script>
+        var now = Date.now();
+        var datefilter = 'end_datetime > ' + moment().unix();
         const search = instantsearch({
             appId: '0TQUM0HNRP',
             apiKey: '38e7a153ed72238b7b15bc61a897f21d',
             indexName: 'Event_dev',
-            urlSync: true
+            urlSync: false,
+            searchParameters: {
+                filters: datefilter
+            }
           });
 
             // initialize SearchBox
@@ -88,9 +107,36 @@
                 container: '#hits',
                 templates: {
                     empty: 'No results',
-                    item: document.getElementById('hit-template').innerHTML,
-                    // item: '<em>Hit {% templatetag openvariable %} objectID {% templatetag closevariable %}</em>: {% templatetag openvariable %}{_highlightResult.title.value}{% templatetag closevariable %}'
-                }
+                    allItems: document.getElementById('hits-template').innerHTML
+                    // item: document.getElementById('hit-template').innerHTML,
+                },
+                transformData: {
+                    item: function(data) {
+                        console.log(data);
+                        data.start_datetime_formatted = moment.unix(data.start_datetime).format("YYYY-MM-DD HH:mm");
+                        data.end_datetime_formatted = moment.unix(data.end_datetime).format("YYYY-MM-DD HH:mm");
+                        return data;
+                    },
+                    allItems: function(data) {
+                        for (i=0; i < data.hits.length; i++) {
+                            data.hits[i].start_datetime_formatted = moment.unix(data.hits[i].start_datetime).format("YYYY-MM-DD HH:mm");
+                            data.hits[i].end_datetime_formatted = moment.unix(data.hits[i].end_datetime).format("YYYY-MM-DD HH:mm");
+                            if (data.hits[i].price === 0) {
+                                data.hits[i].price_formatted = 'Free';
+                            }
+                            else {
+                                data.hits[i].price_formatted = data.hits[i].price;
+                            }
+                            console.log(data.hits[i]);
+                        }
+                        return data;
+                    }
+                },
+                cssClasses: {
+                    root: 'grid-x grid-padding-x',
+                    allItems: 'alalala',
+                    item: 'itemclass'
+                    }
                 })
             );
 
@@ -106,5 +152,6 @@
             );
 
           search.start();
+
       </script>
 {% endblock %}
