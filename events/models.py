@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 
 from sorl.thumbnail import ImageField as SorlImageField
+from sorl.thumbnail import get_thumbnail
 
 from core.models import TimeStampedModel, Comment
 from core.utils import slugify_unique
@@ -33,6 +34,13 @@ class Event(TimeStampedModel):
 
     def algolia_photo_url(self):
         return self.photo.url if self.photo else ''
+
+    def algolia_photo_url_medium(self):
+        photo = get_thumbnail(self.photo, '1024', quality=85) if self.photo else ''
+        if photo:
+            return photo.url
+        return ''
+
 
     def __str__(self):
         return self.title
