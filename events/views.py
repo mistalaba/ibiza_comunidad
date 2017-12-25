@@ -24,28 +24,37 @@ logger = logging.getLogger(__name__)
 
 
 def list_events(request):
-    events = Event.objects.all().order_by('-start_datetime')
+    # Filter
+    filter_q = request.GET.get('q')
+    if filter_q:
+        filter_q_list = filter_q.split(' ')
+        query_q = Q()
+        for item in filter_q_list:
+            query_q |= Q( Q(title__icontains=item) | Q(description__icontains=item) | Q(location_friendly_name__icontains=item))
+        events = Event.objects.filter(query_q)
+    else:
+        events = Event.objects.all().order_by('-start_datetime')
 
     # Today's events
     today = timezone.now().date()
     now = timezone.now()
     q_today = Q(start_datetime__lt=now) & Q(end_datetime__gt=now)
-    events_today = Event.objects.filter(q_today)
+    events_today = events.filter(q_today)
 
     # Tomorrow's events
     tomorrow = today + timezone.timedelta(days=1)
     q_tomorrow = Q(start_datetime__date=tomorrow)
-    events_tomorrow = Event.objects.filter(q_tomorrow)
+    events_tomorrow = events.filter(q_tomorrow)
 
     # This month's events
     end_of_month = datetime.date(today.year, today.month, calendar.monthrange(today.year, today.month)[1])
     q_this_month = Q(start_datetime__date__gt=tomorrow) & Q(start_datetime__date__lte=end_of_month)
-    events_this_month = Event.objects.filter(q_this_month)
+    events_this_month = events.filter(q_this_month)
 
     # The rest
     next_month = today.replace(day=1) + relativedelta(months=1)
     q_rest = Q(start_datetime__gte=next_month)
-    all_other_events = Event.objects.filter(q_rest)
+    all_other_events = events.filter(q_rest)
 
     return render(request, 'list_events.html', {
         'events': events,

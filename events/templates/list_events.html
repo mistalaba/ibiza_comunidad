@@ -15,7 +15,16 @@
 
 <div class="grid-x grid-padding-x">
     <div class="small-12 medium-4 cell">
+        <form action="" method="get">
+            <div class="small-12 cell">
+                <input type="text" name="q" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}">
+            </div>
+            <div class="small-12 cell">
+                <button type="submit" class="button" name="filter">Filter</button>
+                <a href="{% url 'events:list-events' %}">Clear</a>
+            </div>
 
+        </form>
     </div>
     <div class="small-12 medium-8 cell">
 
