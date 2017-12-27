@@ -144,7 +144,8 @@ def event_detail(request, event_slug):
                 'color': event.created_by.profile.color,
                 'initials': get_initials(event.created_by),
             },
-            'comments': comments
+            'comments': comments,
+            'tags': [tag.name for tag in event.tags.all()],
         }
         return JsonResponse(response, safe=False)
     else:

@@ -92,7 +92,8 @@
         </div>
         <h2 id="title"></h2>
         <p id="description" class="ic__card-description"></p>
-        <div class="ic__comments-container"></div>
+        <div class="ic__categories-container"></div>
+        <div class="ic__comments-container" id="tags"></div>
     </div>
     <div class="small-12 medium-4 cell ic__details-container">
         <p class="ic__card-details-item ic__event_creator">
@@ -168,6 +169,8 @@
                         $('#price').text(response['price']);
                         $('#source a').text(response['source']).attr('href', response['source']);
                         $('#location_friendly_name').text(response['location_friendly_name']);
+                        $('#tags').text(response['tags']);
+
 
                         var $comments_container = $('.ic__comments-container');
 
