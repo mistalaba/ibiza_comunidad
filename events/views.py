@@ -29,7 +29,7 @@ def list_events(request):
     # Today's events
     today = timezone.now().date()
     now = timezone.now()
-    q_today = Q(start_datetime__lt=now) & Q(end_datetime__gt=now)
+    q_today = Q(start_datetime__date=today) & Q(end_datetime__gt=now)
     events_today = Event.objects.filter(q_today)
 
     # Tomorrow's events
