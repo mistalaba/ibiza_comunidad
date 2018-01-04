@@ -10,6 +10,7 @@
 @import '_components/social';
 @import '_components/callout';
 @import '_components/modal';
+@import '_components/tags';
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
@@ -132,6 +133,7 @@ i {
         margin-right: 0;
     }
 }
+
 .ic__logo-large {
     width: 64px;
     height: 64px;

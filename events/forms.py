@@ -6,15 +6,20 @@ from django.forms import widgets
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
+from taggit.models import Tag
+
 from core.models import Comment
+from core.widgets import CategoryCheckboxSelectMultiple
 from .models import Event
 
 
 class EventForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
+        # self.tags = Tag.objects.all()
         super(EventForm, self).__init__(*args, **kwargs)
 
+    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=[(tag.name, tag.name) for tag in Tag.objects.all()])
     event_name = forms.CharField(max_length=400, required=True)
     photo = forms.ImageField(max_length=100, required=True)
     description = forms.CharField(max_length=600, required=False, widget=forms.Textarea)
@@ -24,6 +29,7 @@ class EventForm(forms.Form):
     source = forms.URLField(required=False)
     location = forms.CharField(max_length=255, required=True)
     location_gmaps_place_id = forms.CharField(widget=forms.HiddenInput(), max_length=255, required=True)
+
 
 class EventForm2(forms.ModelForm):
     def __init__(self, *args, **kwargs):

@@ -124,6 +124,44 @@ div.callout { position: absolute; top: 3em; min-width: 20em; left: 50%; transfor
 
 .ic__details-container { position: relative; display: -ms-flexbox; display: flex; -ms-flex-direction: column; flex-direction: column; padding: 16px; padding: 1rem; }
 
+i, input[name="categories"] + label { border-bottom: none !important; }
+
+.ic__categories-container { margin-bottom: 16px; margin-bottom: 1rem; }
+
+[class*="ic__tag-"].ic__icon { stroke-width: 4; stroke-miterlimit: 10; }
+
+input[name=categories] + label [class*="ic__tag-"].ic__icon { color: currentColor; fill: none; }
+
+[class*="ic__tag-"].ic__icon { color: currentColor; fill: none; }
+
+input[name=categories]:checked + label [class*="ic__tag-"] { color: #fefefe; }
+
+.ic__tag-nature.ic__icon { color: #009688; }
+
+input[name=categories]:checked + label .ic__tag-nature { fill: #009688; }
+
+.ic__tag-hiking.ic__icon { color: #5D4037; }
+
+input[name=categories]:checked + label .ic__tag-hiking { fill: #5D4037; }
+
+.ic__tag-food.ic__icon { color: #4caf50; }
+
+input[name=categories]:checked + label .ic__tag-food { fill: #4caf50; }
+
+.ic__tag-party.ic__icon { color: #ec407a; }
+
+input[name=categories]:checked + label .ic__tag-party { fill: #ec407a; }
+
+.ic__tag-sport.ic__icon { color: #2196f3; }
+
+input[name=categories]:checked + label .ic__tag-sport { fill: #2196f3; }
+
+ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
+
+ul#id_categories label { margin: 0 8px 0 0; margin: 0 0.5rem 0 0; }
+
+input[name=categories] { display: none; }
+
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 /* Document ========================================================================== */
 /** 1. Change the default font family in all browsers (opinionated). 2. Correct the line height in all browsers. 3. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS. */

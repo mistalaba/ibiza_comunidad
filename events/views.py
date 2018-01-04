@@ -76,6 +76,10 @@ def create_event(request):
                 source=data['source'],
             )
 
+            if data.get('categories'):
+                for c in data['categories']:
+                    event.tags.add(c)
+
             return redirect('events:list-events')
     else:
         form = EventForm(user=request.user)
@@ -190,6 +194,7 @@ def save_ajax_comment(request):
 
     response = current_comment
     return JsonResponse(response, safe=False)
+
 
 @login_required
 def event_delete(request, event_slug):
