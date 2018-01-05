@@ -38,7 +38,7 @@ def list_events(request):
     # Today's events
     today = timezone.now().date()
     now = timezone.now()
-    q_today = Q(start_datetime__lt=now) & Q(end_datetime__gt=now)
+    q_today = Q(start_datetime__date=today) & Q(end_datetime__gt=now)
     events_today = events.filter(q_today)
 
     # Tomorrow's events
@@ -84,6 +84,10 @@ def create_event(request):
                 location_gmaps_place_id=data['location_gmaps_place_id'],
                 source=data['source'],
             )
+
+            if data.get('categories'):
+                for c in data['categories']:
+                    event.tags.add(c)
 
             return redirect('events:list-events')
     else:
@@ -153,7 +157,8 @@ def event_detail(request, event_slug):
                 'color': event.created_by.profile.color,
                 'initials': get_initials(event.created_by),
             },
-            'comments': comments
+            'comments': comments,
+            'tags': [tag.name for tag in event.tags.all()],
         }
         return JsonResponse(response, safe=False)
     else:
@@ -198,6 +203,7 @@ def save_ajax_comment(request):
 
     response = current_comment
     return JsonResponse(response, safe=False)
+
 
 @login_required
 def event_delete(request, event_slug):

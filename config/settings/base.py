@@ -61,6 +61,7 @@ THIRD_PARTY_APPS = [
     'algoliasearch_django',
     'sorl.thumbnail',
     'meta',
+    'taggit',
 ]
 
 # Apps specific for this project go here.
@@ -313,6 +314,8 @@ META_SITE_TYPE = 'website'
 META_USE_TWITTER_PROPERTIES = True
 META_TWITTER_SITE = '@com_ibiza'  # NOT WORKING!
 META_TWITTER_TYPE = 'summary_large_image'  # NOT WORKING!
+
+TAGGIT_CASE_INSENSITIVE = True
 
 LOGGING = {
     'version': 1,
