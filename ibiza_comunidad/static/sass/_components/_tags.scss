@@ -1,0 +1,95 @@
+$nature: #009688;
+$hiking: #5D4037;
+$food: #4caf50;
+$party: #ec407a;
+$sport: #2196f3;
+
+i, input[name="categories"] + label {
+    border-bottom: none !important; // Disable dotted underlining from Foundation
+}
+
+.ic__categories-container {
+    margin-bottom: 1rem;
+}
+
+[class*="ic__tag-"].ic__icon {
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+
+}
+
+input[name=categories] + label [class*="ic__tag-"].ic__icon {
+    // Default styles
+    color: currentColor;
+    fill: none;
+}
+
+[class*="ic__tag-"].ic__icon {
+    // Default styles
+    color: currentColor;
+    fill: none;
+}
+
+
+// Checked items should be inverse
+input[name=categories]:checked + label [class*="ic__tag-"] {
+    color: $white;
+}
+
+.ic__tag-nature.ic__icon {
+    color: $nature;
+}
+input[name=categories]:checked + label .ic__tag-nature {
+    fill: $nature;
+}
+
+.ic__tag-hiking.ic__icon{
+    color: $hiking;
+}
+input[name=categories]:checked + label .ic__tag-hiking {
+    fill: $hiking;
+}
+
+.ic__tag-food.ic__icon{
+    color: $food;
+}
+input[name=categories]:checked + label .ic__tag-food {
+    fill: $food;
+}
+
+.ic__tag-party.ic__icon{
+    color: $party;
+}
+input[name=categories]:checked + label .ic__tag-party {
+    fill: $party;
+}
+
+.ic__tag-sport.ic__icon{
+    color: $sport;
+}
+input[name=categories]:checked + label .ic__tag-sport {
+    fill: $sport;
+}
+
+// Forms
+// Change checkboxes to icons
+ul#id_categories {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    label {
+        margin: 0 0.5rem 0 0;
+    }
+}
+
+input[name=categories] {
+    display: none;
+}
+
+input[name=categories] + label [class*="ic__tag-"] {
+    // color: #aaa;
+}

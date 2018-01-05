@@ -20,6 +20,12 @@
         </div>
         <h2>{{ event.title }}</h2>
         <p class="ic__card-description">{{ event.description }}</p>
+        <div class="ic__categories-container">
+            {% for tag in event.tags.all %}
+            <i title="{{ tag.name }}" data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"><svg class="ic__icon medium ic__tag-{{ tag.name }}"><use xlink:href="#tag-{{ tag.name }}"></use></svg></i>
+            {% endfor %}
+        </div>
+
 
         <div class="grid-x grid-padding-x ic__content">
             <div class="small-12 medium-6 cell">
