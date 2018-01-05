@@ -2676,6 +2676,6 @@ i.ic__nomargin { margin-right: 0; }
 
 .ic__cs-description { text-align: center; }
 
-.ic__comingsoon { background: linear-gradient(rgba(72, 57, 106, 0.5), rgba(72, 57, 106, 0.5)), url(/static/comingsoon/img/comingsoon.jpg); background-size: cover; background-position: center 70%; }
+.ic__comingsoon { background: linear-gradient(rgba(72, 57, 106, 0.5), rgba(72, 57, 106, 0.5)), url(/static/comingsoon/img/comingsoon.jpg); background-size: cover; background-position: center 70%; background-attachment: fixed; background-repeat: no-repeat; }
 
 /*# sourceMappingURL=app.css.map */
