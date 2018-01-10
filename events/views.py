@@ -14,9 +14,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from sorl.thumbnail import get_thumbnail
+from taggit.models import Tag
 
 from ibiza_comunidad.users.utils import get_initials
-from .forms import EventForm, EventForm2, CommentForm
+from .forms import EventForm, EventForm2, CommentForm, EventSearchForm
 from .models import Event
 
 import logging
@@ -24,21 +25,36 @@ logger = logging.getLogger(__name__)
 
 
 def list_events(request):
-    # Filter
+    # All events
+    # events = Event.objects.all().order_by('-start_datetime')
+    events = Event.objects.filter(end_datetime__gte=timezone.now())
+
+    # Category filter
+    categories_q = request.GET.getlist('categories')
+    if categories_q:
+        events = events.filter(tags__name__in=categories_q)
+
+    # Freetext Filter
     filter_q = request.GET.get('q')
+
     if filter_q:
         filter_q_list = filter_q.split(' ')
         query_q = Q()
         for item in filter_q_list:
-            query_q |= Q( Q(title__icontains=item) | Q(description__icontains=item) | Q(location_friendly_name__icontains=item))
-        events = Event.objects.filter(query_q)
-    else:
-        events = Event.objects.all().order_by('-start_datetime')
+            # String match
+            query_q &= Q( Q(title__icontains=item) | Q(description__icontains=item) | Q(location_friendly_name__icontains=item) | Q(tags__name__in=[item.lower()]))
+        events = events.filter(query_q)
+
+    tags = Tag.objects.filter(event__in=events).distinct()
+
+    # List all available tags
+    initial_tags = [xx for xx in categories_q]
+    tags_list = [(tag.name, tag.name) for tag in tags]
 
     # Today's events
     today = timezone.now().date()
     now = timezone.now()
-    q_today = Q(start_datetime__date=today) & Q(end_datetime__gt=now)
+    q_today = q_today = (Q(start_datetime__date=today) & Q(end_datetime__gt=now)) | (Q(start_datetime__lte=now) & Q(end_datetime__gt=now))
     events_today = events.filter(q_today)
 
     # Tomorrow's events
@@ -56,7 +72,14 @@ def list_events(request):
     q_rest = Q(start_datetime__gte=next_month)
     all_other_events = events.filter(q_rest)
 
+    form = EventSearchForm(
+        initial={'q': request.GET.get('q', ''), 'categories': request.GET.getlist('categories')},
+        categories=tags_list
+    )
+
     return render(request, 'list_events.html', {
+        'tags': tags_list,
+        'form': form,
         'events': events,
         'events_today': events_today,
         'events_tomorrow': events_tomorrow,

@@ -17,7 +17,11 @@
     <div class="small-12 medium-4 cell">
         <form action="" method="get">
             <div class="small-12 cell">
-                <input type="text" name="q" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}">
+                <!-- <input type="text" name="q" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}"> -->
+                {% for field in form.visible_fields %}
+                    {% include 'forms/_form_field.html' %}
+                {% endfor %}
+
             </div>
             <div class="small-12 cell">
                 <button type="submit" class="button" name="filter">Filter</button>

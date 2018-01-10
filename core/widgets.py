@@ -1,6 +1,6 @@
-from django.forms import SelectMultiple
-from django.forms.widgets import ChoiceFieldRenderer, RendererMixin, ChoiceInput
+from django.forms.widgets import ChoiceFieldRenderer, ChoiceInput, CheckboxSelectMultiple
 from django.utils.html import format_html
+
 
 class CategoryChoiceInput(ChoiceInput):
     def render(self, name=None, value=None, attrs=None):
@@ -19,9 +19,14 @@ class CategoryChoiceInput(ChoiceInput):
 class CategoryCheckboxChoiceInput(CategoryChoiceInput):
     input_type = 'checkbox'
 
+    def is_checked(self):
+        return self.choice_value in self.value
+
+
 class CategoryCheckboxFieldRenderer(ChoiceFieldRenderer):
     choice_input_class = CategoryCheckboxChoiceInput
 
-class CategoryCheckboxSelectMultiple(RendererMixin, SelectMultiple):
+
+class CategoryCheckboxSelectMultiple(CheckboxSelectMultiple):
     renderer = CategoryCheckboxFieldRenderer
 

@@ -19,7 +19,6 @@ class EventForm(forms.Form):
         # self.tags = Tag.objects.all()
         super(EventForm, self).__init__(*args, **kwargs)
 
-    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=[(tag.name, tag.name) for tag in Tag.objects.all()])
     event_name = forms.CharField(max_length=400, required=True)
     photo = forms.ImageField(max_length=100, required=True)
     description = forms.CharField(max_length=600, required=False, widget=forms.Textarea)
@@ -29,6 +28,7 @@ class EventForm(forms.Form):
     source = forms.URLField(required=False)
     location = forms.CharField(max_length=255, required=True)
     location_gmaps_place_id = forms.CharField(widget=forms.HiddenInput(), max_length=255, required=True)
+    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=[(tag.name, tag.name) for tag in Tag.objects.all()])
 
 
 class EventForm2(forms.ModelForm):
@@ -63,3 +63,16 @@ class CommentForm(forms.Form):
     def save(self):
         data = self.cleaned_data
         self.event.comments.create(comment=data['comment'], created_by=self.user)
+
+
+class EventSearchForm(forms.Form):
+    q = forms.CharField(max_length=100, required=False, label='Event')
+    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), required=False)
+
+    def __init__(self, *args, **kwargs):
+        # import ipdb; ipdb.set_trace()
+
+        self.categories = kwargs.pop('categories')
+        self.base_fields['categories'].choices=self.categories
+        super(EventSearchForm, self).__init__(*args, **kwargs)
+
