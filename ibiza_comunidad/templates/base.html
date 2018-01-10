@@ -48,7 +48,7 @@
                 <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
                     {% block inline_search %}
                     <li>
-                        <form action="{% url 'search' %}" class="ic__inline-search-container" method="get">
+                        <form action="{% url 'events:list-events' %}" class="ic__inline-search-container" method="get">
                         <div class="input-group">
                             <input class="input-group-field" type="search" name="q">
                             <div class="input-group-button">
