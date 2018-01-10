@@ -30,6 +30,8 @@ div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
 
 .ic__comments-container .ic__comment-container .ic__comment-body .ic__comment-meta { color: #cacaca; }
 
+.ic__inline-search-container .input-group { margin-bottom: 0; }
+
 @font-face { font-family: 'Roboto'; src: url("../fonts/roboto/roboto-regular-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-regular-webfont.woff") format("woff"); font-weight: normal; font-style: normal; }
 
 @font-face { font-family: 'Roboto'; src: url("../fonts/roboto/roboto-italic-webfont.woff2") format("woff2"), url("../fonts/roboto/roboto-italic-webfont.woff") format("woff"); font-weight: normal; font-style: italic; }

@@ -4,6 +4,8 @@
 {% block head_title %}{% trans 'Events' %}{% endblock %}
 {% block page_title %}{% trans 'Events' %}{% endblock page_title %}
 
+{% block inline_search %}{% endblock %}
+
 {% block content %}
 {% if request.user.is_authenticated %}
 <div class="grid-x grid-padding-x">
@@ -15,7 +17,19 @@
 
 <div class="grid-x grid-padding-x">
     <div class="small-12 medium-4 cell">
+        <form action="" method="get">
+            <div class="small-12 cell">
+                {% for field in form.visible_fields %}
+                    {% include 'forms/_form_field.html' %}
+                {% endfor %}
 
+            </div>
+            <div class="small-12 cell">
+                <button type="submit" class="button" name="filter">Filter</button>
+                <a href="{% url 'events:list-events' %}">Clear</a>
+            </div>
+
+        </form>
     </div>
     <div class="small-12 medium-8 cell">
 

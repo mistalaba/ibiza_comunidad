@@ -11,6 +11,7 @@ from django.views.static import serve
 urlpatterns = [
     url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    url(r'^search/$', TemplateView.as_view(template_name='pages/search.html'), name='search'),
     url(r'^admin/', admin.site.urls),
     url(r'^users/', include('ibiza_comunidad.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),
