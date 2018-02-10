@@ -192,6 +192,26 @@ input[name=categories]:checked + label .ic__tag-hippie { fill: #CDDC39; }
 
 input[name=categories]:checked + label .ic__tag-beach { fill: #FF5722; }
 
+.ic__tag-sailing.ic__icon { color: #01579B; }
+
+input[name=categories]:checked + label .ic__tag-sailing { fill: #01579B; }
+
+.ic__tag-kayaking.ic__icon { color: #01579B; }
+
+input[name=categories]:checked + label .ic__tag-kayaking { fill: #01579B; }
+
+.ic__tag-biking.ic__icon { color: #FF6F00; }
+
+input[name=categories]:checked + label .ic__tag-biking { fill: #FF6F00; }
+
+.ic__tag-games.ic__icon { color: #E53935; }
+
+input[name=categories]:checked + label .ic__tag-games { fill: #E53935; }
+
+.ic__tag-painting.ic__icon { color: #6A1B9A; }
+
+input[name=categories]:checked + label .ic__tag-painting { fill: #6A1B9A; }
+
 ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
 
 ul#id_categories label { margin: 0 8px 0 0; margin: 0 0.5rem 0 0; }

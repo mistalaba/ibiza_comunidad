@@ -11,6 +11,11 @@ $ecological: #4CAF50;
 $cinema: #FFEB3B;
 $hippie: #CDDC39;
 $beach: #FF5722;
+$sailing: #01579B;
+$kayaking: #01579B;
+$biking: #FF6F00;
+$games: #E53935;
+$painting: #6A1B9A;
 
 i, input[name="categories"] + label {
     border-bottom: none !important; // Disable dotted underlining from Foundation
@@ -85,47 +90,89 @@ input[name=categories]:checked + label .ic__tag-sport {
 input[name=categories]:checked + label .ic__tag-mindfulness {
     fill: $mindfulness;
 }
+
 .ic__tag-drinks.ic__icon{
     color: $drinks;
 }
 input[name=categories]:checked + label .ic__tag-drinks {
     fill: $drinks;
 }
+
 .ic__tag-binoculars.ic__icon{
     color: $binoculars;
 }
 input[name=categories]:checked + label .ic__tag-binoculars {
     fill: $binoculars;
 }
+
 .ic__tag-animals.ic__icon{
     color: $animals;
 }
 input[name=categories]:checked + label .ic__tag-animals {
     fill: $animals;
 }
+
 .ic__tag-ecological.ic__icon{
     color: $ecological;
 }
 input[name=categories]:checked + label .ic__tag-ecological {
     fill: $ecological;
 }
+
 .ic__tag-cinema.ic__icon{
     color: $cinema;
 }
 input[name=categories]:checked + label .ic__tag-cinema {
     fill: $cinema;
 }
+
 .ic__tag-hippie.ic__icon{
     color: $hippie;
 }
 input[name=categories]:checked + label .ic__tag-hippie {
     fill: $hippie;
 }
+
 .ic__tag-beach.ic__icon{
     color: $beach;
 }
 input[name=categories]:checked + label .ic__tag-beach {
     fill: $beach;
+}
+
+.ic__tag-sailing.ic__icon {
+    color: $sailing;
+}
+input[name=categories]:checked + label .ic__tag-sailing {
+    fill: $sailing;
+}
+
+.ic__tag-kayaking.ic__icon {
+    color: $kayaking;
+}
+input[name=categories]:checked + label .ic__tag-kayaking {
+    fill: $kayaking;
+}
+
+.ic__tag-biking.ic__icon {
+    color: $biking;
+}
+input[name=categories]:checked + label .ic__tag-biking {
+    fill: $biking;
+}
+
+.ic__tag-games.ic__icon {
+    color: $games;
+}
+input[name=categories]:checked + label .ic__tag-games {
+    fill: $games;
+}
+
+.ic__tag-painting.ic__icon {
+    color: $painting;
+}
+input[name=categories]:checked + label .ic__tag-painting {
+    fill: $painting;
 }
 
 
