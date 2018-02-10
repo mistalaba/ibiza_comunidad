@@ -28,7 +28,7 @@ class EventForm(forms.Form):
     source = forms.URLField(required=False)
     location = forms.CharField(max_length=255, required=True)
     location_gmaps_place_id = forms.CharField(widget=forms.HiddenInput(), max_length=255, required=True)
-    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=[(tag.name, tag.name) for tag in Tag.objects.all()])
+    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=[(tag.name, tag.name) for tag in Tag.objects.all().order_by('name')])
 
 
 class EventForm2(forms.ModelForm):
