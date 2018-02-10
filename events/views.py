@@ -55,22 +55,22 @@ def list_events(request):
     today = timezone.now().date()
     now = timezone.now()
     q_today = q_today = (Q(start_datetime__date=today) & Q(end_datetime__gt=now)) | (Q(start_datetime__lte=now) & Q(end_datetime__gt=now))
-    events_today = events.filter(q_today)
+    events_today = events.filter(q_today).distinct()
 
     # Tomorrow's events
     tomorrow = today + timezone.timedelta(days=1)
     q_tomorrow = Q(start_datetime__date=tomorrow)
-    events_tomorrow = events.filter(q_tomorrow)
+    events_tomorrow = events.filter(q_tomorrow).distinct()
 
     # This month's events
     end_of_month = datetime.date(today.year, today.month, calendar.monthrange(today.year, today.month)[1])
     q_this_month = Q(start_datetime__date__gt=tomorrow) & Q(start_datetime__date__lte=end_of_month)
-    events_this_month = events.filter(q_this_month)
+    events_this_month = events.filter(q_this_month).distinct()
 
     # The rest
     next_month = today.replace(day=1) + relativedelta(months=1)
     q_rest = Q(start_datetime__gte=next_month)
-    all_other_events = events.filter(q_rest)
+    all_other_events = events.filter(q_rest).distinct()
 
     form = EventSearchForm(
         initial={'q': request.GET.get('q', ''), 'categories': request.GET.getlist('categories')},
