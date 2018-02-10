@@ -70,7 +70,9 @@ div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
 
 .ic__card-details-item { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; margin-bottom: 0.5em; }
 
-.ic__card-description { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ic__card-description-preview { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.ic__card-description { white-space: pre-line; }
 
 .ic__source { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 

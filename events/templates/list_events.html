@@ -105,7 +105,7 @@
             <img id='photo' class="ic__big-cover-image" src="" alt="">
         </div>
         <h2 id="title"></h2>
-        <p id="description" class="ic__card-description"></p>
+        <p id="ic__event_description" class="ic__card-description"></p>
         <div class="ic__categories-container" id="tags"></div>
         <div class="ic__comments-container"></div>
     </div>
@@ -176,7 +176,7 @@
                         // Populate ids
                         $('#photo').attr('src', response['photo']);
                         $('#title').text(response['title']);
-                        $('#description').text(response['description']);
+                        $('#ic__event_description').text(response['description']);
                         $('#event_created_by_avatar').append(created_by_avatar);
                         $('#event_created_by').html('<span id="created_by_userename">' + response['created_by']['username'] + '</span>');
                         $('#date').text(response['start_datetime']);
@@ -262,7 +262,7 @@
                 mapLocation = '';
                 $('#photo').attr('src', '');
                 $('#title').text('');
-                $('#description').text('');
+                $('#ic__event_description').text('');
                 $('#date').text('');
                 $('#price').text('');
                 $('#location_friendly_name').text('');
