@@ -148,17 +148,49 @@ input[name=categories]:checked + label .ic__tag-nature { fill: #009688; }
 
 input[name=categories]:checked + label .ic__tag-hiking { fill: #5D4037; }
 
-.ic__tag-food.ic__icon { color: #4caf50; }
+.ic__tag-food.ic__icon { color: #4CAF50; }
 
-input[name=categories]:checked + label .ic__tag-food { fill: #4caf50; }
+input[name=categories]:checked + label .ic__tag-food { fill: #4CAF50; }
 
-.ic__tag-party.ic__icon { color: #ec407a; }
+.ic__tag-party.ic__icon { color: #EC407A; }
 
-input[name=categories]:checked + label .ic__tag-party { fill: #ec407a; }
+input[name=categories]:checked + label .ic__tag-party { fill: #EC407A; }
 
-.ic__tag-sport.ic__icon { color: #2196f3; }
+.ic__tag-sport.ic__icon { color: #2196F3; }
 
-input[name=categories]:checked + label .ic__tag-sport { fill: #2196f3; }
+input[name=categories]:checked + label .ic__tag-sport { fill: #2196F3; }
+
+.ic__tag-mindfulness.ic__icon { color: #3F51B5; }
+
+input[name=categories]:checked + label .ic__tag-mindfulness { fill: #3F51B5; }
+
+.ic__tag-drinks.ic__icon { color: #E91E63; }
+
+input[name=categories]:checked + label .ic__tag-drinks { fill: #E91E63; }
+
+.ic__tag-binoculars.ic__icon { color: #8BC34A; }
+
+input[name=categories]:checked + label .ic__tag-binoculars { fill: #8BC34A; }
+
+.ic__tag-animals.ic__icon { color: #FF9800; }
+
+input[name=categories]:checked + label .ic__tag-animals { fill: #FF9800; }
+
+.ic__tag-ecological.ic__icon { color: #4CAF50; }
+
+input[name=categories]:checked + label .ic__tag-ecological { fill: #4CAF50; }
+
+.ic__tag-cinema.ic__icon { color: #FFEB3B; }
+
+input[name=categories]:checked + label .ic__tag-cinema { fill: #FFEB3B; }
+
+.ic__tag-hippie.ic__icon { color: #CDDC39; }
+
+input[name=categories]:checked + label .ic__tag-hippie { fill: #CDDC39; }
+
+.ic__tag-beach.ic__icon { color: #FF5722; }
+
+input[name=categories]:checked + label .ic__tag-beach { fill: #FF5722; }
 
 ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
 

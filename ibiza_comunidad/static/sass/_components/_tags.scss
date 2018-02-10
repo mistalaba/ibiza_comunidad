@@ -1,8 +1,16 @@
 $nature: #009688;
 $hiking: #5D4037;
-$food: #4caf50;
-$party: #ec407a;
-$sport: #2196f3;
+$food: #4CAF50;
+$party: #EC407A;
+$sport: #2196F3;
+$mindfulness: #3F51B5;
+$drinks: #E91E63;
+$binoculars: #8BC34A;
+$animals: #FF9800;
+$ecological: #4CAF50;
+$cinema: #FFEB3B;
+$hippie: #CDDC39;
+$beach: #FF5722;
 
 i, input[name="categories"] + label {
     border-bottom: none !important; // Disable dotted underlining from Foundation
@@ -70,6 +78,58 @@ input[name=categories]:checked + label .ic__tag-party {
 input[name=categories]:checked + label .ic__tag-sport {
     fill: $sport;
 }
+
+.ic__tag-mindfulness.ic__icon{
+    color: $mindfulness;
+}
+input[name=categories]:checked + label .ic__tag-mindfulness {
+    fill: $mindfulness;
+}
+.ic__tag-drinks.ic__icon{
+    color: $drinks;
+}
+input[name=categories]:checked + label .ic__tag-drinks {
+    fill: $drinks;
+}
+.ic__tag-binoculars.ic__icon{
+    color: $binoculars;
+}
+input[name=categories]:checked + label .ic__tag-binoculars {
+    fill: $binoculars;
+}
+.ic__tag-animals.ic__icon{
+    color: $animals;
+}
+input[name=categories]:checked + label .ic__tag-animals {
+    fill: $animals;
+}
+.ic__tag-ecological.ic__icon{
+    color: $ecological;
+}
+input[name=categories]:checked + label .ic__tag-ecological {
+    fill: $ecological;
+}
+.ic__tag-cinema.ic__icon{
+    color: $cinema;
+}
+input[name=categories]:checked + label .ic__tag-cinema {
+    fill: $cinema;
+}
+.ic__tag-hippie.ic__icon{
+    color: $hippie;
+}
+input[name=categories]:checked + label .ic__tag-hippie {
+    fill: $hippie;
+}
+.ic__tag-beach.ic__icon{
+    color: $beach;
+}
+input[name=categories]:checked + label .ic__tag-beach {
+    fill: $beach;
+}
+
+
+
 
 // Forms
 // Change checkboxes to icons
