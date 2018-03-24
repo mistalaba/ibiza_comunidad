@@ -42,7 +42,7 @@ def list_events(request):
         query_q = Q()
         for item in filter_q_list:
             # String match
-            query_q &= Q( Q(title__icontains=item) | Q(description__icontains=item) | Q(location_friendly_name__icontains=item) | Q(tags__name__in=[item.lower()]))
+            query_q &= Q(Q(title__icontains=item) | Q(description__icontains=item) | Q(location_friendly_name__icontains=item) | Q(tags__name__in=[item.lower()]))
         events = events.filter(query_q)
 
     tags = Tag.objects.filter(event__in=events).distinct()
