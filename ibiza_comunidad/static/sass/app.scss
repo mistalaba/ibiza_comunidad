@@ -76,10 +76,23 @@ body.ic__center {
 }
 
 // * Navbar * //
+
 // Set height of navbar
 // .ic__main-nav, .menu  {
 //     height: 80px;
 // }
+.ic__main-nav-homepage{
+    // Navbar for the homepage only
+    position: fixed;
+    right: 0;
+    &.top-bar, &.top-bar ul {
+        background-color: transparent;
+    }
+    a {
+        color: $white;
+    }
+}
+
 .top-bar, .top-bar ul {
     background-color: $white;
 }

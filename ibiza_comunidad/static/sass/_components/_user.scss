@@ -2,7 +2,7 @@
     position: absolute;
     height: 3em;
     width: 3em;
-    border: 2px solid #ffffff;
+    border: 2px solid #ffffff !important;  // Need !important to override <i> css
     border-radius: 50%;
     background-color: rgb(255, 255, 255);
     // cursor: default;

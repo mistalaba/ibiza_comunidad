@@ -78,7 +78,7 @@ div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
 
 .ic__event_creator { margin-top: -12px; margin-top: -0.75rem; margin-left: -12px; margin-left: -0.75rem; }
 
-.ic__user-avatar { position: absolute; height: 3em; width: 3em; border: 2px solid #ffffff; border-radius: 50%; background-color: white; overflow: hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); display: -ms-flexbox; display: flex; -ms-flex-pack: center; justify-content: center; -ms-flex-align: baseline; align-items: baseline; }
+.ic__user-avatar { position: absolute; height: 3em; width: 3em; border: 2px solid #ffffff !important; border-radius: 50%; background-color: white; overflow: hidden; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); display: -ms-flexbox; display: flex; -ms-flex-pack: center; justify-content: center; -ms-flex-align: baseline; align-items: baseline; }
 
 .ic__user-avatar.small { height: 2em; width: 2em; }
 
@@ -2658,6 +2658,12 @@ html, body { height: 100%; width: 100%; }
 body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pack: center; justify-content: center; }
 
 .grid-x.ic__center { -ms-flex-pack: center; justify-content: center; }
+
+.ic__main-nav-homepage { position: fixed; right: 0; }
+
+.ic__main-nav-homepage.top-bar, .ic__main-nav-homepage.top-bar ul { background-color: transparent; }
+
+.ic__main-nav-homepage a { color: #fefefe; }
 
 .top-bar, .top-bar ul { background-color: #fefefe; }
 
