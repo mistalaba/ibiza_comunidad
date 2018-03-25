@@ -87,9 +87,22 @@ body.ic__center {
     right: 0;
     &.top-bar, &.top-bar ul {
         background-color: transparent;
+        align-items: center;  // Fix for items not being aligned
     }
     a {
         color: $white;
+        &::after {
+            border-color: $white transparent transparent !important;
+        }
+    }
+    .dropdown.menu .is-active > a {
+        color: $white;
+    }
+    ul.js-dropdown-active {
+        background-color: $white !important;
+    }
+    .dropdown .is-submenu-item a {
+        color: $primary-color;
     }
 }
 

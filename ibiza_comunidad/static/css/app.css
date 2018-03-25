@@ -2661,9 +2661,17 @@ body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pa
 
 .ic__main-nav-homepage { position: fixed; right: 0; }
 
-.ic__main-nav-homepage.top-bar, .ic__main-nav-homepage.top-bar ul { background-color: transparent; }
+.ic__main-nav-homepage.top-bar, .ic__main-nav-homepage.top-bar ul { background-color: transparent; -ms-flex-align: center; align-items: center; }
 
 .ic__main-nav-homepage a { color: #fefefe; }
+
+.ic__main-nav-homepage a::after { border-color: #fefefe transparent transparent !important; }
+
+.ic__main-nav-homepage .dropdown.menu .is-active > a { color: #fefefe; }
+
+.ic__main-nav-homepage ul.js-dropdown-active { background-color: #fefefe !important; }
+
+.ic__main-nav-homepage .dropdown .is-submenu-item > a { color: #03a9f4; }
 
 .top-bar, .top-bar ul { background-color: #fefefe; }
 
