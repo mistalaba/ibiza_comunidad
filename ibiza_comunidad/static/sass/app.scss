@@ -119,6 +119,34 @@ body.ic__center {
     }
 }
 
+.ic_homepage_container {
+    // Center everything
+    padding-top: 5em;
+    color: $white;
+    .grid-x {
+        justify-content: center;
+        .cell {
+            text-align: center;
+            .ic__icon {
+                margin: 0 auto;
+            }
+        }
+    }
+    .ic__homepage-form {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em;
+        input[type='search'] {
+            margin: 0;
+            padding-right: 2em;
+        }
+        .ic__search-button {
+            margin-left: -2em;
+        }
+    }
+
+}
+
 .ic__title-bar {
     justify-content: space-between;
 }
@@ -272,14 +300,6 @@ i {
   border-color: #4d90fe;
 }
 
-// #title {
-//   color: #fff;
-//   background-color: #4d90fe;
-//   font-size: 25px;
-//   font-weight: 500;
-//   padding: 6px 12px;
-// }
-
 .ic__small-text {
     font-size: rem-calc(12);
 }
@@ -316,19 +336,9 @@ i {
 }
 
 .ic__comingsoon {
-    // &:before {
-    //     content: "";
-    //     position: fixed;
-    //     left: 0;
-    //     right: 0;
-    //     top: 0;
-    //     bottom: 0;
-    //     display: block;
-    // }
     $background: darken(rgba(95, 75, 139, 0.5), 10%);
 
     background: linear-gradient($background, $background), url(/static/comingsoon/img/comingsoon.jpg);
-    // background-image: ;
     background-size: cover;
     background-position: center 70%;
     background-attachment: fixed;
