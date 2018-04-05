@@ -16,7 +16,7 @@
 {% endif %}
 
 <div class="grid-x grid-padding-x">
-    <div class="small-12 medium-4 cell">
+    <div class="small-12 medium-3 cell">
         <form action="" method="get">
             <div class="small-12 cell">
                 {% for field in form.visible_fields %}
@@ -31,7 +31,7 @@
 
         </form>
     </div>
-    <div class="small-12 medium-8 cell">
+    <div class="small-12 medium-9 cell">
 
 {# Today's events #}
 {% if events_today %}
@@ -134,8 +134,8 @@
     </div>
     </div>
     <button class="close-button close-reveal-modal" data-close aria-label="Close reveal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 {% endblock content %}
 
