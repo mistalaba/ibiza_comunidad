@@ -6,4 +6,5 @@ div.callout {
     transform: translateX(-50%);
     @include shadow($callout-shadow);
     border-radius: $global-radius;
+    padding-right: 3rem;
 }
