@@ -2,6 +2,116 @@
 /** Foundation for Sites by ZURB Version 6.4.3 foundation.zurb.com Licensed under MIT Open Source */
 @media print, screen and (min-width: 40em) { .reveal, .reveal.tiny, .reveal.small, .reveal.large { right: auto; left: auto; margin: 0 auto; } }
 
+i, input[name="categories"] + label { border-bottom: none !important; }
+
+.ic__categories-container { margin-bottom: 16px; margin-bottom: 1rem; }
+
+[class*="ic__tag-"].ic__icon { stroke-width: 4; stroke-miterlimit: 10; }
+
+input[name=categories] + label [class*="ic__tag-"].ic__icon { color: currentColor; fill: none; }
+
+[class*="ic__tag-"].ic__icon { color: currentColor; fill: none; }
+
+input[name=categories]:checked + label [class*="ic__tag-"] { color: #fefefe; }
+
+.ic__tag-nature.ic__icon { color: #009688; }
+
+input[name=categories]:checked + label .ic__tag-nature { fill: #009688; }
+
+.ic__tag-hiking.ic__icon { color: #5D4037; }
+
+input[name=categories]:checked + label .ic__tag-hiking { fill: #5D4037; }
+
+.ic__tag-food.ic__icon { color: #4CAF50; }
+
+input[name=categories]:checked + label .ic__tag-food { fill: #4CAF50; }
+
+.ic__tag-party.ic__icon, .ic__taggroup-party { color: #EC407A; }
+
+input[name=categories]:checked + label .ic__tag-party { fill: #EC407A; }
+
+.ic__tag-sport.ic__icon { color: #2196F3; }
+
+input[name=categories]:checked + label .ic__tag-sport { fill: #2196F3; }
+
+.ic__tag-mindfulness.ic__icon { color: #3F51B5; }
+
+input[name=categories]:checked + label .ic__tag-mindfulness { fill: #3F51B5; }
+
+.ic__tag-drinks.ic__icon { color: #E91E63; }
+
+input[name=categories]:checked + label .ic__tag-drinks { fill: #E91E63; }
+
+.ic__tag-binoculars.ic__icon { color: #8BC34A; }
+
+input[name=categories]:checked + label .ic__tag-binoculars { fill: #8BC34A; }
+
+.ic__tag-animals.ic__icon { color: #FF9800; }
+
+input[name=categories]:checked + label .ic__tag-animals { fill: #FF9800; }
+
+.ic__tag-ecological.ic__icon { color: #4CAF50; }
+
+input[name=categories]:checked + label .ic__tag-ecological { fill: #4CAF50; }
+
+.ic__tag-cinema.ic__icon { color: #FFEB3B; }
+
+input[name=categories]:checked + label .ic__tag-cinema { fill: #FFEB3B; }
+
+.ic__tag-hippie.ic__icon, .ic__taggroup-hippie { color: #CDDC39; }
+
+input[name=categories]:checked + label .ic__tag-hippie { fill: #CDDC39; }
+
+.ic__tag-beach.ic__icon { color: #FF5722; }
+
+input[name=categories]:checked + label .ic__tag-beach { fill: #FF5722; }
+
+.ic__tag-sailing.ic__icon { color: #01579B; }
+
+input[name=categories]:checked + label .ic__tag-sailing { fill: #01579B; }
+
+.ic__tag-kayaking.ic__icon { color: #01579B; }
+
+input[name=categories]:checked + label .ic__tag-kayaking { fill: #01579B; }
+
+.ic__tag-biking.ic__icon { color: #FF6F00; }
+
+input[name=categories]:checked + label .ic__tag-biking { fill: #FF6F00; }
+
+.ic__tag-games.ic__icon { color: #E53935; }
+
+input[name=categories]:checked + label .ic__tag-games { fill: #E53935; }
+
+.ic__tag-painting.ic__icon { color: #6A1B9A; }
+
+input[name=categories]:checked + label .ic__tag-painting { fill: #6A1B9A; }
+
+ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
+
+ul#id_categories label { margin: 0 8px 0 0; margin: 0 0.5rem 0 0; }
+
+input[name=categories] { display: none; }
+
+.ic_homepage-container { padding-left: 0 !important; padding-right: 0 !important; padding-top: 5em; color: #fefefe; }
+
+.ic_homepage-container .grid-x { -ms-flex-pack: center; justify-content: center; }
+
+.ic_homepage-container .grid-x .cell { text-align: center; }
+
+.ic_homepage-container .grid-x .cell .ic__icon { margin: 0 auto; }
+
+.ic_homepage-container .ic__homepage-form { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; margin-bottom: 1em; }
+
+.ic_homepage-container .ic__homepage-form input[type='search'] { margin: 0; padding-right: 2em; }
+
+.ic_homepage-container .ic__homepage-form .ic__search-button { margin-left: -2em; }
+
+.ic__homepage-section { padding-top: 48px; padding-top: 3rem; padding-bottom: 48px; padding-bottom: 3rem; }
+
+.ic__homepage-section#section_2 { background-color: #fefefe; color: #8a8a8a; }
+
+.ic__homepage-section .ic__centered_subset { -ms-flex-align: center; align-items: center; }
+
 .ic__form-container { margin: 60px auto 0; margin: 3.75rem auto 0; }
 
 .ic__form-container .ic__form { padding: 16px 0; padding: 1rem 0; }
@@ -152,7 +262,7 @@ input[name=categories]:checked + label .ic__tag-hiking { fill: #5D4037; }
 
 input[name=categories]:checked + label .ic__tag-food { fill: #4CAF50; }
 
-.ic__tag-party.ic__icon { color: #EC407A; }
+.ic__tag-party.ic__icon, .ic__taggroup-party { color: #EC407A; }
 
 input[name=categories]:checked + label .ic__tag-party { fill: #EC407A; }
 
@@ -184,7 +294,7 @@ input[name=categories]:checked + label .ic__tag-ecological { fill: #4CAF50; }
 
 input[name=categories]:checked + label .ic__tag-cinema { fill: #FFEB3B; }
 
-.ic__tag-hippie.ic__icon { color: #CDDC39; }
+.ic__tag-hippie.ic__icon, .ic__taggroup-hippie { color: #CDDC39; }
 
 input[name=categories]:checked + label .ic__tag-hippie { fill: #CDDC39; }
 
@@ -2679,23 +2789,11 @@ body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pa
 
 .ic__main-nav .menu { -ms-flex-align: center; align-items: center; }
 
-.ic_homepage_container { padding-top: 5em; color: #fefefe; }
-
-.ic_homepage_container .grid-x { -ms-flex-pack: center; justify-content: center; }
-
-.ic_homepage_container .grid-x .cell { text-align: center; }
-
-.ic_homepage_container .grid-x .cell .ic__icon { margin: 0 auto; }
-
-.ic_homepage_container .ic__homepage-form { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; margin-bottom: 1em; }
-
-.ic_homepage_container .ic__homepage-form input[type='search'] { margin: 0; padding-right: 2em; }
-
-.ic_homepage_container .ic__homepage-form .ic__search-button { margin-left: -2em; }
-
 .ic__title-bar { -ms-flex-pack: justify; justify-content: space-between; }
 
-.ic__icon { display: block; width: 32px; height: 32px; stroke-width: 0; stroke: currentColor; fill: currentColor; }
+svg { width: 100%; height: 100%; }
+
+.ic__icon { display: block; stroke-width: 0; stroke: currentColor; fill: currentColor; }
 
 .ic__icon.small { width: 24px; height: 24px; }
 

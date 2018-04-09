@@ -1,0 +1,44 @@
+@import '_components/tags';
+
+.ic_homepage-container {
+    // Negate all that is set by Foundation
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    // Center everything
+    padding-top: 5em;
+    color: $white;
+    .grid-x {
+        justify-content: center;
+        .cell {
+            text-align: center;
+            .ic__icon {
+                margin: 0 auto;
+            }
+        }
+    }
+    .ic__homepage-form {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1em;
+        input[type='search'] {
+            margin: 0;
+            padding-right: 2em;
+        }
+        .ic__search-button {
+            margin-left: -2em;
+        }
+    }
+
+}
+
+.ic__homepage-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    &#section_2 {
+        background-color: $white;
+        color: $dark-gray;
+    }
+    .ic__centered_subset {
+        align-items: center;
+    }
+}

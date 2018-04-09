@@ -2,6 +2,7 @@
 @import '../bower_components/foundation-sites/scss/foundation';
 @import '../bower_components/foundation-sites/scss/util/mixins';
 
+@import '_components/homepage';
 @import '_components/utils';
 @import '_components/forms';
 @import '_components/fonts';
@@ -119,45 +120,20 @@ body.ic__center {
     }
 }
 
-.ic_homepage_container {
-    // Center everything
-    padding-top: 5em;
-    color: $white;
-    .grid-x {
-        justify-content: center;
-        .cell {
-            text-align: center;
-            .ic__icon {
-                margin: 0 auto;
-            }
-        }
-    }
-    .ic__homepage-form {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1em;
-        input[type='search'] {
-            margin: 0;
-            padding-right: 2em;
-        }
-        .ic__search-button {
-            margin-left: -2em;
-        }
-    }
-
-}
-
 .ic__title-bar {
     justify-content: space-between;
 }
 
 // * icons * //
+svg {
+    width: 100%;
+    height: 100%;
+}
+
 // Taken from icomoon
 .ic__icon {
     // Defaults for all icons
     display: block;
-    width: 32px;
-    height: 32px;
     stroke-width: 0;
     stroke: currentColor;
     fill: currentColor;
