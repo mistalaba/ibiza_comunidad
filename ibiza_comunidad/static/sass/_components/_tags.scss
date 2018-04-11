@@ -1,21 +1,4 @@
-$nature: #009688;
-$hiking: #5D4037;
-$food: #4CAF50;
-$party: #EC407A;
-$sport: #2196F3;
-$mindfulness: #3F51B5;
-$drinks: #E91E63;
-$binoculars: #8BC34A;
-$animals: #FF9800;
-$ecological: #4CAF50;
-$cinema: #FFEB3B;
-$hippie: #CDDC39;
-$beach: #FF5722;
-$sailing: #01579B;
-$kayaking: #01579B;
-$biking: #FF6F00;
-$games: #E53935;
-$painting: #6A1B9A;
+@import '_components/colors';
 
 i, input[name="categories"] + label {
     border-bottom: none !important; // Disable dotted underlining from Foundation
@@ -70,7 +53,7 @@ input[name=categories]:checked + label .ic__tag-food {
     fill: $food;
 }
 
-.ic__tag-party.ic__icon{
+.ic__tag-party.ic__icon, .ic__taggroup-party {
     color: $party;
 }
 input[name=categories]:checked + label .ic__tag-party {
@@ -126,7 +109,7 @@ input[name=categories]:checked + label .ic__tag-cinema {
     fill: $cinema;
 }
 
-.ic__tag-hippie.ic__icon{
+.ic__tag-hippie.ic__icon, .ic__taggroup-hippie {
     color: $hippie;
 }
 input[name=categories]:checked + label .ic__tag-hippie {
