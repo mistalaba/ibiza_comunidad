@@ -55,7 +55,7 @@
 @include foundation-float-classes;
 
 html, body {
-    height: 100%;
+    // height: 100%;
     width: 100%;
 }
 
@@ -74,6 +74,7 @@ body.ic__center {
 
 .grid-x.ic__center {
     justify-content: center;
+    text-align: center;
 }
 
 // * Navbar * //
@@ -110,8 +111,20 @@ body.ic__center {
 .top-bar, .top-bar ul {
     background-color: $white;
 }
+
+.ic__main-container {
+    // Arbitrary margin, adjust accordingly when needed.
+    margin-top: 7rem;
+}
+
 .ic__main-nav{
-    margin-bottom: 1em;
+    // Make sticky
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0;
+    z-index: 100;
+
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
     // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
     .menu {
@@ -162,6 +175,10 @@ i {
         // Don't want so much space between icon and dropdown arrow
         margin-right: 0;
     }
+    &.ic__vertical-align-fix {
+        // The footer is not aligning well
+        vertical-align: text-bottom;
+    }
 }
 
 .ic__logo-large {
@@ -204,7 +221,7 @@ i {
 
 footer {
     background: $twitter-gray;
-    padding: 2rem 0;
+    padding: 2rem 0 0;
 }
 
 // Google maps temporary

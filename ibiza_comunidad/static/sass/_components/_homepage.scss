@@ -22,9 +22,11 @@
         margin-bottom: 1em;
         input[type='search'] {
             margin: 0;
-            padding: 1rem 2.5rem 1rem 0.5rem;
-            font-size: 24px;
-            height: 3rem;
+            @include breakpoint(medium large) {
+                padding: 1rem 2.5rem 1rem 0.5rem;
+                font-size: 24px;
+                height: 3rem;
+            }
         }
         .ic__search-button {
             margin-left: -2em;

@@ -102,7 +102,9 @@ input[name=categories] { display: none; }
 
 .ic_homepage-container .ic__homepage-form { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; margin-bottom: 1em; }
 
-.ic_homepage-container .ic__homepage-form input[type='search'] { margin: 0; padding: 16px 40px 16px 8px; padding: 1rem 2.5rem 1rem 0.5rem; font-size: 24px; height: 48px; height: 3rem; }
+.ic_homepage-container .ic__homepage-form input[type='search'] { margin: 0; }
+
+@media screen and (min-width: 40em) { .ic_homepage-container .ic__homepage-form input[type='search'] { padding: 1rem 2.5rem 1rem 0.5rem; font-size: 24px; height: 3rem; } }
 
 .ic_homepage-container .ic__homepage-form .ic__search-button { margin-left: -2em; }
 
@@ -2761,13 +2763,13 @@ a.thumbnail image { box-shadow: none; }
 
 .clearfix::after { clear: both; }
 
-html, body { height: 100%; width: 100%; }
+html, body { width: 100%; }
 
 .menu-text > a { padding: 0 !important; color: inherit; }
 
 body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pack: center; justify-content: center; }
 
-.grid-x.ic__center { -ms-flex-pack: center; justify-content: center; }
+.grid-x.ic__center { -ms-flex-pack: center; justify-content: center; text-align: center; }
 
 .ic__main-nav-homepage { position: fixed; right: 0; }
 
@@ -2785,7 +2787,9 @@ body.ic__center .ic__title-container, body.ic__center .ic__content { -ms-flex-pa
 
 .top-bar, .top-bar ul { background-color: #fefefe; }
 
-.ic__main-nav { margin-bottom: 1em; box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1); }
+.ic__main-container { margin-top: 112px; margin-top: 7rem; }
+
+.ic__main-nav { position: fixed; left: 0px; right: 0px; top: 0; z-index: 100; box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1); }
 
 .ic__main-nav .menu { -ms-flex-align: center; align-items: center; }
 
@@ -2805,6 +2809,8 @@ i { display: inline-block; font-style: normal; margin-right: 0.5em; vertical-ali
 
 i.ic__nomargin { margin-right: 0; }
 
+i.ic__vertical-align-fix { vertical-align: text-bottom; }
+
 .ic__logo-large { width: 64px; height: 64px; }
 
 .ic__logo-medium { width: 32px; height: 32px; }
@@ -2821,7 +2827,7 @@ i.ic__nomargin { margin-right: 0; }
 
 .ic__not_found_bg { background-image: url(../images/stock_photos/tommy-ferraz-124023.jpg); background-position: center; background-repeat: no-repeat; background-size: cover; }
 
-footer { background: #e6ecf0; padding: 32px 0; padding: 2rem 0; }
+footer { background: #e6ecf0; padding: 32px 0 0; padding: 2rem 0 0; }
 
 /* Always set the map height explicitly to define the size of the div element that contains the map. */
 #map { height: 300px; }
