@@ -102,7 +102,7 @@ input[name=categories] { display: none; }
 
 .ic_homepage-container .ic__homepage-form { display: -ms-flexbox; display: flex; -ms-flex-align: center; align-items: center; margin-bottom: 1em; }
 
-.ic_homepage-container .ic__homepage-form input[type='search'] { margin: 0; padding-right: 2em; }
+.ic_homepage-container .ic__homepage-form input[type='search'] { margin: 0; padding: 16px 40px 16px 8px; padding: 1rem 2.5rem 1rem 0.5rem; font-size: 24px; height: 48px; height: 3rem; }
 
 .ic_homepage-container .ic__homepage-form .ic__search-button { margin-left: -2em; }
 
