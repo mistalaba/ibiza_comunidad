@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
 from mailchimp3 import MailChimp
+from mailchimp3.mailchimpclient import MailChimpError
 
 from .models import Category, Subscriber, Subscription
 from .forms import SignupForm
@@ -34,13 +35,14 @@ def signup(request):
             api_key = settings.MAILCHIMP_API_KEY
             mc_client = MailChimp(mc_api=api_key)
             # Add subscriber to list
-            mc_client.lists.members.create(category.mailchimp_list_id, {
-                'email_address': email,
-                'status': 'pending',
-            })
-
-            return redirect('newsletter:thank-you')
-
+            try:
+                mc_client.lists.members.create(category.mailchimp_list_id, {
+                    'email_address': email,
+                    'status': 'pending',
+                })
+                return redirect('newsletter:thank-you')
+            except MailChimpError:
+                messages.error(request, _("This email address is already subscribed"))
     return render(request, template_name, {
         'form': form,
     })

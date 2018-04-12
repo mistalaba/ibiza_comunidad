@@ -6,6 +6,7 @@ from django.views.defaults import page_not_found, server_error
 from django.utils.translation import ugettext_lazy as _
 
 from mailchimp3 import MailChimp
+from mailchimp3.mailchimpclient import MailChimpError
 from meta.views import Meta
 
 from newsletter.forms import SignupForm
@@ -35,11 +36,15 @@ def index(request):
             api_key = settings.MAILCHIMP_API_KEY
             mc_client = MailChimp(mc_api=api_key)
             # Add subscriber to list
-            mc_client.lists.members.create(category.mailchimp_list_id, {
-                'email_address': email,
-                'status': 'pending',
-            })
-            messages.success(request, _("Thank you for subscribing! We have sent a confirmation to your email address, please verify it to continue."))
+            try:
+                mc_client.lists.members.create(category.mailchimp_list_id, {
+                    'email_address': email,
+                    'status': 'pending',
+                })
+                messages.success(request, _("Thank you for subscribing! We have sent a confirmation to your email address, please verify it to continue."))
+            except MailChimpError:
+                messages.error(request, _("This email address is already subscribed"))
+
             return redirect('comingsoon:index')
 
     return render(request, 'index.html', {
