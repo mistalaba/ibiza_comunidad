@@ -84,30 +84,30 @@ def mailchimp_webhook(request):
     list_id = data.get('data[list_id]')
     status = data.get('type')
     action = data.get('data[action]')
-    category = Category.objects.get(mailchimp_list_id=list_id)
 
-
-    if action == 'delete':
-        # Completely remove subscription
-        subscription = Subscription.objects.filter(subscriber__email=email, category=category).first()
-        if subscription:
-            subscription.delete()
-            logger.info("Subscription for {} removed.".format(email))
-    else:
-        subscriber, created = Subscriber.objects.get_or_create(email=email)
-
-        # Update subscription
-        if status == 'subscribe':
-            subscription, created = Subscription.objects.get_or_create(subscriber=subscriber, category=category, defaults={'status': 'subscribe'})
-            subscription.status = 'subscribe'
-            subscription.save()
-        elif status == 'unsubscribe':
-            subscription, created = Subscription.objects.get_or_create(subscriber=subscriber, category=category, defaults={'status': 'unsubscribe'})
-            subscription.status = 'unsubscribe'
-            subscription.save()
+    if list_id:
+        category = Category.objects.get(mailchimp_list_id=list_id)
+        if action == 'delete':
+            # Completely remove subscription
+            subscription = Subscription.objects.filter(subscriber__email=email, category=category).first()
+            if subscription:
+                subscription.delete()
+                logger.info("Subscription for {} removed.".format(email))
         else:
-            pass
+            subscriber, created = Subscriber.objects.get_or_create(email=email)
 
-        logger.info(subscription)
+            # Update subscription
+            if status == 'subscribe':
+                subscription, created = Subscription.objects.get_or_create(subscriber=subscriber, category=category, defaults={'status': 'subscribe'})
+                subscription.status = 'subscribe'
+                subscription.save()
+            elif status == 'unsubscribe':
+                subscription, created = Subscription.objects.get_or_create(subscriber=subscriber, category=category, defaults={'status': 'unsubscribe'})
+                subscription.status = 'unsubscribe'
+                subscription.save()
+            else:
+                pass
+
+            logger.info(subscription)
 
     return HttpResponse(status=200)
