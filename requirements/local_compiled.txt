@@ -58,6 +58,7 @@ jedi==0.11.0              # via ipython
 jinja2==2.9.6             # via sphinx
 jmespath==0.9.3           # via boto3, botocore
 kombu==3.0.37             # via celery
+mailchimp3==3.0.1
 markupsafe==1.0           # via jinja2
 oauthlib==2.0.6           # via requests-oauthlib
 olefile==0.44             # via pillow
@@ -85,7 +86,7 @@ pytz==2017.2
 redis==2.10.6
 regex==2017.9.23          # via awesome-slugify
 requests-oauthlib==0.8.0  # via django-allauth
-requests[security]==2.18.4  # via algoliasearch, django-allauth, django-anymail, requests-oauthlib, sphinx
+requests[security]==2.18.4  # via algoliasearch, django-allauth, django-anymail, mailchimp3, requests-oauthlib, sphinx
 s3transfer==0.1.11        # via boto3
 simplegeneric==0.8.1      # via ipython
 six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-coverage-plugin, django-environ, django-extensions, fabric3, faker, pip-tools, prompt-toolkit, pynacl, pyopenssl, python-dateutil, sphinx, traitlets

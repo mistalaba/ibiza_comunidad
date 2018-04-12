@@ -14,6 +14,7 @@ class Category(models.Model):
 
     title = models.CharField(max_length=200)
     tag = models.CharField(max_length=50)
+    mailchimp_list_id = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
@@ -23,10 +24,19 @@ class Subscriber(models.Model):
         verbose_name_plural = _("Subscribers")
 
     email = models.EmailField(unique=True)
-    subscriptions = models.ManyToManyField(Category)
+    subscriptions = models.ManyToManyField(Category, through='Subscription')
 
     def __str__(self):
         return self.email
+
+class Subscription(models.Model):
+    subscriber = models.ForeignKey(Subscriber, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    status = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{}: {} - {}".format(self.subscriber, self.category, self.status)
+
 
 @receiver(tracking)
 def handle_unsubscribe(sender, event, esp_name, **kwargs):
