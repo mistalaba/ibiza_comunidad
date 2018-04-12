@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static i18n core_tags meta %}
+
+{% block ga %}
+    {% include "_google_analytics.html" %}
+{% endblock ga %}
+
+{% block bodyclass %}ic__comingsoon{% endblock bodyclass %}
+
+{% block topnav %}
+<div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium" style="display:none;">
+    <!-- Should be to the left -->
+    <a class="ic__logo-link-small" href="{% url 'home' %}">
+        <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
+    </a>
+    <!-- Should be to the right -->
+    <button class="menu-icon" type="button" data-toggle="top-menu"></button>
+</div>
+<div class="top-bar ic__main-nav-homepage" id="top-menu">
+    <div class="top-bar-right">
+        <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
+            <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
+            <li><a href="{% url 'newsletter:signup' %}">{% trans "Newsletter" %}</a></li>
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
+            <li>
+                <a href="{% url 'users:public-profile' request.user.username %}">
+                        <i class="ic__user-avatar small normal ic__nomargin" title="{{ event.created_by.username }}">
+                                {% avatar request.user 'small' %}
+                        </i>
+                </a>
+            </li>
+            <li><a href="#"><i class="ic__nomargin"><svg class="ic__icon small"><use xlink:href="#icon-settings"></use></svg></i></a>
+                <ul class="menu">
+                    <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
+                    <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
+                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+                </ul>
+            </li>
+            {% else %}
+                <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
+                <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock topnav %}
+
+{% block page_title_container %}{% endblock page_title_container %}
+
+{% block extra_container_class %} ic_homepage-container fluid{% endblock extra_container_class %}
+
+{% block content %}
+    <section id="section_1" class="ic__homepage-section">
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell small-12">
+                    <svg class="ic__icon ic__logo-large ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg><br>
+                    <h1>{% trans "Comunidad Ibiza" %}</h1>
+                    <h2>{% trans "Because local knowledge matters." %}</h2>
+                </div>
+                <div class="cell small-12 medium-8 large-6">
+                    <!-- Search -->
+                    <form action="{% url 'events:list-events' %}" method="get" class="ic__homepage-form">
+                        <input type="search" name="q" id="id_q" placeholder="{% trans 'Find your next event' %}">
+                        <button type="submit" class="ic__search-button">
+                            <i><svg class="ic__icon small"><use xlink:href="#icon-magnifying-glass"></use></svg></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="section_2" class="ic__homepage-section">
+            <div class="grid-container">
+                <div class="grid-x grid-margin-x">
+                    <div class="cell small-6">
+                        <div class="grid-x grid-margin-x ic__centered_subset ic__taggroup-party">
+                            <div class="cell small-12 medium-5">
+                                <svg class="ic__icon ic__tag-"><use xlink:href="#tag-party"></use></svg>
+                            </div>
+                            <div class="cell small-12 medium-7">
+                                <p>Everyday can be a party! Find your favorite event by filtering on categories.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell small-6">
+                        <div class="grid-x grid-margin-x ic__centered_subset ic__taggroup-hippie">
+                            <div class="cell small-12 medium-5">
+                                <svg class="ic__icon ic__tag-"><use xlink:href="#tag-hippie"></use></svg>
+                            </div>
+                            <div class="cell small-12 medium-7">
+                                <p>Clubbing not your style? Join the hippies for a chilled out time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock content %}

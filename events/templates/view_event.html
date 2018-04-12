@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load staticfiles i18n thumbnail %}
+{% load staticfiles i18n thumbnail core_tags thumbnail %}
 
 {% block head_title %}{{ event.title }}{% endblock %}
 {% block page_title %}{% endblock page_title %}
@@ -20,6 +20,12 @@
         </div>
         <h2>{{ event.title }}</h2>
         <p class="ic__card-description">{{ event.description }}</p>
+        <div class="ic__categories-container">
+            {% for tag in event.tags.all %}
+            <i title="{{ tag.name }}" data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"><svg class="ic__icon medium ic__tag-{{ tag.name }}"><use xlink:href="#tag-{{ tag.name }}"></use></svg></i>
+            {% endfor %}
+        </div>
+
 
         <div class="grid-x grid-padding-x ic__content">
             <div class="small-12 medium-6 cell">
@@ -34,6 +40,12 @@
         {% include "_comments.html" %}
     </div>
     <div class="small-12 medium-4 cell ic__details-container">
+        <p class="ic__card-details-item ic__event_creator">
+            <i><span id="event_created_by_avatar" class="ic__user-avatar normal" title="">
+                {% spaceless %}{% avatar event.created_by "small" %}{% endspaceless %}
+            </span></i>
+            <span id="event_created_by">{{ event.created_by.username }}</span>
+        </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
             {% with sd=event.start_datetime ed=event.end_datetime %}
@@ -68,7 +80,7 @@
         </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
-            <span class="ic__source" id="source"><a href="{{ event.source }}">{{ event.source }}</a></span>
+            <span class="ic__source" id="source"><a href="{{ event.source }}" target="_blank">{{ event.source }}</a></span>
         </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>

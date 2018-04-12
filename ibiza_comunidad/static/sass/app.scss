@@ -2,6 +2,7 @@
 @import '../bower_components/foundation-sites/scss/foundation';
 @import '../bower_components/foundation-sites/scss/util/mixins';
 
+@import '_components/homepage';
 @import '_components/utils';
 @import '_components/forms';
 @import '_components/fonts';
@@ -10,6 +11,7 @@
 @import '_components/social';
 @import '_components/callout';
 @import '_components/modal';
+@import '_components/tags';
 
 @include foundation-global-styles;
 @include foundation-xy-grid-classes;
@@ -53,7 +55,7 @@
 @include foundation-float-classes;
 
 html, body {
-    height: 100%;
+    // height: 100%;
     width: 100%;
 }
 
@@ -72,18 +74,57 @@ body.ic__center {
 
 .grid-x.ic__center {
     justify-content: center;
+    text-align: center;
 }
 
 // * Navbar * //
+
 // Set height of navbar
 // .ic__main-nav, .menu  {
 //     height: 80px;
 // }
+.ic__main-nav-homepage{
+    // Navbar for the homepage only
+    position: fixed;
+    right: 0;
+    &.top-bar, &.top-bar ul {
+        background-color: transparent;
+        align-items: center;  // Fix for items not being aligned
+    }
+    a {
+        color: $white;
+        &::after {
+            border-color: $white transparent transparent !important;
+        }
+    }
+    .dropdown.menu .is-active > a {
+        color: $white;
+    }
+    ul.js-dropdown-active {
+        background-color: $white !important;
+    }
+    .dropdown .is-submenu-item a {
+        color: $primary-color;
+    }
+}
+
 .top-bar, .top-bar ul {
     background-color: $white;
 }
+
+.ic__main-container {
+    // Arbitrary margin, adjust accordingly when needed.
+    margin-top: 7rem;
+}
+
 .ic__main-nav{
-    margin-bottom: 1em;
+    // Make sticky
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0;
+    z-index: 100;
+
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
     // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
     .menu {
@@ -97,12 +138,15 @@ body.ic__center {
 }
 
 // * icons * //
+svg {
+    width: 100%;
+    height: 100%;
+}
+
 // Taken from icomoon
 .ic__icon {
     // Defaults for all icons
     display: block;
-    width: 32px;
-    height: 32px;
     stroke-width: 0;
     stroke: currentColor;
     fill: currentColor;
@@ -131,7 +175,12 @@ i {
         // Don't want so much space between icon and dropdown arrow
         margin-right: 0;
     }
+    &.ic__vertical-align-fix {
+        // The footer is not aligning well
+        vertical-align: text-bottom;
+    }
 }
+
 .ic__logo-large {
     width: 64px;
     height: 64px;
@@ -168,6 +217,11 @@ i {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+footer {
+    background: $twitter-gray;
+    padding: 2rem 0 0;
 }
 
 // Google maps temporary
@@ -244,14 +298,6 @@ i {
   border-color: #4d90fe;
 }
 
-// #title {
-//   color: #fff;
-//   background-color: #4d90fe;
-//   font-size: 25px;
-//   font-weight: 500;
-//   padding: 6px 12px;
-// }
-
 .ic__small-text {
     font-size: rem-calc(12);
 }
@@ -288,19 +334,11 @@ i {
 }
 
 .ic__comingsoon {
-    // &:before {
-    //     content: "";
-    //     position: fixed;
-    //     left: 0;
-    //     right: 0;
-    //     top: 0;
-    //     bottom: 0;
-    //     display: block;
-    // }
     $background: darken(rgba(95, 75, 139, 0.5), 10%);
 
     background: linear-gradient($background, $background), url(/static/comingsoon/img/comingsoon.jpg);
-    // background-image: ;
     background-size: cover;
     background-position: center 70%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }

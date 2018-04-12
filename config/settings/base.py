@@ -58,7 +58,10 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'anymail',
+    'algoliasearch_django',
     'sorl.thumbnail',
+    'meta',
+    'taggit',
 ]
 
 # Apps specific for this project go here.
@@ -300,6 +303,20 @@ THUMBNAIL_QUALITY = 85
 # GOOGLE API
 GOOGLE_API_KEY = env('GOOGLE_API_KEY')
 
+# DJANGO-META
+META_USE_SITES = True
+META_SITE_PROTOCOL = env('META_SITE_PROTOCOL')
+META_USE_OG_PROPERTIES = True
+META_FB_APPID = '1658212564224354'
+META_USE_GOOGLEPLUS_PROPERTIES = True
+META_SITE_NAME = 'La Comunidad Ibiza'
+META_SITE_TYPE = 'website'
+META_USE_TWITTER_PROPERTIES = True
+META_TWITTER_SITE = '@com_ibiza'  # NOT WORKING!
+META_TWITTER_TYPE = 'summary_large_image'  # NOT WORKING!
+
+TAGGIT_CASE_INSENSITIVE = True
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -363,4 +380,10 @@ LOGGING = {
             'level':'DEBUG',
         },
     }
+}
+
+ALGOLIA = {
+    'APPLICATION_ID': env('ALGOLIA_APPLICATION_ID'),
+    'API_KEY': env('ALGOLIA_ADMIN_API_KEY'),
+    'INDEX_SUFFIX': env('ALGOLIA_INDEX_SUFFIX'),
 }

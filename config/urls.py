@@ -7,10 +7,14 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.views.decorators.cache import never_cache
 from django.views.static import serve
+from core import views as core_views
 
 urlpatterns = [
+    # url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
+    url(r'^$', core_views.index, name='index'),
     url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    url(r'^search/$', TemplateView.as_view(template_name='pages/search.html'), name='search'),
     url(r'^admin/', admin.site.urls),
     url(r'^users/', include('ibiza_comunidad.users.urls', namespace='users')),
     url(r'^accounts/', include('allauth.urls')),

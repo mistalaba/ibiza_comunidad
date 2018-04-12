@@ -4,6 +4,8 @@
 {% block head_title %}{% trans 'Events' %}{% endblock %}
 {% block page_title %}{% trans 'Events' %}{% endblock page_title %}
 
+{% block inline_search %}{% endblock %}
+
 {% block content %}
 {% if request.user.is_authenticated %}
 <div class="grid-x grid-padding-x">
@@ -14,10 +16,22 @@
 {% endif %}
 
 <div class="grid-x grid-padding-x">
-    <div class="small-12 medium-4 cell">
+    <div class="small-12 medium-3 cell">
+        <form action="" method="get">
+            <div class="small-12 cell">
+                {% for field in form.visible_fields %}
+                    {% include 'forms/_form_field.html' %}
+                {% endfor %}
 
+            </div>
+            <div class="small-12 cell ic__buttons">
+                <button type="submit" class="button" name="filter">Filter</button>
+                <a href="{% url 'events:list-events' %}">Clear</a>
+            </div>
+
+        </form>
     </div>
-    <div class="small-12 medium-8 cell">
+    <div class="small-12 medium-9 cell">
 
 {# Today's events #}
 {% if events_today %}
@@ -91,10 +105,15 @@
             <img id='photo' class="ic__big-cover-image" src="" alt="">
         </div>
         <h2 id="title"></h2>
-        <p id="description" class="ic__card-description"></p>
+        <p id="ic__event_description" class="ic__card-description"></p>
+        <div class="ic__categories-container" id="tags"></div>
         <div class="ic__comments-container"></div>
     </div>
     <div class="small-12 medium-4 cell ic__details-container">
+        <p class="ic__card-details-item ic__event_creator">
+            <i><span id="event_created_by_avatar" class="ic__user-avatar normal" title=""></span></i>
+            <span id="event_created_by"></span>
+        </p>
         <p class="ic__card-details-item">
             <i><svg class="ic__icon small"><use xlink:href="#icon-event"></use></svg></i>
             <span id="date"></span>
@@ -104,19 +123,19 @@
             <span id="price"></span>
         </p>
         <p class="ic__card-details-item">
-            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
-            <span id="location_friendly_name"></span>
+            <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
+            <span id="source" class="ic__source"><a href="" target="_blank"></a></span>
         </p>
         <p class="ic__card-details-item">
-            <i><svg class="ic__icon small"><use xlink:href="#icon-link"></use></svg></i>
-            <span id="source" class="ic__source"><a href=""></a></span>
+            <i><svg class="ic__icon small"><use xlink:href="#icon-location"></use></svg></i>
+            <span id="location_friendly_name"></span>
         </p>
         <div class="ic__map" id="map"></div>
     </div>
     </div>
     <button class="close-button close-reveal-modal" data-close aria-label="Close reveal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 {% endblock content %}
 
@@ -130,7 +149,13 @@
             var mapLocation = '';
 
             // Current user avatar
-            var current_user_avatar = '{% spaceless %}{% avatar request.user "small" %}{% endspaceless %}';
+            if (user) {
+                var current_user_avatar = '{% spaceless %}{% avatar request.user "small" %}{% endspaceless %}';
+            }
+            else {
+                var current_user_avatar = '';
+            }
+
             var current_id;
 
 
@@ -140,14 +165,31 @@
                 $.ajax({
                     url: url,
                     success: function(response){
+                        // Build creator avatar
+                        var created_by_avatar = '';
+                        if (response['created_by']['avatar_url']){
+                            created_by_avatar = '<span class="ic__user-avatar-image" style="background-image: url(' + response['created_by']['avatar_url'] + ')"></span>';
+                        }
+                        else {
+                            created_by_avatar = '<span class="ic__user-without-avatar" style="background-color: ' + response['created_by']['color'] + '">' + response['created_by']['initials'] + '</span>';
+                        }
                         // Populate ids
                         $('#photo').attr('src', response['photo']);
                         $('#title').text(response['title']);
-                        $('#description').text(response['description']);
+                        $('#ic__event_description').text(response['description']);
+                        $('#event_created_by_avatar').append(created_by_avatar);
+                        $('#event_created_by').html('<span id="created_by_userename">' + response['created_by']['username'] + '</span>');
                         $('#date').text(response['start_datetime']);
                         $('#price').text(response['price']);
                         $('#source a').text(response['source']).attr('href', response['source']);
                         $('#location_friendly_name').text(response['location_friendly_name']);
+                        console.log(response['tags']);
+                        var $tags = '';
+                        $.each(response['tags'], function(i, v) {
+                            $tags += '<i title="' + v + '" data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"><svg class="ic__icon medium ic__tag-' + v + '"><use xlink:href="#tag-' + v + '"></use></svg></i>';
+                        });
+                        $('#tags').html($tags);
+
 
                         var $comments_container = $('.ic__comments-container');
 
@@ -188,18 +230,21 @@
                             $("time.timeago").timeago();
                         }
 
+
                         // Comment form
-                        var form =
-                            '<form id="__comment_form_ajax" class="ic__comment-container" method="POST" action="" novalidate>' +
-                            "{% csrf_token %}" +
-                            '<div class="ic__comment-profile">' +
-                            '<div class="ic__user-avatar normal">' + current_user_avatar + '</div>' +
-                            '</div>' +
-                            '<div class="ic__comment-body">' +
-                            '<textarea cols="40" id="id_comment" maxlength="600" name="comment" placeholder="Write your comment here" rows="2"></textarea>' +
-                            '<div class="ic__buttons"><button type="submit" class="button">Post</button></div>' +
-                            '</div></form>';
-                        $comments_container.append(form);
+                        if (user){
+                            var form =
+                                '<form id="__comment_form_ajax" class="ic__comment-container" method="POST" action="" novalidate>' +
+                                "{% csrf_token %}" +
+                                '<div class="ic__comment-profile">' +
+                                '<div class="ic__user-avatar normal">' + current_user_avatar + '</div>' +
+                                '</div>' +
+                                '<div class="ic__comment-body">' +
+                                '<textarea cols="40" id="id_comment" maxlength="600" name="comment" placeholder="Write your comment here" rows="2"></textarea>' +
+                                '<div class="ic__buttons"><button type="submit" class="button">Post</button></div>' +
+                                '</div></form>';
+                            $comments_container.append(form);
+                        }
 
                         mapLocation = response['location_gmaps_place_id'];
                         $modal.foundation('open');
@@ -210,56 +255,60 @@
                         history.pushState(null, null, url);
                     }
                 });
+                $(document).foundation();
             });
 
             $modal.on("closed.zf.reveal", function () {
                 mapLocation = '';
                 $('#photo').attr('src', '');
                 $('#title').text('');
-                $('#description').text('');
+                $('#ic__event_description').text('');
                 $('#date').text('');
                 $('#price').text('');
                 $('#location_friendly_name').text('');
                 $('.ic__comments-container').html('');
+                $('#event_created_by_avatar').html('');
+                $('#event_created_by').html('');
                 history.pushState(null, null, '{% url "events:list-events" %}');
             });
 
 
 
             $modal.on('submit', '#__comment_form_ajax', function(e){
-                e.preventDefault();
+                if (user) {
+                    e.preventDefault();
 
-                var form_data = {
-                    'comment': $('#id_comment').val(),
-                    'event': current_id,
-                    'csrfmiddlewaretoken': '{{csrf_token}}'
-                }
-
-                $.ajax({
-                    method: "POST",
-                    url: '{% url "events:save-ajax-comment" %}',
-                    data: form_data,
-                    success: function(response){
-                        // Append comment to template
-                        var created = response['created'];
-                        var comment_id = '__comment_' + response['id'];
-                        var comment_html =
-                            '<div class="ic__comment-container" id="' + comment_id + '">' +
-                            '<div class="ic__comment-profile">' +
-                            '<div class="ic__user-avatar normal small" title="">' + current_user_avatar + '</div>' +
-                            '</div>' +
-                            '<div class="ic__comment-body">' +
-                            '<div class="ic__comment">' + form_data['comment'] + '</div>' +
-                            '<div class="ic__comment-meta">' +
-                            '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
-                            '</div></div></div>';
-
-                        $('#__comment_form_ajax').before(comment_html);
-                        $('#id_comment').val('');
-                        $('#' + comment_id).find("time.timeago").timeago();
-                        // $("time.timeago").timeago();
+                    var form_data = {
+                        'comment': $('#id_comment').val(),
+                        'event': current_id,
+                        'csrfmiddlewaretoken': '{{csrf_token}}'
                     }
-                });
+
+                    $.ajax({
+                        method: "POST",
+                        url: '{% url "events:save-ajax-comment" %}',
+                        data: form_data,
+                        success: function(response){
+                            // Append comment to template
+                            var created = response['created'];
+                            var comment_id = '__comment_' + response['id'];
+                            var comment_html =
+                                '<div class="ic__comment-container" id="' + comment_id + '">' +
+                                '<div class="ic__comment-profile">' +
+                                '<div class="ic__user-avatar normal small" title="">' + current_user_avatar + '</div>' +
+                                '</div>' +
+                                '<div class="ic__comment-body">' +
+                                '<div class="ic__comment">' + form_data['comment'] + '</div>' +
+                                '<div class="ic__comment-meta">' +
+                                '<time class="timeago ic__small-text" datetime="' + created + '">' + created + '</time>' +
+                                '</div></div></div>';
+
+                            $('#__comment_form_ajax').before(comment_html);
+                            $('#id_comment').val('');
+                            $('#' + comment_id).find("time.timeago").timeago();
+                        }
+                    });
+                }
                 return false;
             });
 
@@ -288,6 +337,7 @@
             }
 
         });
+
     </script>
 
 {% endblock %}

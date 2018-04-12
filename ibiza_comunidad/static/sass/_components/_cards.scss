@@ -54,14 +54,23 @@
     margin-bottom: 0.5em;
 }
 
-.ic__card-description {
+.ic__card-description-preview {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ic__card-description {
+    white-space: pre-line;
 }
 
 .ic__source {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ic__event_creator {
+    margin-top: -0.75rem;
+    margin-left: -0.75rem;
 }

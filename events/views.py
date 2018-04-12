@@ -14,9 +14,10 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from sorl.thumbnail import get_thumbnail
+from taggit.models import Tag
 
 from ibiza_comunidad.users.utils import get_initials
-from .forms import EventForm, EventForm2, CommentForm
+from .forms import EventForm, EventForm2, CommentForm, EventSearchForm
 from .models import Event
 
 import logging
@@ -24,29 +25,61 @@ logger = logging.getLogger(__name__)
 
 
 def list_events(request):
-    events = Event.objects.all().order_by('-start_datetime')
+    # All events
+    # events = Event.objects.all().order_by('-start_datetime')
+    events = Event.objects.filter(end_datetime__gte=timezone.now())
+
+    # Category filter
+    categories_q = request.GET.getlist('categories')
+    if categories_q:
+        events = events.filter(tags__name__in=categories_q)
+
+    # Freetext Filter
+    filter_q = request.GET.get('q')
+
+    if filter_q:
+        filter_q_list = filter_q.split(' ')
+        query_q = Q()
+        for item in filter_q_list:
+            # String match
+            query_q &= Q(Q(title__icontains=item) | Q(description__icontains=item) | Q(location_friendly_name__icontains=item) | Q(tags__name__in=[item.lower()]))
+        events = events.filter(query_q)
+
+    tags = Tag.objects.filter(event__in=events).distinct()
+
+    # List all available tags
+    initial_tags = [xx for xx in categories_q]
+    tags_list = [(tag.name, tag.name) for tag in tags]
 
     # Today's events
     today = timezone.now().date()
-    q_today = Q(start_datetime__date=today)
-    events_today = Event.objects.filter(q_today)
+    now = timezone.now()
+    q_today = q_today = (Q(start_datetime__date=today) & Q(end_datetime__gt=now)) | (Q(start_datetime__lte=now) & Q(end_datetime__gt=now))
+    events_today = events.filter(q_today).distinct()
 
     # Tomorrow's events
     tomorrow = today + timezone.timedelta(days=1)
     q_tomorrow = Q(start_datetime__date=tomorrow)
-    events_tomorrow = Event.objects.filter(q_tomorrow)
+    events_tomorrow = events.filter(q_tomorrow).distinct()
 
     # This month's events
     end_of_month = datetime.date(today.year, today.month, calendar.monthrange(today.year, today.month)[1])
     q_this_month = Q(start_datetime__date__gt=tomorrow) & Q(start_datetime__date__lte=end_of_month)
-    events_this_month = Event.objects.filter(q_this_month)
+    events_this_month = events.filter(q_this_month).distinct()
 
     # The rest
     next_month = today.replace(day=1) + relativedelta(months=1)
     q_rest = Q(start_datetime__gte=next_month)
-    all_other_events = Event.objects.filter(q_rest)
+    all_other_events = events.filter(q_rest).distinct()
+
+    form = EventSearchForm(
+        initial={'q': request.GET.get('q', ''), 'categories': request.GET.getlist('categories')},
+        categories=tags_list
+    )
 
     return render(request, 'list_events.html', {
+        'tags': tags_list,
+        'form': form,
         'events': events,
         'events_today': events_today,
         'events_tomorrow': events_tomorrow,
@@ -74,6 +107,10 @@ def create_event(request):
                 location_gmaps_place_id=data['location_gmaps_place_id'],
                 source=data['source'],
             )
+
+            if data.get('categories'):
+                for c in data['categories']:
+                    event.tags.add(c)
 
             return redirect('events:list-events')
     else:
@@ -124,6 +161,7 @@ def event_detail(request, event_slug):
 
             }
             comments.append(current_comment)
+
         response = {
             'type': 'event',
             'id': event.pk,
@@ -138,9 +176,12 @@ def event_detail(request, event_slug):
             'location_gmaps_place_id': event.location_gmaps_place_id,
             'created_by': {
                 'username': event.created_by.username,
-                'avatar': event.created_by.profile.avatar.url if event.created_by.profile.avatar else '',
+                'avatar_url': get_thumbnail(event.created_by.profile.avatar, '48', quality=85).url if event.created_by.profile.avatar else '',
+                'color': event.created_by.profile.color,
+                'initials': get_initials(event.created_by),
             },
-            'comments': comments
+            'comments': comments,
+            'tags': [tag.name for tag in event.tags.all()],
         }
         return JsonResponse(response, safe=False)
     else:
@@ -185,6 +226,7 @@ def save_ajax_comment(request):
 
     response = current_comment
     return JsonResponse(response, safe=False)
+
 
 @login_required
 def event_delete(request, event_slug):
