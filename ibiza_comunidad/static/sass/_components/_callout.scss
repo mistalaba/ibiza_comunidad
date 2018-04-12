@@ -7,4 +7,5 @@ div.callout {
     @include shadow($callout-shadow);
     border-radius: $global-radius;
     padding-right: 3rem;
+    z-index: 500;
 }
