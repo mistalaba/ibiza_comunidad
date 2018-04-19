@@ -5,7 +5,7 @@
     padding-left: 0 !important;
     padding-right: 0 !important;
     // Center everything
-    padding-top: 5em;
+    // padding-top: 5em;
     color: $white;
     .grid-x {
         justify-content: center;
@@ -38,11 +38,23 @@
 .ic__homepage-section {
     padding-top: 3rem;
     padding-bottom: 3rem;
+    &#section_1 {
+        padding-top: 5rem;
+        $background: darken(rgba(95, 75, 139, 0.5), 10%);
+        background: linear-gradient($background, $background), url(/static/comingsoon/img/comingsoon.jpg);
+        background-size: cover;
+        background-position: center 80%;
+        // background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
     &#section_2 {
         background-color: $white;
         color: $dark-gray;
     }
     .ic__centered_subset {
         align-items: center;
+    }
+    [class*="ic__taggroup-"] p {
+        padding: 2rem 0;
     }
 }

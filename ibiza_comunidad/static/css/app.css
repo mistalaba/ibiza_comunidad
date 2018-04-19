@@ -92,7 +92,7 @@ ul#id_categories label { margin: 0 8px 0 0; margin: 0 0.5rem 0 0; }
 
 input[name=categories] { display: none; }
 
-.ic_homepage-container { padding-left: 0 !important; padding-right: 0 !important; padding-top: 5em; color: #fefefe; }
+.ic_homepage-container { padding-left: 0 !important; padding-right: 0 !important; color: #fefefe; }
 
 .ic_homepage-container .grid-x { -ms-flex-pack: center; justify-content: center; }
 
@@ -110,9 +110,13 @@ input[name=categories] { display: none; }
 
 .ic__homepage-section { padding-top: 48px; padding-top: 3rem; padding-bottom: 48px; padding-bottom: 3rem; }
 
+.ic__homepage-section#section_1 { padding-top: 80px; padding-top: 5rem; background: linear-gradient(rgba(72, 57, 106, 0.5), rgba(72, 57, 106, 0.5)), url(/static/comingsoon/img/comingsoon.jpg); background-size: cover; background-position: center 80%; background-repeat: no-repeat; }
+
 .ic__homepage-section#section_2 { background-color: #fefefe; color: #8a8a8a; }
 
 .ic__homepage-section .ic__centered_subset { -ms-flex-align: center; align-items: center; }
+
+.ic__homepage-section [class*="ic__taggroup-"] p { padding: 32px 0; padding: 2rem 0; }
 
 .ic__form-container { margin: 60px auto 0; margin: 3.75rem auto 0; }
 

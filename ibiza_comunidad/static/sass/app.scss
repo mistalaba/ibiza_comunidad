@@ -335,7 +335,6 @@ footer {
 
 .ic__comingsoon {
     $background: darken(rgba(95, 75, 139, 0.5), 10%);
-
     background: linear-gradient($background, $background), url(/static/comingsoon/img/comingsoon.jpg);
     background-size: cover;
     background-position: center 70%;
