@@ -90,6 +90,14 @@ input[name=categories]:checked + label .ic__tag-painting { fill: #6A1B9A; }
 
 input[name=categories]:checked + label .ic__tag-culture { fill: #EC407A; }
 
+.ic__tag-kids.ic__icon { color: #C62828; }
+
+input[name=categories]:checked + label .ic__tag-kids { fill: #C62828; }
+
+.ic__tag-workshop.ic__icon { color: #0288D1; }
+
+input[name=categories]:checked + label .ic__tag-workshop { fill: #0288D1; }
+
 ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
 
 ul#id_categories label { margin: 0 8px 0 0; margin: 0 0.5rem 0 0; }
@@ -335,6 +343,14 @@ input[name=categories]:checked + label .ic__tag-painting { fill: #6A1B9A; }
 .ic__tag-culture.ic__icon { color: #EC407A; }
 
 input[name=categories]:checked + label .ic__tag-culture { fill: #EC407A; }
+
+.ic__tag-kids.ic__icon { color: #C62828; }
+
+input[name=categories]:checked + label .ic__tag-kids { fill: #C62828; }
+
+.ic__tag-workshop.ic__icon { color: #0288D1; }
+
+input[name=categories]:checked + label .ic__tag-workshop { fill: #0288D1; }
 
 ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
 

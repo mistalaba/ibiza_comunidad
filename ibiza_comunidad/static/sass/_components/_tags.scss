@@ -165,8 +165,19 @@ input[name=categories]:checked + label .ic__tag-culture {
     fill: $culture;
 }
 
+.ic__tag-kids.ic__icon {
+    color: $kids;
+}
+input[name=categories]:checked + label .ic__tag-kids {
+    fill: $kids;
+}
 
-
+.ic__tag-workshop.ic__icon {
+    color: $workshop;
+}
+input[name=categories]:checked + label .ic__tag-workshop {
+    fill: $workshop;
+}
 
 // Forms
 // Change checkboxes to icons
