@@ -158,6 +158,13 @@ input[name=categories]:checked + label .ic__tag-painting {
     fill: $painting;
 }
 
+.ic__tag-culture.ic__icon {
+    color: $culture;
+}
+input[name=categories]:checked + label .ic__tag-culture {
+    fill: $culture;
+}
+
 
 
 
