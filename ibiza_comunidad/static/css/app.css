@@ -98,6 +98,22 @@ input[name=categories]:checked + label .ic__tag-kids { fill: #C62828; }
 
 input[name=categories]:checked + label .ic__tag-workshop { fill: #0288D1; }
 
+.ic__tag-conference.ic__icon { color: #039be5; }
+
+input[name=categories]:checked + label .ic__tag-conference { fill: #039be5; }
+
+.ic__tag-lgbt.ic__icon { color: #8e24aa; }
+
+input[name=categories]:checked + label .ic__tag-lgbt { fill: #8e24aa; }
+
+.ic__tag-municipal.ic__icon { color: #3949ab; }
+
+input[name=categories]:checked + label .ic__tag-municipal { fill: #3949ab; }
+
+.ic__tag-music.ic__icon { color: #ef6c00; }
+
+input[name=categories]:checked + label .ic__tag-music { fill: #ef6c00; }
+
 ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
 
 ul#id_categories label { margin: 0 8px 0 0; margin: 0 0.5rem 0 0; }
@@ -351,6 +367,22 @@ input[name=categories]:checked + label .ic__tag-kids { fill: #C62828; }
 .ic__tag-workshop.ic__icon { color: #0288D1; }
 
 input[name=categories]:checked + label .ic__tag-workshop { fill: #0288D1; }
+
+.ic__tag-conference.ic__icon { color: #039be5; }
+
+input[name=categories]:checked + label .ic__tag-conference { fill: #039be5; }
+
+.ic__tag-lgbt.ic__icon { color: #8e24aa; }
+
+input[name=categories]:checked + label .ic__tag-lgbt { fill: #8e24aa; }
+
+.ic__tag-municipal.ic__icon { color: #3949ab; }
+
+input[name=categories]:checked + label .ic__tag-municipal { fill: #3949ab; }
+
+.ic__tag-music.ic__icon { color: #ef6c00; }
+
+input[name=categories]:checked + label .ic__tag-music { fill: #ef6c00; }
 
 ul#id_categories { list-style: none; margin: 0; display: -ms-flexbox; display: flex; -ms-flex-direction: row; flex-direction: row; -ms-flex-wrap: wrap; flex-wrap: wrap; -ms-flex-pack: start; justify-content: flex-start; -ms-flex-align: center; align-items: center; }
 

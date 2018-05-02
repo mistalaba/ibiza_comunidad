@@ -179,6 +179,34 @@ input[name=categories]:checked + label .ic__tag-workshop {
     fill: $workshop;
 }
 
+.ic__tag-conference.ic__icon {
+    color: $conference;
+}
+input[name=categories]:checked + label .ic__tag-conference {
+    fill: $conference;
+}
+
+.ic__tag-lgbt.ic__icon {
+    color: $lgbt;
+}
+input[name=categories]:checked + label .ic__tag-lgbt {
+    fill: $lgbt;
+}
+
+.ic__tag-municipal.ic__icon {
+    color: $municipal;
+}
+input[name=categories]:checked + label .ic__tag-municipal {
+    fill: $municipal;
+}
+
+.ic__tag-music.ic__icon {
+    color: $music;
+}
+input[name=categories]:checked + label .ic__tag-music {
+    fill: $music;
+}
+
 // Forms
 // Change checkboxes to icons
 ul#id_categories {
