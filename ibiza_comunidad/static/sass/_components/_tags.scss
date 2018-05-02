@@ -193,7 +193,7 @@ input[name=categories]:checked + label .ic__tag-lgbt {
     fill: $lgbt;
 }
 
-.ic__tag-municipal.ic__icon {
+.ic__tag-municipal.ic__icon, .ic__taggroup-municipal {
     color: $municipal;
 }
 input[name=categories]:checked + label .ic__tag-municipal {

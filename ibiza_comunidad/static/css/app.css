@@ -106,7 +106,7 @@ input[name=categories]:checked + label .ic__tag-conference { fill: #039be5; }
 
 input[name=categories]:checked + label .ic__tag-lgbt { fill: #8e24aa; }
 
-.ic__tag-municipal.ic__icon { color: #3949ab; }
+.ic__tag-municipal.ic__icon, .ic__taggroup-municipal { color: #3949ab; }
 
 input[name=categories]:checked + label .ic__tag-municipal { fill: #3949ab; }
 
@@ -376,7 +376,7 @@ input[name=categories]:checked + label .ic__tag-conference { fill: #039be5; }
 
 input[name=categories]:checked + label .ic__tag-lgbt { fill: #8e24aa; }
 
-.ic__tag-municipal.ic__icon { color: #3949ab; }
+.ic__tag-municipal.ic__icon, .ic__taggroup-municipal { color: #3949ab; }
 
 input[name=categories]:checked + label .ic__tag-municipal { fill: #3949ab; }
 
