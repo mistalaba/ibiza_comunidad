@@ -170,7 +170,7 @@ div.ic__buttons *:not(:last-child) { margin-right: 16px; margin-right: 1rem; }
 
 .ic__comments-container .ic__comment-container .ic__comment-profile { margin-right: 16px; margin-right: 1rem; -ms-flex: 0 1 auto; flex: 0 1 auto; }
 
-.ic__comments-container .ic__comment-container .ic__comment-body { -ms-flex: 1 0 auto; flex: 1 0 auto; -ms-flex-item-align: stretch; -ms-grid-row-align: stretch; align-self: stretch; border-bottom: 1px solid #e6e6e6; }
+.ic__comments-container .ic__comment-container .ic__comment-body { -ms-flex: 1 1 auto; flex: 1 1 auto; -ms-flex-item-align: stretch; -ms-grid-row-align: stretch; align-self: stretch; border-bottom: 1px solid #e6e6e6; }
 
 .ic__comments-container .ic__comment-container .ic__comment-body .ic__comment-meta { color: #cacaca; }
 
