@@ -22,8 +22,9 @@ def get_secret(setting, secrets=secrets):
         error_msg = 'Set the {0} environment variable'.format(setting)
         raise ImproperlyConfigured(error_msg)
 
-ROOT_DIR = environ.Path(__file__) - 3  # (ibiza_comunidad/config/settings/base.py - 3 = ibiza_comunidad/)
-APPS_DIR = ROOT_DIR.path('ibiza_comunidad')
+# ROOT_DIR = environ.Path(__file__) - 3  # (ibiza_comunidad/config/settings/base.py - 3 = ibiza_comunidad/)
+ROOT_DIR = environ.Path(__file__) - 4  # (ibiza_comunidad/src/config/settings/base.py - 4 = ibiza_comunidad/)
+APPS_DIR = ROOT_DIR.path('src/ibiza_comunidad')
 # APPS_DIR = ROOT_DIR  # Works with comingsoon bt not with the rest
 
 # Load operating system environment variables and then prepare to use them
