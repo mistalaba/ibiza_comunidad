@@ -15,7 +15,7 @@ env.user = 'mistalaba'
 env.branch = 'default'
 env.directory = os.path.dirname(os.path.abspath(__file__))
 env.project_name = os.path.basename(env.directory)
-env.directory = '/home/mistalaba/projects/%s/' % env.project_name
+env.directory = '/home/mistalaba/projects/%s/src/' % env.project_name
 
 
 @task
