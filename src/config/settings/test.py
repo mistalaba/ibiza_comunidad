@@ -25,8 +25,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ibiza_comunidad',
-        'USER': get_secret('POSTGRES_USER'),
-        'PASSWORD': get_secret('POSTGRES_PASSWORD'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
         'HOST': '',
         'PORT': '',
         'ATOMIC_REQUESTS': True,

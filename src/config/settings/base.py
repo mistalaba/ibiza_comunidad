@@ -10,17 +10,6 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 import json
 import environ
 
-# Load non-versioned, sensitive settings file
-with open('secrets.json') as f:
-    secrets = json.loads(f.read())
-
-def get_secret(setting, secrets=secrets):
-    '''Get the secret variable or return explicit exception.'''
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = 'Set the {0} environment variable'.format(setting)
-        raise ImproperlyConfigured(error_msg)
 
 # ROOT_DIR = environ.Path(__file__) - 3  # (ibiza_comunidad/config/settings/base.py - 3 = ibiza_comunidad/)
 ROOT_DIR = environ.Path(__file__) - 4  # (ibiza_comunidad/src/config/settings/base.py - 4 = ibiza_comunidad/)
