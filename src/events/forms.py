@@ -13,6 +13,9 @@ from core.widgets import CategoryCheckboxSelectMultiple
 from .models import Event
 
 
+def get_tags():
+    return [(tag.name, tag.name) for tag in Tag.objects.all().order_by('name')]
+
 class EventForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -28,7 +31,7 @@ class EventForm(forms.Form):
     source = forms.URLField(required=False)
     location = forms.CharField(max_length=255, required=True)
     location_gmaps_place_id = forms.CharField(widget=forms.HiddenInput(), max_length=255, required=True)
-    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=[(tag.name, tag.name) for tag in Tag.objects.all().order_by('name')])
+    categories = forms.MultipleChoiceField(widget=CategoryCheckboxSelectMultiple(attrs={'class': 'category'}), choices=get_tags)
 
 
 class EventForm2(forms.ModelForm):
@@ -75,4 +78,3 @@ class EventSearchForm(forms.Form):
         self.categories = kwargs.pop('categories')
         self.base_fields['categories'].choices=self.categories
         super(EventSearchForm, self).__init__(*args, **kwargs)
-
