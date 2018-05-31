@@ -82,6 +82,19 @@ Vagrant.configure("2") do |config|
   #   ansible.install_mode = "pip"
   # end
 
+  config.vm.provision "node_modules mounting", type: "shell", run: "always" do |shell|
+    shell.privileged = false
+    shell.inline = <<-SHELL
+    echo "Mounting node_modules directories"
+    if [ -f /home/vagrant/app/package.json ]; then
+      mkdir -p /home/vagrant/app/node_modules
+      mkdir -p /home/vagrant/app_node_modules
+      sudo mount --bind /home/vagrant/app_node_modules /home/vagrant/app/node_modules
+    fi
+    echo "Directories created"
+    SHELL
+  end
+
   config.vm.provision "shell", path: "vagrant/bootstrap.sh"
   config.vm.provision "shell", privileged: false, type:"shell", path: "vagrant/bootstrap_no_privilege.sh"
 end
