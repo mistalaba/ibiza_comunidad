@@ -64,3 +64,13 @@ echo "LS_COLORS=$LS_COLORS:'ow=1;33:ex=0;32:' ; export LS_COLORS" >> $HOME/.bash
 # npm install --global gulp-cli
 # cd app
 # npm install
+
+# TODO: Setup database
+# pg_restore clean ----no-owner --role=ibiza_comunidad -d ibiza_comunidad ~/app/ibiza_comunidad_latest.dump
+
+# Start services
+# activate
+# celery -A ibiza_comunidad.taskapp worker -l INFO
+
+# activate
+# runserver
