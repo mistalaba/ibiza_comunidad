@@ -96,8 +96,8 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  config.vm.provision "shell", path: "vagrant/bootstrap.sh"
-  # config.vm.provision "shell", path: "vagrant/postgres.sh"
-  config.vm.provision "shell", path: "vagrant/redis.sh"
+  config.vm.provision "init", type:"shell", path: "vagrant/bootstrap.sh"
+  config.vm.provision "postgres", type:"shell", path: "vagrant/postgres.sh"
+  config.vm.provision "redis", type:"shell", path: "vagrant/redis.sh"
   config.vm.provision "shell", privileged: false, type:"shell", path: "vagrant/bootstrap_no_privilege.sh"
 end
