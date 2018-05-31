@@ -1,19 +1,27 @@
 #!/bin/bash
 
 echo "Provisioning virtual machine for local apps..."
+
+# Pip
+echo "Get pip3..."
+wget https://bootstrap.pypa.io/get-pip.py --quiet
+
+echo "Upgrade pip3..."
+sudo -H python3.6 get-pip.py -q
+
 # NVM
 if ! grep -q 'export NVM_DIR="$HOME/.nvm"' $HOME/.bashrc ; then
     echo "Install NVM..."
     NVM_VERSION=v0.33.11
     NODE_VERSION=v8.11.2
-    wget -qO- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash &>/dev/null
-    source ~/.nvm/nvm.sh; nvm install $NODE_VERSION --silent; nvm use --delete-prefix $NODE_VERSION
+    wget -qO- https://raw.githubusercontent.com/creationix/nvm/$NVM_VERSION/install.sh | bash > "/dev/null" 2>&1
+    source ~/.nvm/nvm.sh; nvm install $NODE_VERSION --silent; nvm use --delete-prefix $NODE_VERSION > "/dev/null" 2>&1
 fi
 
 # Virtualenvwrapper
 if ! grep -q 'virtualenvwrapper.sh' $HOME/.bashrc ; then
     echo "Install Virtualenvwrapper..."
-    pip install --user virtualenvwrapper --quiet
+    pip install --user virtualenvwrapper --quiet > "/dev/null" 2>&1
     printf '\n%s\n%s\n%s\n%s\n%s\n' \
     'export WORKON_HOME=$HOME/.virtualenvs' \
     'export PROJECT_HOME=$HOME' \
@@ -40,7 +48,11 @@ if ! grep -q "$PYTHON" $HOME/.bash_aliases ; then
     echo $PYTHON >> $HOME/.bash_aliases
 fi
 
-# Set up project
+# Color fixes
+echo "# Color changes" >> $HOME/.bashrc
+echo "LS_COLORS=$LS_COLORS:'ow=1;33:ex=0;32:' ; export LS_COLORS" >> $HOME/.bashrc
+
+### Set up project ###
 # mkvirtualenv app
 # cd app
 # pip install -r requirements/local.txt
@@ -48,3 +60,7 @@ fi
 # ln -s $HOME/app/_virtualenv/postactivate_local $VIRTUAL_ENV/bin/postactivate
 # mv $VIRTUAL_ENV/bin/predeactivate $VIRTUAL_ENV/bin/predeactivate_org
 # ln -s $HOME/app/_virtualenv/predeactivate $VIRTUAL_ENV/bin/predeactivate
+### INSTALL GULP ###
+# npm install --global gulp-cli
+# cd app
+# npm install

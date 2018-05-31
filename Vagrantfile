@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder "src", "/home/vagrant/app"
+  config.vm.synced_folder "vagrant", "/vagrant_setup"
 
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
@@ -96,5 +97,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "shell", path: "vagrant/bootstrap.sh"
+  # config.vm.provision "shell", path: "vagrant/postgres.sh"
+  config.vm.provision "shell", path: "vagrant/redis.sh"
   config.vm.provision "shell", privileged: false, type:"shell", path: "vagrant/bootstrap_no_privilege.sh"
 end
