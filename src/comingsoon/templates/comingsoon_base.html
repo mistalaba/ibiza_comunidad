@@ -106,11 +106,10 @@
         {% block modal %}{% endblock modal %}
 
         {% block javascript %}
-            <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-            <script src="{% static 'bower_components/foundation-sites/dist/js/foundation.min.js' %}"></script>
+            <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'lib/foundation-sites/foundation.min.js' %}"></script>
             <script src="{% static 'js/app.js' %}"></script>
             <script>$(document).foundation();</script>
         {% endblock javascript %}
     </body>
 </html>
-

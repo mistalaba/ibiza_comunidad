@@ -3,7 +3,7 @@
 
 {% block css %}
     {{ block.super }}
-    <link href="{% static 'bower_components/cropper/dist/cropper.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/cropper/cropper.min.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block head_title %}{% trans 'Profile' %}{% endblock %}
@@ -64,7 +64,7 @@
 
 {% block javascript %}
     {{ block.super }}
-    <script src="{% static 'bower_components/cropper/dist/cropper.min.js' %}"></script>
+    <script src="{% static 'lib/cropper/cropper.min.js' %}"></script>
 
     <script>
         $("#id_avatar").change(function () {
