@@ -18,7 +18,7 @@ module.exports = {
         Assets.map(asset => {
           return {
             from: path.resolve(__dirname, `./node_modules/${asset}`),
-            to: path.resolve(__dirname, './wwwroot/npm')
+            to: path.resolve(__dirname, './ibiza_comunidad/static/lib')
           };
         })
       )
