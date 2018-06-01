@@ -16,9 +16,10 @@ module.exports = {
     plugins: [
       new CopyWebpackPlugin(
         Assets.map(asset => {
+          const curr_path = `${asset}`.split(path.sep)[0];
           return {
             from: path.resolve(__dirname, `./node_modules/${asset}`),
-            to: path.resolve(__dirname, './ibiza_comunidad/static/lib')
+            to: path.resolve(__dirname, `./ibiza_comunidad/static/lib/${curr_path}`)
           };
         })
       )
