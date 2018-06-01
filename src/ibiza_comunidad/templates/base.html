@@ -137,15 +137,15 @@
         {% block modal %}{% endblock modal %}
 
         {% block javascript %}
-            <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-            <script src="{% static 'bower_components/foundation-sites/dist/js/foundation.min.js' %}"></script>
-            <script src="{% static 'bower_components/js-cookie/src/js.cookie.js' %}"></script>
+            <script src="{% static 'lib/jquery.min.js' %}"></script>
+            <script src="{% static 'lib/foundation.min.js' %}"></script>
+            <script src="{% static 'lib/js.cookie.js' %}"></script>
             <script>
                 var user = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
             </script>
 
             <script src="{% static 'js/app.js' %}"></script>
-            <script src="{% static 'bower_components/jquery-timeago/jquery.timeago.js' %}"></script>
+            <script src="{% static 'lib/jquery.timeago.js' %}"></script>
             <script>$(document).foundation();</script>
         {% endblock javascript %}
     </body>
