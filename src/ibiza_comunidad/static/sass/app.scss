@@ -2,6 +2,7 @@
 @import '../../../node_modules/foundation-sites/scss/foundation';
 @import '../../../node_modules/foundation-sites/scss/util/mixins';
 
+@import '_components/navigation';
 @import '_components/homepage';
 @import '_components/utils';
 @import '_components/forms';
@@ -119,11 +120,12 @@ body.ic__center {
 
 .ic__main-nav{
     // Make sticky
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    top: 0;
-    z-index: 100;
+    // position: fixed;
+    // left: 0px;
+    // right: 0px;
+    // top: 0;
+    // z-index: 100;
+    background-color: #fefefe;
 
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
     // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
@@ -131,6 +133,12 @@ body.ic__center {
         // Add this to Foundation .menu since links next to logo are misaligned.
         align-items: center;
     }
+}
+.top-bar2 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    margin-left: auto;
 }
 
 .ic__title-bar {
@@ -157,6 +165,10 @@ svg {
     &.medium {
         width: 32px;
         height: 32px;
+    }
+    &.medium-large {
+        width: 48px;
+        height: 48px;
     }
 }
 

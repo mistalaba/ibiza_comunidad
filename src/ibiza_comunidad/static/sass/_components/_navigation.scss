@@ -1,0 +1,59 @@
+.ic__topnav {
+    background-color: #fefefe;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    @include breakpoint(medium) {
+        flex-direction: row;
+    }
+    ul {
+        background-color: rgba(255,0,0,0.3);
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        position: relative;
+        flex: 1 0 auto;
+        &.left {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            li {}
+        }
+        &.right {
+            // Remove button styling and icons somehow
+            a.button {
+
+            }
+            @include breakpoint(medium) {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex: 0 0 auto;
+                li {
+                    a {
+                        padding: 0.7rem 1rem;
+                    }
+                }
+            }
+        }
+        li {
+            white-space: nowrap;
+            a {
+                display: block;
+                padding: 0.7rem 1rem;
+                margin-bottom: 0;
+            }
+        }
+    }
+    .nav-toggle {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        text-transform: uppercase;
+        @include breakpoint(medium) {
+            display: none;
+        }
+    }
+}
