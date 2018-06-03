@@ -36,7 +36,7 @@ DATABASES = {
         'NAME': 'ibiza_comunidad',
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
         'ATOMIC_REQUESTS': True,
     }
