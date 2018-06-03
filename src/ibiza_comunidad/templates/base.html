@@ -15,6 +15,7 @@
 
         {% block css %}
             <link href="{% static 'css/app.css' %}" rel="stylesheet">
+            <link href="{% static 'lib/responsive-nav-js/responsive-nav.css' %}" rel="stylesheet">
         {% endblock %}
 
         {% block ga %}
@@ -84,7 +85,7 @@
                     </ul>
                 </div>
             </div>
-        {% endblock topnav %}
+            {% endblock topnav %}
 
         <div class="grid-container ic__main-container{% block extra_container_class %}{% endblock extra_container_class %}">
             {% block messages %}
@@ -137,10 +138,12 @@
         {% block modal %}{% endblock modal %}
 
         {% block javascript %}
+            <script src="{% static 'lib/responsive-nav-js/responsive-nav.js' %}"></script>
             <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
             <script src="{% static 'lib/foundation-sites/foundation.min.js' %}"></script>
             <script src="{% static 'lib/js-cookie/js.cookie.js' %}"></script>
             <script>
+                var navigation = responsiveNav(".nav-collapse");
                 var user = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
             </script>
 
