@@ -179,7 +179,7 @@ a > i.ic__nomargin {
 }
 i {
     // Hijack i for icons
-    display: inline-block;
+    display: block;
     font-style: normal;
     margin-right: 0.5em;
     vertical-align: inherit;
@@ -191,6 +191,11 @@ i {
         // The footer is not aligning well
         vertical-align: text-bottom;
     }
+}
+
+// Optional text block next to an icon
+span.ic__icon-text {
+    margin-left: 0.3rem;
 }
 
 .ic__logo-large {
