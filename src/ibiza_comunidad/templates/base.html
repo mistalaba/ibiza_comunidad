@@ -27,65 +27,8 @@
         {% include_svg 'symbol-defs.svg' %}
         <!-- Responsive nav -->
         {% block topnav %}
-            <div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium" style="display:none;">
-                <!-- Should be to the left -->
-                <a class="ic__logo-link-small" href="{% url 'home' %}">
-                    <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
-                </a>
-                <!-- Should be to the right -->
-                <button class="menu-icon" type="button" data-toggle="top-menu"></button>
-            </div>
-            <!-- Responsive nav END -->
-            <div class="top-bar ic__main-nav" id="top-menu">
-                <div class="top-bar-left hide-for-small-only">
-                    <ul class="vertical medium-horizontal menu ic__left-list" data-dropdown-menu>
-                        <li>
-                            <a class="ic__logo-link" href="{% url 'home' %}">
-                                <svg class="ic__icon ic__logo-large ic__logo"><use xlink:href="#icon-logo1"></use></svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="top-bar-right">
-                    <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
-                        {% block inline_search %}
-                        <li>
-                            <form action="{% url 'events:list-events' %}" class="ic__inline-search-container" method="get">
-                            <div class="input-group">
-                                <input class="input-group-field" type="search" name="q">
-                                <div class="input-group-button">
-                                    <input type="submit" class="button" value="Search">
-                                </div>
-                            </div>
-                            </form>
-                        </li>
-                        {% endblock inline_search %}
-                        <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
-                        <li><a href="{% url 'newsletter:signup' %}">{% trans "Newsletter" %}</a></li>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
-                        <li>
-                            <a href="{% url 'users:public-profile' request.user.username %}">
-                                    <i class="ic__user-avatar small normal ic__nomargin" title="{{ event.created_by.username }}">
-                                            {% avatar request.user 'small' %}
-                                    </i>
-                            </a>
-                        </li>
-                        <li><a href="#"><i class="ic__nomargin"><svg class="ic__icon small"><use xlink:href="#icon-settings"></use></svg></i></a>
-                            <ul class="menu">
-                                <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
-                                <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
-                                <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
-                            </ul>
-                        </li>
-                        {% else %}
-                            <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
-                            <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-            {% endblock topnav %}
+        {% include '_topnav.html' %}
+        {% endblock topnav %}
 
         <div class="grid-container ic__main-container{% block extra_container_class %}{% endblock extra_container_class %}">
             {% block messages %}
@@ -143,13 +86,38 @@
             <script src="{% static 'lib/foundation-sites/foundation.min.js' %}"></script>
             <script src="{% static 'lib/js-cookie/js.cookie.js' %}"></script>
             <script>
-                var navigation = responsiveNav(".nav-collapse");
                 var user = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
             </script>
 
             <script src="{% static 'js/app.js' %}"></script>
             <script src="{% static 'lib/timeago/jquery.timeago.js' %}"></script>
             <script>$(document).foundation();</script>
+            <script>
+                var nav = responsiveNav(".nav-collapse", { // Selector
+                    customToggle: "#toggler",
+                    openPos: "relative",
+                    init: function(){}, // Function: Init callback
+                    open: function(){}, // Function: Open callback
+                    close: function(){} // Function: Close callback
+                });
+                var nav_settings_button = document.querySelector('.ic__settings');
+                var nav_settings_submenu = document.querySelector('.ic__dropdown');
+                if (nav_settings_button!=null) {
+                    nav_settings_button.onclick = function(event) {
+                    event.preventDefault();
+                    console.log('click');
+                    if (!document.querySelectorAll('.nav-collapse.opened').length > 0) {
+                        if (nav_settings_submenu.classList.contains('hide')) {
+                            nav_settings_submenu.classList.remove('hide');
+                        }
+                        else {
+                            nav_settings_submenu.classList.add('hide');
+                        }
+                    }
+                };
+
+                }
+            </script>
         {% endblock javascript %}
     </body>
 </html>
