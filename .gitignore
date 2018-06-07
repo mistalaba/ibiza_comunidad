@@ -306,3 +306,4 @@ src/ibiza_comunidad/media/
 media/
 .vscode/
 .vagrant/
+*.code-workspace
