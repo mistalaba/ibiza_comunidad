@@ -10,7 +10,7 @@ from django.views.static import serve
 from core import views as core_views
 
 urlpatterns = [
-    # url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
+    url(r'^nav/$', never_cache(TemplateView.as_view(template_name='navigation_test.html')), name='nav'),
     url(r'^$', core_views.index, name='index'),
     url(r'^$', never_cache(TemplateView.as_view(template_name='pages/home.html')), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),

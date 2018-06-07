@@ -1,0 +1,103 @@
+{% load meta static i18n core_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head{% meta_namespaces %}>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NAVIGATION TEST</title>
+        {% include 'meta/meta.html' %}
+        {% include "_favicons.html" %}
+        {% block css %}
+            <link href="{% static 'css/app.css' %}" rel="stylesheet">
+            <link href="{% static 'lib/responsive-nav-js/responsive-nav.css' %}" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        {% include_svg 'symbol-defs.svg' %}
+        {% block topnav %}
+        <nav class="ic__topnav">
+            <ul class="left">
+                <li>
+                    <a class="ic__logo-link" href="/">
+                        <svg class="ic__icon ic__logo-large ic__logo">
+                            <use xlink:href="#icon-logo1"></use>
+                        </svg>
+                    </a>
+                </li>
+                <li class="hide-for-medium">
+                    <button class="nav-toggle" id="toggler">Menu
+                        <svg class="ic__icon medium-large"><use xlink:href="#icon-hamburger-menu"></use></svg>
+                    </button>
+                </li>
+            </ul>
+            <ul class="right nav-collapse">
+                <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
+                <li><a href="{% url 'newsletter:signup' %}">{% trans "Newsletter" %}</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
+                <li><a href="{% url 'users:public-profile' request.user.username %}">
+                    <i class="ic__user-avatar small normal ic__nomargin" title="{{ event.created_by.username }}">
+                        {% avatar request.user 'small' %}
+                    </i>
+                    <span class="ic__icon-text hide-for-medium">Profile</span>
+                </a></li>
+                <li><a href="#" class="ic__settings">
+                    <i class="ic__nomargin"><svg class="ic__icon small"><use xlink:href="#icon-settings"></use></svg></i>
+                    <span class="ic__icon-text hide-for-medium">Settings</span>
+                    </a>
+                    <ul class="ic__dropdown hide">
+                        <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
+                        <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+
+                {% else %}
+                <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
+                <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endblock topnav %}
+
+        {% block javascript %}
+            <script src="{% static 'lib/responsive-nav-js/responsive-nav.js' %}"></script>
+            <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+            <script src="{% static 'lib/foundation-sites/foundation.min.js' %}"></script>
+            <script src="{% static 'lib/js-cookie/js.cookie.js' %}"></script>
+            <script>
+                var user = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
+
+                var nav = responsiveNav(".nav-collapse", { // Selector
+                    customToggle: "#toggler",
+                    openPos: "relative",
+                    init: function(){}, // Function: Init callback
+                    open: function(){}, // Function: Open callback
+                    close: function(){} // Function: Close callback
+                });
+            </script>
+            <script>
+                var nav_settings_button = document.querySelector('.ic__settings');
+                var nav_settings_submenu = document.querySelector('.ic__dropdown');
+                nav_settings_button.onclick = function(event) {
+                    event.preventDefault();
+                    console.log('click');
+                    if (!document.querySelectorAll('.nav-collapse.opened').length > 0) {
+                        if (nav_settings_submenu.classList.contains('hide')) {
+                            nav_settings_submenu.classList.remove('hide');
+                        }
+                        else {
+                            nav_settings_submenu.classList.add('hide');
+                        }
+                    }
+                };
+
+            </script>
+
+            <script src="{% static 'js/app.js' %}"></script>
+            <script src="{% static 'lib/timeago/jquery.timeago.js' %}"></script>
+            <script>$(document).foundation();</script>
+        {% endblock javascript %}
+    </body>
+</html>

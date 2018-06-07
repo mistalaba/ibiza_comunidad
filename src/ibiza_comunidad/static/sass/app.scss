@@ -2,6 +2,7 @@
 @import '../../../node_modules/foundation-sites/scss/foundation';
 @import '../../../node_modules/foundation-sites/scss/util/mixins';
 
+@import '_components/navigation';
 @import '_components/homepage';
 @import '_components/utils';
 @import '_components/forms';
@@ -21,17 +22,17 @@
 @include foundation-typography;
 @include foundation-forms;
 @include foundation-button;
-@include foundation-accordion;
-@include foundation-accordion-menu;
+// @include foundation-accordion;
+// @include foundation-accordion-menu;
 @include foundation-badge;
 @include foundation-breadcrumbs;
 @include foundation-button-group;
 @include foundation-callout;
 @include foundation-card;
 @include foundation-close-button;
-@include foundation-menu;
-@include foundation-menu-icon;
-@include foundation-drilldown-menu;
+// @include foundation-menu;
+// @include foundation-menu-icon;
+// @include foundation-drilldown-menu;
 @include foundation-dropdown;
 @include foundation-dropdown-menu;
 @include foundation-responsive-embed;
@@ -50,7 +51,7 @@
 @include foundation-thumbnail;
 @include foundation-title-bar;
 @include foundation-tooltip;
-@include foundation-top-bar;
+// @include foundation-top-bar;
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 
@@ -114,16 +115,20 @@ body.ic__center {
 
 .ic__main-container {
     // Arbitrary margin, adjust accordingly when needed.
-    margin-top: 7rem;
+    margin-top: 50px !important;
+    @include breakpoint(medium) {
+        margin-top: 100px !important;
+    }
 }
 
 .ic__main-nav{
     // Make sticky
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    top: 0;
-    z-index: 100;
+    // position: fixed;
+    // left: 0px;
+    // right: 0px;
+    // top: 0;
+    // z-index: 100;
+    background-color: #fefefe;
 
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
     // Used this example for centering the menu links: https://codepen.io/chriscoyier/pen/Jeryz?editors=1100
@@ -131,6 +136,12 @@ body.ic__center {
         // Add this to Foundation .menu since links next to logo are misaligned.
         align-items: center;
     }
+}
+.top-bar2 {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    margin-left: auto;
 }
 
 .ic__title-bar {
@@ -158,6 +169,10 @@ svg {
         width: 32px;
         height: 32px;
     }
+    &.medium-large {
+        width: 48px;
+        height: 48px;
+    }
 }
 
 
@@ -179,6 +194,11 @@ i {
         // The footer is not aligning well
         vertical-align: text-bottom;
     }
+}
+
+// Optional text block next to an icon
+span.ic__icon-text {
+    margin-left: 0.3rem;
 }
 
 .ic__logo-large {
@@ -204,12 +224,14 @@ i {
     fill: $white;
 }
 
-.menu a.ic__logo-link {
-    padding: 0;
-}
+.ic__logo, .ic__logo-inverse {
+    width: 32px;
+    height: 32px;
+    @include breakpoint(medium) {
+        width: 64px;
+        height: 64px;
+    }
 
-.ic__logo-link-small {
-    padding: 5px;
 }
 
 .ic__not_found_bg {

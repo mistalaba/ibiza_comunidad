@@ -8,42 +8,7 @@
 {% block bodyclass %}{% endblock bodyclass %}
 
 {% block topnav %}
-<div class="title-bar ic__title-bar" data-responsive-toggle="top-menu" data-hide-for="medium" style="display:none;">
-    <!-- Should be to the left -->
-    <a class="ic__logo-link-small" href="{% url 'home' %}">
-        <svg class="ic__icon ic__logo-small ic__logo-inverse"><use xlink:href="#icon-logo1"></use></svg>
-    </a>
-    <!-- Should be to the right -->
-    <button class="menu-icon" type="button" data-toggle="top-menu"></button>
-</div>
-<div class="top-bar ic__main-nav-homepage" id="top-menu">
-    <div class="top-bar-right">
-        <ul class="vertical medium-horizontal menu dropdown" data-dropdown-menu>
-            <li><a href="{% url 'events:list-events' %}">{% trans "Events" %}</a></li>
-            <li><a href="{% url 'newsletter:signup' %}">{% trans "Newsletter" %}</a></li>
-            {% if request.user.is_authenticated %}
-            <li><a href="{% url 'users:list-users' %}">{% trans "Members" %}</a></li>
-            <li>
-                <a href="{% url 'users:public-profile' request.user.username %}">
-                        <i class="ic__user-avatar small normal ic__nomargin" title="{{ event.created_by.username }}">
-                                {% avatar request.user 'small' %}
-                        </i>
-                </a>
-            </li>
-            <li><a href="#"><i class="ic__nomargin"><svg class="ic__icon small"><use xlink:href="#icon-settings"></use></svg></i></a>
-                <ul class="menu">
-                    <li><a href="{% url 'users:private-profile' %}">{% trans "Edit profile" %}</a></li>
-                    <li><a href="{% url 'socialaccount_connections' %}">{% trans 'Social accounts' %}</a></li>
-                    <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
-                </ul>
-            </li>
-            {% else %}
-                <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
-                <li><a class="button" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
+{% include '_topnav.html' %}
 {% endblock topnav %}
 
 {% block page_title_container %}{% endblock page_title_container %}
