@@ -115,7 +115,10 @@ body.ic__center {
 
 .ic__main-container {
     // Arbitrary margin, adjust accordingly when needed.
-    margin-top: 7rem;
+    margin-top: 50px !important;
+    @include breakpoint(medium) {
+        margin-top: 100px !important;
+    }
 }
 
 .ic__main-nav{
@@ -221,12 +224,14 @@ span.ic__icon-text {
     fill: $white;
 }
 
-.menu a.ic__logo-link {
-    padding: 0;
-}
+.ic__logo, .ic__logo-inverse {
+    width: 32px;
+    height: 32px;
+    @include breakpoint(medium) {
+        width: 64px;
+        height: 64px;
+    }
 
-.ic__logo-link-small {
-    padding: 5px;
 }
 
 .ic__not_found_bg {
