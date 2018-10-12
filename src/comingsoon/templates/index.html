@@ -63,7 +63,7 @@
                         <p>Make the information available for everyone, new and old residents.</p>
                     </div>
                     <div class="small-12 medium-6 cell">
-                        <form class="ic__form" method="POST" action="" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %}
+                        <!-- <form class="ic__form" method="POST" action="" novalidate enctype="application/x-www-form-urlencoded">{% csrf_token %} -->
                             {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
                             <div class="grid-x">
                                 <div class="small-12 cell">
@@ -76,7 +76,7 @@
                             <div class="ic__buttons">
                                 <button class="button primary expanded" type="submit">{% trans 'Subscribe to updates' %}</button>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                 </div>
 

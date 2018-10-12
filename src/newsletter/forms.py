@@ -19,6 +19,7 @@ class SignupForm(forms.Form):
         super(SignupForm, self).__init__(*args, **kwargs)
 
     email = forms.EmailField(max_length=254, required=True, widget=forms.widgets.EmailInput(attrs={'placeholder': _("Enter your email here")}))
+    email.disabled = True
 
     def clean(self):
         cleaned_data = super(SignupForm, self).clean()
