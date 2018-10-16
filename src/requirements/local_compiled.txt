@@ -5,8 +5,6 @@
 #    pip-compile --output-file requirements/local_compiled.txt requirements/local.txt
 #
 alabaster==0.7.10         # via sphinx
-algoliasearch-django==1.5.1
-algoliasearch==1.14.1     # via algoliasearch-django
 amqp==1.4.9               # via kombu
 anyjson==0.3.3            # via kombu
 argon2-cffi==16.3.0
@@ -23,7 +21,7 @@ cffi==1.11.2              # via argon2-cffi, bcrypt, cryptography, pynacl
 chardet==3.0.4            # via requests
 click==6.7                # via pip-tools
 coverage==4.4.1
-cryptography==2.1.2       # via paramiko, pyopenssl, requests
+cryptography==2.1.2       # via paramiko
 decorator==4.1.2          # via ipython, traitlets
 defusedxml==0.5.0         # via python3-openid
 django-allauth==0.33.0
@@ -76,7 +74,6 @@ pyasn1==0.3.7             # via paramiko
 pycparser==2.18           # via cffi
 pygments==2.2.0           # via ipython, sphinx
 pynacl==1.1.2             # via paramiko
-pyopenssl==17.4.0         # via requests
 pytest-django==3.1.2
 pytest-sugar==0.9.0
 pytest==3.2.3             # via pytest-django, pytest-sugar
@@ -86,10 +83,10 @@ pytz==2017.2
 redis==2.10.6
 regex==2017.9.23          # via awesome-slugify
 requests-oauthlib==0.8.0  # via django-allauth
-requests[security]==2.18.4  # via algoliasearch, django-allauth, django-anymail, mailchimp3, requests-oauthlib, sphinx
+requests==2.18.4          # via django-allauth, django-anymail, mailchimp3, requests-oauthlib, sphinx
 s3transfer==0.1.11        # via boto3
 simplegeneric==0.8.1      # via ipython
-six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-coverage-plugin, django-environ, django-extensions, fabric3, faker, pip-tools, prompt-toolkit, pynacl, pyopenssl, python-dateutil, sphinx, traitlets
+six==1.11.0               # via argon2-cffi, bcrypt, cryptography, django-anymail, django-coverage-plugin, django-environ, django-extensions, fabric3, faker, pip-tools, prompt-toolkit, pynacl, python-dateutil, sphinx, traitlets
 snowballstemmer==1.2.1    # via sphinx
 sorl-thumbnail==12.4.1
 sphinx==1.6.3
