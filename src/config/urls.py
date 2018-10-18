@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^events/', include('events.urls', namespace='events')),
     url(r'^newsletter/', include('newsletter.urls')),
     url(r'^anymail/', include('anymail.urls')),
-
+    url(r'^comingsoon/', include('comingsoon.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
